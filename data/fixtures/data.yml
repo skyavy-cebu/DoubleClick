@@ -1,0 +1,12 @@
+City:
+  City_1:
+    State: State_2
+    name: 'Cebu City'
+  City_2:
+    State: State_2
+    name: 'Mandaue City'
+State:
+  State_1:
+    name: Luzon
+  State_2:
+    name: Visayas

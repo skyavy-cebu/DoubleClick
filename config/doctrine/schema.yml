@@ -1,0 +1,101 @@
+Page:
+  actAs:          { Timestampable: ~ }
+  columns:
+    id:           { type: integer(1), unsigned: true, primary: true, autoincrement: true }
+    name:         { type: string(100) }
+    content:      { type: clob }
+
+State:
+  columns:
+    id:           { type: integer(2), unsigned: true, primary: true, autoincrement: true }
+    name:         { type: string(50) }
+
+City:
+  columns:
+    id:           { type: integer(2), unsigned: true, primary: true, autoincrement: true }
+    state_id:     { type: integer(2), unsigned: true }
+    name:         { type: string(50) }
+  relations:
+    State:        { class: State, local: state_id, foreign: id, onDelete: CASCADE }
+
+User:
+  actAs:          { Timestampable: ~ }
+  columns:
+    id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
+    role:         { type: enum, values: [0, 1, 2], default: 0 }
+    status:       { type: enum, values: [0, 1, 2, 3, 4], default: 0 }
+    email:        { type: string(80), notnull: true, unique: true }
+    password:     { type: string(32), notnull: true }
+    name:         { type: string(100), notnull: true }
+    state_id:     { type: integer(2), unsigned: true, notnull: false }
+    city_id:      { type: integer(2), unsigned: true, notnull: false }
+    request_code: { type: string(32) }
+    login_type:   { type: enum, values: [0, 1, 2], default: 0 }
+    picture:      { type: string(42), notnull: true }
+  relations:
+    State:        { class: State, local: state_id, foreign: id, onDelete: SET NULL }
+    City:         { class: City, local: city_id, foreign: id, onDelete: SET NULL }
+
+Teacher:
+  actAs:          { Timestampable: ~ }
+  columns:
+    id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
+    user_id:      { type: integer(4), unsigned: true, unique: true, notnull: true }
+    title:        { type: string(100) }
+    portfolio:    { type: clob }
+    details:      { type: clob }
+  relations:
+    User:         { class: User, local: user_id, foreign: id, onDelete: CASCADE }
+
+Student:
+  actAs:          { Timestampable: ~ }
+  columns:
+    id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
+    user_id:      { type: integer(4), unsigned: true, unique: true, notnull: true }
+    furigana:     { type: string(100) }
+    zipcode:      { type: integer(2) }
+    address:      { type: string(150) }
+    contact:      { type: string(20) }
+  relations:
+    User:         { class: User, local: user_id, foreign: id, onDelete: CASCADE }
+
+TeacherStudent:
+  actAs:          { Timestampable: ~ }
+  columns:
+    id:           { type: integer(2), unsigned: true, primary: true, autoincrement: true }
+    teacher_id:   { type: integer(4), unsigned: true, notnull: true }
+    student_id:   { type: integer(4), unsigned: true, notnull: true }
+  relations:
+    Teacher:      { class: Teacher, local: teacher_id, foreign: id, onDelete: CASCADE }
+    Student:      { class: Student, local: student_id, foreign: id, onDelete: CASCADE }
+
+Feedback:
+  actAs:          { Timestampable: ~ }
+  columns:
+    id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
+    user_id:      { type: integer(4), unsigned: true, notnull: true }
+    name:         { type: string(80) }
+    content:      { type: clob }
+  relations:
+    User:         { class: User, local: user_id, foreign: id, onDelete: CASCADE }
+
+Newsletter:
+  actAs:          { Timestampable: ~ }
+  columns:
+    id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
+    user_id:      { type: integer(4), unsigned: true, notnull: true }
+    title:        { type: string(150) }
+    content:      { type: clob }
+    publish_at:   { type: timestamp }
+  relations:
+    User:         { class: User, local: user_id, foreign: id, onDelete: CASCADE }
+
+Topic:
+  actAs:          { Timestampable: ~ }
+  columns:
+    id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
+    user_id:      { type: integer(4), unsigned: true, notnull: true }
+    title:        { type: string(255) }
+    pdf_filename: { type: string(36) }
+  relations:
+    User:         { class: User, local: user_id, foreign: id, onDelete: CASCADE }
