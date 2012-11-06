@@ -17,8 +17,21 @@ class registerActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward404Unless($request->isMethod('post'));
+    //$this->forward404Unless($request->isMethod('post'));
+    //$this->setLayout('layoutRegister');
     
-    $this->setLayout('layoutRegister');
+    //echo $this->getUser()->getCulture();
+    
+    $this->form = new RegisterForm();
+    
+    if ($request->isMethod('post'))
+    {
+      $this->form->bind($request->getParameter('register'));
+      
+      if ($this->form->isValid())
+      {
+        //$this->redirect('contact/thankyou?'.http_build_query($this->form->getValues()));
+      }
+    }
   }
 }

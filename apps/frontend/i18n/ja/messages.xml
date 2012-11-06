@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="EN" target-language="ja" datatype="plaintext" original="messages" date="2012-10-30T14:51:27Z" product-name="messages">
+    <header/>
+    <body>
+      <trans-unit id="1">
+        <source>Register</source>
+        <target>会員登録</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Submit</source>
+        <target>提出する</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Name</source>
+        <target>氏名</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Furigana</source>
+        <target>ふりがな</target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>Zipcode</source>
+        <target>住所</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>State</source>
+        <target>都道府県</target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>City</source>
+        <target>氏名</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>Address</source>
+        <target>住所</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

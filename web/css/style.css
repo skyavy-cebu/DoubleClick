@@ -114,7 +114,8 @@ body {
 .visualWrapper,
 .contentWrapper,
 .bannersWrapper,
-.footerWrapper {
+.footerWrapper,
+.mainBodyWrapper {
   width: 100%;
 }
 
@@ -124,7 +125,7 @@ body {
 .bannersWrapper { background: #EEEEEE; border-top: 1px solid #D9D9D9; }
 .footerWrapper { background-image: url('../images/bg-footer.png'); }
 
-.header, .navi, .visual, .content, .banners, .footer {
+.header, .navi, .visual, .content, .banners, .footer, .mainBody {
   width: 960px;
   
   margin-left: auto;
@@ -185,7 +186,7 @@ body {
       .header-right div h4 span {
         font-size: 13px;
       }
-    .header-right div h1 {
+    .header-right div h2 {
       background: url('../images/ico-call.png') no-repeat 0px 4px;
       padding-left: 28px;
       color: #C2151C;

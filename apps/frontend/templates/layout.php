@@ -14,7 +14,7 @@
       <div class="header">
         <div class="headerLeft">
           <h3>投資のことなら暁投資顧問</h3>
-          <a href="/"><img src="images/header-logo.png" alt="Akatsuki" alt="Akatsuki" /></a>
+          <a href="/"><img src="/images/header-logo.png" alt="Akatsuki" alt="Akatsuki" /></a>
         </div>
         
         <ul>
@@ -27,7 +27,7 @@
         <div class="header-right">
           <div>
             <h3>お電話でのお問い合わせ</h3>
-            <h1>03-1234-5678</h1>
+            <h2>03-1234-5678</h2>
             <h4>AM9:00-PM5:00 <span>[土日・祝祭日を除く]</span></h4>
           </div>
           <a href="/" alt="" title=""></a>
@@ -49,7 +49,9 @@
       </div>
     </div>
     
-    <?php echo $sf_content ?>
+    <div class="mainBodyWrapper">
+      <div class="mainBody"><?php echo $sf_content ?></div>
+    </div>
     
     <!-- footer -->
     <div class="footerWrapper">
@@ -69,13 +71,13 @@
         
         <div class="footerRight">
           <div class="footerRightInfo">
-            <img src="images/footer-logo.png" />
+            <img src="/images/footer-logo.png" />
             <p>運営会社:株式会社ダブルクリック</p>
             <p>住所  :東京都中野区1-1-1</p>
             <p>関東財務局長(金商)第2654号</p>
             <p>会員番号:00000000000</p>
           </div>
-          <img src="images/footer-verisign.png" class="footerVerisign" />
+          <img src="/images/footer-verisign.png" class="footerVerisign" />
         </div>
         
         <p>2012 暁投資顧問 All rights reserved.</p>
