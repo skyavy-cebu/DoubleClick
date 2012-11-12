@@ -4,4 +4,7 @@ log/*
 cache/*
 web/access.log
 web/error.log
+web/_access.log
+web/_error.log
 web/uploads/*
+config/databases.yml
