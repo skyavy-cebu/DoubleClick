@@ -9,18 +9,18 @@
  * @property integer $state_id
  * @property string $name
  * @property State $State
- * @property Doctrine_Collection $User
+ * @property Doctrine_Collection $Student
  * 
  * @method integer             getId()       Returns the current record's "id" value
  * @method integer             getStateId()  Returns the current record's "state_id" value
  * @method string              getName()     Returns the current record's "name" value
  * @method State               getState()    Returns the current record's "State" value
- * @method Doctrine_Collection getUser()     Returns the current record's "User" collection
+ * @method Doctrine_Collection getStudent()  Returns the current record's "Student" collection
  * @method City                setId()       Sets the current record's "id" value
  * @method City                setStateId()  Sets the current record's "state_id" value
  * @method City                setName()     Sets the current record's "name" value
  * @method City                setState()    Sets the current record's "State" value
- * @method City                setUser()     Sets the current record's "User" collection
+ * @method City                setStudent()  Sets the current record's "Student" collection
  * 
  * @package    DOUBLECLICK
  * @subpackage model
@@ -42,10 +42,12 @@ abstract class BaseCity extends sfDoctrineRecord
         $this->hasColumn('state_id', 'integer', 2, array(
              'type' => 'integer',
              'unsigned' => true,
+             'notnull' => true,
              'length' => 2,
              ));
         $this->hasColumn('name', 'string', 50, array(
              'type' => 'string',
+             'notnull' => true,
              'length' => 50,
              ));
     }
@@ -58,7 +60,7 @@ abstract class BaseCity extends sfDoctrineRecord
              'foreign' => 'id',
              'onDelete' => 'CASCADE'));
 
-        $this->hasMany('User', array(
+        $this->hasMany('Student', array(
              'local' => 'id',
              'foreign' => 'city_id'));
     }
