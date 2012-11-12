@@ -2,69 +2,75 @@ Page:
   actAs:          { Timestampable: ~ }
   columns:
     id:           { type: integer(1), unsigned: true, primary: true, autoincrement: true }
-    name:         { type: string(100) }
-    content:      { type: clob }
+    title:        { type: string(150), notnull: true }
+    image1:       { type: string(100), notnull: false }
+    image2:       { type: string(100), notnull: false }
+    body:         { type: clob(65532), notnull: false }
 
 State:
   columns:
     id:           { type: integer(2), unsigned: true, primary: true, autoincrement: true }
-    name:         { type: string(50) }
+    name:         { type: string(50), notnull: true }
 
 City:
   columns:
     id:           { type: integer(2), unsigned: true, primary: true, autoincrement: true }
-    state_id:     { type: integer(2), unsigned: true }
-    name:         { type: string(50) }
+    state_id:     { type: integer(2), unsigned: true, notnull: true }
+    name:         { type: string(50), notnull: true }
   relations:
     State:        { class: State, local: state_id, foreign: id, onDelete: CASCADE }
 
-User:
+Admin:
   actAs:          { Timestampable: ~ }
   columns:
     id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
-    role:         { type: enum, values: [0, 1, 2], default: 0 }
-    status:       { type: enum, values: [0, 1, 2, 3, 4], default: 0 }
+    name:         { type: string(100) }
     email:        { type: string(80), notnull: true, unique: true }
-    password:     { type: string(32), notnull: true }
-    name:         { type: string(100), notnull: true }
-    state_id:     { type: integer(2), unsigned: true, notnull: false }
-    city_id:      { type: integer(2), unsigned: true, notnull: false }
-    request_code: { type: string(32) }
-    login_type:   { type: enum, values: [0, 1, 2], default: 0 }
-    picture:      { type: string(42), notnull: true }
-  relations:
-    State:        { class: State, local: state_id, foreign: id, onDelete: SET NULL }
-    City:         { class: City, local: city_id, foreign: id, onDelete: SET NULL }
+    password:     { type: string(32), notnull: true  }
 
 Teacher:
   actAs:          { Timestampable: ~ }
   columns:
     id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
-    user_id:      { type: integer(4), unsigned: true, unique: true, notnull: true }
     title:        { type: string(100) }
-    portfolio:    { type: clob }
-    details:      { type: clob }
-  relations:
-    User:         { class: User, local: user_id, foreign: id, onDelete: CASCADE }
+    email:        { type: string(80), notnull: true, unique: true }
+    password:     { type: string(32), notnull: true  }
+    portfolio:    { type: clob(65532), notnull: false }
+    details:      { type: clob(65532), notnull: false }
 
 Student:
   actAs:          { Timestampable: ~ }
   columns:
     id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
-    user_id:      { type: integer(4), unsigned: true, unique: true, notnull: true }
-    furigana:     { type: string(100) }
-    zipcode:      { type: integer(2) }
-    address:      { type: string(150) }
-    contact:      { type: string(20) }
+    name:         { type: string(100), notnull: true }
+    furigana:     { type: string(100), notnull: false }
+    email:        { type: string(80), notnull: true, unique: true }
+    password:     { type: string(32), notnull: false  }
+    login_type:   { type: enum, values: [0, 1], notnull: true, default: 0 }
+    zipcode1:     { type: string(3), notnull: false }
+    zipcode2:     { type: string(4), notnull: false }
+    address:      { type: string(150), notnull: false }
+    state_id:     { type: integer(2), unsigned: true, notnull: false }
+    city_id:      { type: integer(2), unsigned: true, notnull: false }
+    contact:      { type: string(20), notnull: false }
+    picture:      { type: string(42), notnull: false }
+    status:       { type: enum, values: [0, 1, 2, 3, 4], notnull: true, default: 0 }
   relations:
-    User:         { class: User, local: user_id, foreign: id, onDelete: CASCADE }
+    State:        { class: State, local: state_id, foreign: id, onDelete: SET NULL }
+    City:         { class: City, local: city_id, foreign: id, onDelete: SET NULL }
 
-TeacherStudent:
-  actAs:          { Timestampable: ~ }
+Subscription:
+  actAs:
+    Timestampable: 
+      created:
+        expression: 'NOW()'
+      updated:
+        disabled: true
   columns:
-    id:           { type: integer(2), unsigned: true, primary: true, autoincrement: true }
-    teacher_id:   { type: integer(4), unsigned: true, notnull: true }
-    student_id:   { type: integer(4), unsigned: true, notnull: true }
+    teacher_id:   { type: integer(4), unsigned: true, primary: true, autoincrement: false }
+    student_id:   { type: integer(4), unsigned: true, primary: true, autoincrement: false }
+    duration:     { type: enum, values: [0,1,2], notnull: true }
+    valid_until:  { type: timestamp(25), notnull: false }
   relations:
     Teacher:      { class: Teacher, local: teacher_id, foreign: id, onDelete: CASCADE }
     Student:      { class: Student, local: student_id, foreign: id, onDelete: CASCADE }
@@ -73,29 +79,42 @@ Feedback:
   actAs:          { Timestampable: ~ }
   columns:
     id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
-    user_id:      { type: integer(4), unsigned: true, notnull: true }
-    name:         { type: string(80) }
-    content:      { type: clob }
+    admin_id:     { type: integer(4), unsigned: true, notnull: true }
+    customer_name: { type: string(80), notnull: true }
+    body:         { type: clob(65532), notnull: false }
+    publish_date: { type: timestamp(25), notnull: true }
   relations:
-    User:         { class: User, local: user_id, foreign: id, onDelete: CASCADE }
+    Admin:        { class: Admin, local: admin_id, foreign: id, onDelete: CASCADE }
 
-Newsletter:
+NewsletterAdmin:
   actAs:          { Timestampable: ~ }
   columns:
     id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
-    user_id:      { type: integer(4), unsigned: true, notnull: true }
-    title:        { type: string(150) }
-    content:      { type: clob }
-    publish_at:   { type: timestamp }
+    admin_id:     { type: integer(4), unsigned: true, notnull: true }
+    title:        { type: string(150), notnull: true }
+    content:      { type: clob(65532), notnull: false }
+    publish_date: { type: timestamp(25), notnull: true }
   relations:
-    User:         { class: User, local: user_id, foreign: id, onDelete: CASCADE }
+    Admin:         { class: Admin, local: admin_id, foreign: id, onDelete: CASCADE }
+
+NewsletterTeacher:
+  actAs:          { Timestampable: ~ }
+  columns:
+    id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
+    teacher_id:   { type: integer(4), unsigned: true, notnull: true }
+    title:        { type: string(150), notnull: true }
+    content:      { type: clob(65532), notnull: false }
+    publish_date: { type: timestamp(25), notnull: true }
+  relations:
+    Admin:         { class: Teacher, local: teacher_id, foreign: id, onDelete: CASCADE }
 
 Topic:
   actAs:          { Timestampable: ~ }
   columns:
     id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
-    user_id:      { type: integer(4), unsigned: true, notnull: true }
-    title:        { type: string(255) }
-    pdf_filename: { type: string(36) }
+    admin_id:      { type: integer(4), unsigned: true, notnull: true }
+    title:        { type: string(255), notnull: true }
+    pdf_filename: { type: string(36), notnull: true }
+    publish_date: { type: timestamp(25), notnull: true }
   relations:
-    User:         { class: User, local: user_id, foreign: id, onDelete: CASCADE }
+    Admin:         { class: Admin, local: admin_id, foreign: id, onDelete: CASCADE }
