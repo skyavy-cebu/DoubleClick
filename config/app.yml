@@ -1,0 +1,5 @@
+all:
+  envi: %SF_ENVIRONMENT%
+  
+  system:
+    salt: wi47m86vvmlahmtl86d5

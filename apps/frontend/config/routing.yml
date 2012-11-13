@@ -4,6 +4,14 @@
 home:
   url:   /
   param: { module: home, action: index }
+  
+register-confirm:
+  url: /register/confirm
+  param: { module: register, action: confirm }
+
+register:
+  url: /register
+  param: { module: register, action: index }
 
 # generic rules
 # please, remove them by adding more specific rules

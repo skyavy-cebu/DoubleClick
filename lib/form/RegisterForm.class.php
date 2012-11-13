@@ -12,48 +12,106 @@ class RegisterForm extends BaseForm
 {
   public function configure()
   {
-    $q = Doctrine_Query::create()->from('State s');
-    $states_orig = $q->fetchArray();
-    $states = array('Please select a state');
+    $statesArr = StateTable::getInstance()->createQuery()->fetchArray();
+    $statesChoice = array('全ての県');
+    foreach ($statesArr as $state)
+    {
+      $statesChoice[$state['id']] = $state['name'];
+    }
     
-    foreach ($states_orig as $s)
-      $states[] = $s['name'];
+    /* uncomment when teachers are set in the db */
+    // $teachersArr = TeacherTable::getInstance()->createQuery()->fetchArray();
+    // $teachersChoice = array();
+    // foreach ($teachersArr as $teacher)
+    // {
+      // $teachersChoice[$teacher['id']] = $teacher['title'];
+    // }
+    
+    /* temporary choices for teachers */
+    $teachersChoice = array('OP先生', 'CFD先生', 'シロネコ先生', '白虎先生', 'スイング先生');
     
     $this->setWidgets(array(
-      'name'      => new sfWidgetFormInputText(),
-      'furigana'  => new sfWidgetFormInputText(),
-      'zipcode'   => new sfWidgetFormInputText(),
-      'state'     => new sfWidgetFormSelect(array('choices'=>$states)),
-      'address'   => new sfWidgetFormInputText(),
-      'contact'   => new sfWidgetFormInputText(),
-      'email'     => new sfWidgetFormInputText(),
-      'cemail'    => new sfWidgetFormInputText(),
-      'password'  => new sfWidgetFormInputPassword(),
-      'cpassword' => new sfWidgetFormInputPassword(),
+      'name'       => new sfWidgetFormInputText(),
+      'furigana'   => new sfWidgetFormInputText(),
+      'zipcode1'   => new sfWidgetFormInputText(),
+      'zipcode2'   => new sfWidgetFormInputText(),
+      'state_id'   => new sfWidgetFormSelect(array('choices' => $statesChoice)),
+      'address'    => new sfWidgetFormInputText(),
+      'contact'    => new sfWidgetFormInputText(array('label' => 'Contact Info')),
+      'email'      => new sfWidgetFormInputText(array('label' => 'Email')),
+      'cemail'     => new sfWidgetFormInputText(array('label' => 'Confirm Email')),
+      'password'   => new sfWidgetFormInputPassword(array('label' => 'Password')),
+      'cpassword'  => new sfWidgetFormInputPassword(array('label' => 'Confirm Password')),
+      'duration'   => new sfWidgetFormChoice(array(
+                      'label' => 'Courses',
+                      'expanded' => true,
+                      'multiple' => false,
+                      'choices' => array('1ヶ月コース', '3ヶ月コース', '6ヶ月コース')
+                     )),
+      'teacher_id' => new sfWidgetFormChoice(array(
+                      'label' => 'Teachers',
+                      'expanded' => true,
+                      'multiple' => true,
+                      'choices' => $teachersChoice
+                     ))
     ));
     
     $this->setValidators(array(
-      'name'      => new sfValidatorString(array('required'=>true)),
-      'furigana'  => new sfValidatorString(array('required'=>false)),
-      'zipcode'   => new sfValidatorString(array('required'=>false)),
-      'state'     => new sfValidatorChoice(array('choices'=>array_keys($states))),
-      'address'   => new sfValidatorString(array('required'=>false)),
-      'contact'   => new sfValidatorString(array('required'=>false)),
-      'email'     => new sfValidatorString(array('required'=>true)),
-      'cemail'    => new sfValidatorString(array('required'=>true)),
-      'password'  => new sfValidatorString(array('required'=>true)),
-      'cpassword' => new sfValidatorString(array('required'=>true)),
+      'name'       => new sfValidatorString(array('required' => true)),
+      'furigana'   => new sfValidatorString(array('required' => true)),
+      'zipcode1'   => new sfValidatorString(array('required' => true)),
+      'zipcode2'   => new sfValidatorString(array('required' => true)),
+      'state_id'   => new sfValidatorChoice(array('choices' => array_slice(array_keys($statesChoice), 1, count($statesArr)))),
+      'address'    => new sfValidatorString(array('required' => true)),
+      'contact'    => new sfValidatorString(array('required' => true)),
+      'email'      => new sfValidatorString(array('required' => true)),
+      'cemail'     => new sfValidatorString(array('required' => true)),
+      'password'   => new sfValidatorString(
+                        array(
+                          'required' => true,
+                          'min_length' => 8,
+                          'max_length' => 16),
+                        array(
+                          'min_length' => '8-16 alphanumeric characters.',
+                          'max_length' => '8-16 alphanumeric characters.'
+                        )
+                      ),
+      'cpassword'  => new sfValidatorString(array('required' => true)),
+      'duration'   => new sfValidatorChoice(array('choices' => array('0', '1', '2'))),
+      'teacher_id' => new sfValidatorChoice(array('choices' => array_keys($teachersChoice), 'multiple' => true))
     ));
     
     $this->mergePostValidator(
       new sfValidatorAnd(
         array(
-          new sfValidatorSchemaCompare('email', sfValidatorSchemaCompare::EQUAL, 'cemail', array(), array('invalid' => 'Email must match.')),
-          new sfValidatorSchemaCompare('password', sfValidatorSchemaCompare::EQUAL, 'cpassword', array(), array('invalid' => 'Password must match.'))
+          // unique email
+          new sfValidatorCallback(array('callback' => array($this, 'checkUniqueEmail'))),
+          // same email and email confirmation
+          new sfValidatorSchemaCompare(
+            'email', sfValidatorSchemaCompare::EQUAL, 'cemail',
+            array(), array('invalid' => '電子メールは一致しません。')),
+          // same password and password confirmation
+          new sfValidatorSchemaCompare(
+            'password', sfValidatorSchemaCompare::EQUAL, 'cpassword',
+            array(), array('invalid' => 'パスワードが一致しません。'))
         )
       )
     );
     
     $this->widgetSchema->setNameFormat('register[%s]');
+  }
+  
+  /**
+   * Checks if the email is unique or is not yet assigned to another Student.
+   *
+   * @param $validator
+   * @param $values
+   */
+  public function checkUniqueEmail($validator, $values)
+  {
+    if ('' != trim($values['email']) && StudentTable::getInstance()->findOneByEmail($values['email']))
+    {
+			throw new sfValidatorErrorSchema($validator, array('email' => new sfValidatorError($validator, 'このメールアドレスはすでに登録済みです。')));
+    }
   }
 }

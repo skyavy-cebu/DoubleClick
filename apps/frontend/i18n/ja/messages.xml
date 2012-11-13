@@ -21,7 +21,7 @@
         <target>ふりがな</target>
       </trans-unit>
       <trans-unit id="5">
-        <source>Zipcode</source>
+        <source>Zip Code</source>
         <target>住所</target>
       </trans-unit>
       <trans-unit id="6">
@@ -35,6 +35,54 @@
       <trans-unit id="8">
         <source>Address</source>
         <target>住所</target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>Contact Info</source>
+        <target>連絡先</target>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>Email</source>
+        <target>メールアドレス</target>
+      </trans-unit>
+      <trans-unit id="11">
+        <source>Confirm Email</source>
+        <target>メールアドレス確認用</target>
+      </trans-unit>
+      <trans-unit id="12">
+        <source>Password</source>
+        <target>パスワード</target>
+      </trans-unit>
+      <trans-unit id="13">
+        <source>Confirm Password</source>
+        <target>パスワード確認用</target>
+      </trans-unit>
+      <trans-unit id="14">
+        <source>Courses</source>
+        <target>ご希望のコース</target>
+      </trans-unit>
+      <trans-unit id="15">
+        <source>Teachers</source>
+        <target>ご希望のコース</target>
+      </trans-unit>
+      <trans-unit id="16">
+        <source>Confirm Registration</source>
+        <target>登録情報確認</target>
+      </trans-unit>
+      <trans-unit id="17">
+        <source>Back</source>
+        <target>戻る</target>
+      </trans-unit>
+      <trans-unit id="18">
+        <source>8-16 alphanumeric characters.</source>
+        <target>半角英数字8〜16字で設定してください。</target>
+      </trans-unit>
+      <trans-unit id="19">
+        <source>Emails do not match.</source>
+        <target>電子メールは一致しません。</target>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>Passwords do not match.</source>
+        <target>パスワードが一致しません。</target>
       </trans-unit>
     </body>
   </file>
