@@ -8,16 +8,16 @@
  * @property integer $id
  * @property string $name
  * @property Doctrine_Collection $City
- * @property Doctrine_Collection $User
+ * @property Doctrine_Collection $Student
  * 
- * @method integer             getId()   Returns the current record's "id" value
- * @method string              getName() Returns the current record's "name" value
- * @method Doctrine_Collection getCity() Returns the current record's "City" collection
- * @method Doctrine_Collection getUser() Returns the current record's "User" collection
- * @method State               setId()   Sets the current record's "id" value
- * @method State               setName() Sets the current record's "name" value
- * @method State               setCity() Sets the current record's "City" collection
- * @method State               setUser() Sets the current record's "User" collection
+ * @method integer             getId()      Returns the current record's "id" value
+ * @method string              getName()    Returns the current record's "name" value
+ * @method Doctrine_Collection getCity()    Returns the current record's "City" collection
+ * @method Doctrine_Collection getStudent() Returns the current record's "Student" collection
+ * @method State               setId()      Sets the current record's "id" value
+ * @method State               setName()    Sets the current record's "name" value
+ * @method State               setCity()    Sets the current record's "City" collection
+ * @method State               setStudent() Sets the current record's "Student" collection
  * 
  * @package    DOUBLECLICK
  * @subpackage model
@@ -38,6 +38,7 @@ abstract class BaseState extends sfDoctrineRecord
              ));
         $this->hasColumn('name', 'string', 50, array(
              'type' => 'string',
+             'notnull' => true,
              'length' => 50,
              ));
     }
@@ -49,7 +50,7 @@ abstract class BaseState extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'state_id'));
 
-        $this->hasMany('User', array(
+        $this->hasMany('Student', array(
              'local' => 'id',
              'foreign' => 'state_id'));
     }

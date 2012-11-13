@@ -2,9 +2,9 @@ all:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn: 'mysql:host=localhost;dbname=sf_doubleclick; unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock'
+      dsn: 'mysql:host=localhost;dbname=sf_doubleclick';
       username: root
-      password: root
+      password: 
       encoding: utf8
       attributes:
         use_native_enum: true
