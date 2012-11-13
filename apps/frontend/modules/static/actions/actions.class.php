@@ -27,4 +27,20 @@ class staticActions extends sfActions
   {
     
   }
+  public function executeList(sfWebRequest $request)
+  {
+    
+  }
+  public function executeTeacherIntroduction(sfWebRequest $request)
+  {
+    
+  }
+  public function executeTeacherIntroductionDetail(sfWebRequest $request)
+  {
+    
+  }
+  public function executeTeacherPerformance(sfWebRequest $request)
+  {
+    
+  }
 }

@@ -420,7 +420,7 @@ body {
       width: inherit;
       height:  ;
     }
-      .contentContentAboutHeader, .contentContentMenuHeader, .contentContentTeachersHeader, .contentContentFeedbackHeader, .contentContentOptionHeader {
+      .contentContentAboutHeader, .contentContentMenuHeader, .contentContentTeachersHeader, .contentContentFeedbackHeader, .contentContentOptionHeader, .contentContentListHeader {
         height: 31px;
         background: url('../images/bg-black-header.png');
         
@@ -448,7 +448,31 @@ body {
           
         color: #FFFFFF;
       }
-      .contentContentAboutContent, .contentContentFeedbackContentDetails, .contentContentOptionContentDetails {
+			.contentContentTeacherIntroductionContentHeader {
+        height: 27px;
+        background: url('../images/bg-gray-header-plain.png');
+        
+        font-family: ShinGoPro-Regular;
+        font-size: 14px;
+        font-weight: bold;
+          
+        padding: 13px 0px 0px 15px;
+                  
+        color: #FFFFFF;
+      }
+			.contentContentTeacherPerformanceHeader {
+        height: 33px;
+        background: url('../images/teacher-performance-detail-title-bg.png');
+        
+        font-family: ShinGoPro-Regular;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top:15px;  
+        padding: 8px 0px 0px 15px;
+                  
+        color: #a9a9a9;
+      }
+      .contentContentAboutContent, .contentContentFeedbackContentDetails, .contentContentOptionContentDetails, .contentContentTeacherDetail, .contentContentTeacherPerformanceContents {
         width: 620px;
         
         padding: 10px 19px 17px 19px;
@@ -462,14 +486,14 @@ body {
         
         text-align: justify;
       }
-			.contentContentFeedbackContentDetails, .contentContentOptionContentDetails{
+			.contentContentOptionContentDetails, .contentContentTeacherPerformanceContents p{
 				margin-top:10px;
 			}
-        .contentContentAboutContent p, .contentContentFeedbackContentDetails p {
+        .contentContentAboutContent p, .contentContentFeedbackContentDetails p, .contentContentTeacherPerformanceContents p {
           color: #1E1E1E;
           font-family: ShinGoPro-Regular;
         }
-        .contentContentAboutContent a {
+        .contentContentAboutContent a{
           width: 172px;
           height: 46px;
           
@@ -479,16 +503,33 @@ body {
           
           margin: 20px auto 0px auto;
         }
-        .contentContentAboutContent a:hover {
+				 .contentContentTeacherIntroDetail a{
+          width: 172px;
+          height: 46px;
+          
+          display: block;
+          
+          background: url('../images/btn-content-content-about.png');
+          
+          margin: 20px 0px 0px 350px;
+        }
+        .contentContentAboutContent a:hover, .contentContentTeacherIntroDetail a:hover{
           background: url('../images/btn-content-content-about-hover.png');
         }
     .contentContentMenu {
       margin: 27px 0px 0px 0px;
     }
-      .contentContentMenuContent {
+      .contentContentMenuContent,.contentContentListContent {
         border: 1px solid #DCDCDC;
         padding: 11px;
       }
+				.contentContentListContent ul li {
+						height: 45px;
+						padding: 7px 0 0 14px;
+						color: #969696;
+						font-size: 12px;
+						line-height: 40px;
+				}
         .contentContentMenuContent>div {
           background: #f5f5f5;
           padding: 14px 13px 14px 13px;
@@ -528,14 +569,17 @@ body {
       margin: 27px 0px 0px 0px;
 			
     } 
-    .contentContentBlog, .contentContentLatestColumnHeaderLink, .contentContentFeedbackContentHeaderDate { float: right; }
-		.contentContentLatestColumnHeaderLink, .contentContentFeedbackContentHeaderDate{
+    .contentContentBlog, .contentContentLatestColumnHeaderLink, .contentContentFeedbackContentHeaderDate, .contentContentTeacherIntroductionContentHeaderLink { float: right; }
+		.contentContentLatestColumnHeaderLink, .contentContentFeedbackContentHeaderDate, .contentContentTeacherIntroductionContentHeaderLink{
 			margin-right:15px;
 		}
-		.contentContentLatestColumnHeaderLink a, .contentContentFeedbackContentHeaderDate a{
+		.contentContentLatestColumnHeaderLink a, .contentContentFeedbackContentHeaderDate a, .contentContentTeacherIntroductionContentHeaderLink a{
 			color: #005DFE;
 		}
-    .contentContentNews, .contentContentLatestColumn, .contentContentLatestColumnHeaderTitle, .contentContentFeedbackContentHeaderTitle { float: left; }
+		.contentContentTeacherIntroductionContentHeaderTitle{
+			text-shadow: 0px 0px 3px #000000;
+		}
+    .contentContentNews, .contentContentLatestColumn, .contentContentLatestColumnHeaderTitle, .contentContentFeedbackContentHeaderTitle, .contentContentTeacherIntroductionContentHeaderTitle { float: left; }
       .contentContentNewsHeader, .contentContentBlogHeader, .contentContentLatestColumnHeader {
         height: 31px;
         background: url('../images/bg-gray-header.png');
@@ -550,7 +594,7 @@ body {
         
         text-shadow: 0 -1px 1px #FFFFFF;
       }
-      .contentContentNewsContent, .contentContentBlogContent, .contentContentLatestColumnContent {
+      .contentContentNewsContent, .contentContentBlogContent, .contentContentLatestColumnContent, .contentContentTeacherIntroDetails {
         border: 1px solid #DCDCDC;
       }
       .contentContentNewsContent ul li, .contentContentBlogContent ul li, .contentContentLatestColumnContent ul li {
@@ -564,14 +608,14 @@ body {
 				list-style:none;
 				padding-bottom: 15px;
 			}
-      .contentContentNewsContent ul li:nth-child(even), .contentContentBlogContent ul li:nth-child(even), .contentContentLatestColumnContent ul li:nth-child(even) { background-color: #F5F5F5; }
+      .contentContentNewsContent ul li:nth-child(even), .contentContentBlogContent ul li:nth-child(even), .contentContentLatestColumnContent ul li:nth-child(even),.contentContentListContent ul li:nth-child(even) { background-color: #F5F5F5; }
       .contentContentNewsContent ul li:last-child, .contentContentBlogContent ul li:last-child, .contentContentLatestColumnContent ul li:last-child { border-bottom: none; }
       .contentContentNewsContent ul li span, .contentContentBlogContent ul li span, .contentContentLatestColumnContent ul li span {
         color: #969696;
         font-size: 12px;
         line-height: 19px;
       }
-      .contentContentNewsContent ul li p, .contentContentBlogContent ul li p, .contentContentLatestColumnContent ul li p {
+      .contentContentNewsContent ul li p, .contentContentBlogContent ul li p, .contentContentLatestColumnContent ul li p,  .contentContentTeacherDetail p {
         color: #1E1E1E;
         font-family: Hiragino;
         font-size: 12px;
@@ -583,17 +627,21 @@ body {
 			margin-top: 26px;
 		}
 			/* Find ".contentContentAboutHeader, .contentContentMenuHeader, .contentContentTeachersHeader {" for reference on the parent's header style */
-			.contentContentTeachersContent, .contentContentFeedbackContent {
+			.contentContentTeachersContent, .contentContentFeedbackContent, .contentContentTeachersIntroductionContent, .contentContentTeacherIntroDetails{
 				padding: 9px 0px 0px 0px;
       }
-          .contentContentTeachersContent1 { float: left; }
-          .contentContentTeachersContent2{ float: right; }
+          .contentContentTeachersContent1, .contentContentTeacherImage, .contentContentTeachersIntroductionContent1 { float: left; }
+          .contentContentTeachersContent2, .contentContentTeacherDetail, .contentContentTeachersIntroductionContent2{ float: right; }
           .contentContentTeachersContent1 li, .contentContentTeachersContent2 li {
 						margin-bottom: 20px;
 						border: 1px solid #DCDCDC;
 						padding: 9px;
 						width: 300px;
 						height: 110px;
+					}
+					
+					.contentContentTeacherDetail{
+						width: 360px;
 					}
           .contentContentTeachersContent1 li:last-child, .contentContentTeachersContent2 li:last-child { margin-bottom: 0px; }
 					.contentContentTeachersContent1 li img, .contentContentTeachersContent2 li img {
@@ -603,9 +651,42 @@ body {
 						
 						margin-right: 13px;
 					}
+					.contentContentTeachersIntroductionContent1 li img, .contentContentTeachersIntroductionContent2 li img{
+						border: 1px solid #E6E6E6;
+						padding: 6px;
+						float: left;
+						
+						 margin: 13px 0 0 13px;
+					}
+					.contentContentTeacherIntroDetailImage{
+						border: 1px solid #E6E6E6;
+						padding: 6px;
+						float: left;
+						margin: 13px 15px 0 13px;
+					}
+					.contentContentTeachersIntroductionContent1 li p, .contentContentTeachersIntroductionContent2 li p{
+						padding: 6px;
+						margin: 13px 0 0 13px;
+						float:right;
+						width:172px;
+					}
+					.contentContentTeacherIntroDetail{
+						font-family: ShinGoPro-Regular;
+						font-size: 12px;
+						line-height: 24px;
+						padding: 10px 19px 17px;
+						text-align: justify;
+					}
+					
 					.contentContentTeachersContent1 li h3, .contentContentTeachersContent2 li h3 { margin-top: 11px; font-size: 20px; color: #1E1E1E; }
 					.contentContentTeachersContent1 li h5, .contentContentTeachersContent2 li h5 { margin-top: 3px; font-size: 12px; color: #1E1E1E; line-height: 20px; }
 					.contentContentTeachersContent1 li h5 span, .contentContentTeachersContent1 li h5 span a, .contentContentTeachersContent2 li h5 span, .contentContentTeachersContent2 li h5 span a { color: #005dfe; }
+					.contentContentTeachersIntroductionContent1 li, .contentContentTeachersIntroductionContent2 li  {
+							border: 1px solid #DCDCDC;
+							height: 210px;
+							margin-bottom: 20px;
+							width: 320px;
+					}
 /* Banners */
 .banners {
   padding: 24px 0px 25px 0px;
