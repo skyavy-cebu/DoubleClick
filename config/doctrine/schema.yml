@@ -121,137 +121,6 @@ Feedback:
       primary: false
       notnull: false
       autoincrement: false
-Mailmagazine:
-  connection: doctrine
-  tableName: mailmagazine
-  columns:
-    id:
-      type: integer(4)
-      fixed: false
-      unsigned: true
-      primary: true
-      autoincrement: true
-    title:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: true
-      autoincrement: false
-    content:
-      type: string()
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: false
-      autoincrement: false
-    publish_date:
-      type: timestamp(25)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: true
-      autoincrement: false
-    updated_at:
-      type: timestamp(25)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: false
-      autoincrement: false
-    created_at:
-      type: timestamp(25)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: false
-      autoincrement: false
-Newsletter:
-  connection: doctrine
-  tableName: newsletter
-  columns:
-    id:
-      type: integer(8)
-      fixed: false
-      unsigned: true
-      primary: true
-      autoincrement: true
-    teacher_id:
-      type: integer(8)
-      fixed: false
-      unsigned: true
-      primary: false
-      notnull: true
-      autoincrement: false
-    title:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: true
-      autoincrement: false
-    content:
-      type: blob()
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: false
-      autoincrement: false
-    publish_date:
-      type: timestamp(25)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: true
-      autoincrement: false
-    updated_at:
-      type: timestamp(25)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: false
-      autoincrement: false
-    created_at:
-      type: timestamp(25)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: false
-      autoincrement: false
-  relations:
-    Teacher:
-      local: teacher_id
-      foreign: id
-      type: one
-    NewsletterXStudent:
-      local: id
-      foreign: newsletter_id
-      type: many
-NewsletterXStudent:
-  connection: doctrine
-  tableName: newsletter_x_student
-  columns:
-    newsletter_id:
-      type: integer(8)
-      fixed: false
-      unsigned: true
-      primary: true
-      autoincrement: false
-    student_id:
-      type: integer(8)
-      fixed: false
-      unsigned: true
-      primary: true
-      autoincrement: false
-  relations:
-    Newsletter:
-      local: newsletter_id
-      foreign: id
-      type: one
-    Student:
-      local: student_id
-      foreign: id
-      type: one
 Page:
   connection: doctrine
   tableName: page
@@ -304,6 +173,50 @@ Page:
       primary: false
       notnull: false
       autoincrement: false
+Settlement:
+  connection: doctrine
+  tableName: settlement
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: false
+    status:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    paid_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    Subscription:
+      local: id
+      foreign: settlement_id
+      type: many
 State:
   connection: doctrine
   tableName: state
@@ -472,10 +385,6 @@ Student:
       local: state_id
       foreign: id
       type: one
-    NewsletterXStudent:
-      local: id
-      foreign: student_id
-      type: many
     Subscription:
       local: id
       foreign: student_id
@@ -496,16 +405,19 @@ Subscription:
       unsigned: true
       primary: true
       autoincrement: false
+    settlement_id:
+      type: integer(8)
+      fixed: false
+      unsigned: true
+      primary: false
+      notnull: true
+      autoincrement: false
     status:
-      type: enum(1)
+      type: integer(1)
       fixed: false
       unsigned: false
-      values:
-        - '0'
-        - '1'
-        - '2'
       primary: false
-      default: '2'
+      default: '1'
       notnull: true
       autoincrement: false
     duration:
@@ -521,11 +433,11 @@ Subscription:
       notnull: true
       autoincrement: false
     price:
-      type: integer(4)
+      type: 'decimal(9, 2)'
       fixed: false
       unsigned: true
       primary: false
-      default: '0'
+      default: '0.00'
       notnull: true
       autoincrement: false
     valid_until:
@@ -550,12 +462,16 @@ Subscription:
       notnull: false
       autoincrement: false
   relations:
-    Student:
-      local: student_id
-      foreign: id
-      type: one
     Teacher:
       local: teacher_id
+      foreign: id
+      type: one
+    Settlement:
+      local: settlement_id
+      foreign: id
+      type: one
+    Student:
+      local: student_id
       foreign: id
       type: one
 Teacher:
@@ -618,10 +534,6 @@ Teacher:
       notnull: false
       autoincrement: false
   relations:
-    Newsletter:
-      local: id
-      foreign: teacher_id
-      type: many
     Subscription:
       local: id
       foreign: teacher_id

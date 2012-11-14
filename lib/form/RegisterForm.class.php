@@ -20,15 +20,15 @@ class RegisterForm extends BaseForm
     }
     
     /* uncomment when teachers are set in the db */
-    // $teachersArr = TeacherTable::getInstance()->createQuery()->fetchArray();
-    // $teachersChoice = array();
-    // foreach ($teachersArr as $teacher)
-    // {
-      // $teachersChoice[$teacher['id']] = $teacher['title'];
-    // }
+    $teachersArr = TeacherTable::getInstance()->createQuery()->fetchArray();
+    $teachersChoice = array();
+    foreach ($teachersArr as $teacher)
+    {
+      $teachersChoice[$teacher['id']] = $teacher['title'];
+    }
     
     /* temporary choices for teachers */
-    $teachersChoice = array('OP先生', 'CFD先生', 'シロネコ先生', '白虎先生', 'スイング先生');
+    // $teachersChoice = array('OP先生', 'CFD先生', 'シロネコ先生', '白虎先生', 'スイング先生');
     
     $this->setWidgets(array(
       'name'       => new sfWidgetFormInputText(),
@@ -64,8 +64,8 @@ class RegisterForm extends BaseForm
       'state_id'   => new sfValidatorChoice(array('choices' => array_slice(array_keys($statesChoice), 1, count($statesArr)))),
       'address'    => new sfValidatorString(array('required' => true)),
       'contact'    => new sfValidatorString(array('required' => true)),
-      'email'      => new sfValidatorString(array('required' => true)),
-      'cemail'     => new sfValidatorString(array('required' => true)),
+      'email'      => new sfValidatorEmail(array('required' => true)),
+      'cemail'     => new sfValidatorEmail(array('required' => true)),
       'password'   => new sfValidatorString(
                         array(
                           'required' => true,

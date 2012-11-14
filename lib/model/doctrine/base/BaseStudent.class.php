@@ -26,51 +26,48 @@ Doctrine_Manager::getInstance()->bindComponent('Student', 'doctrine');
  * @property timestamp $created_at
  * @property City $City
  * @property State $State
- * @property Doctrine_Collection $NewsletterXStudent
  * @property Doctrine_Collection $Subscription
  * 
- * @method integer             getId()                 Returns the current record's "id" value
- * @method string              getName()               Returns the current record's "name" value
- * @method string              getFurigana()           Returns the current record's "furigana" value
- * @method string              getEmail()              Returns the current record's "email" value
- * @method string              getPassword()           Returns the current record's "password" value
- * @method enum                getLoginType()          Returns the current record's "login_type" value
- * @method string              getZipcode1()           Returns the current record's "zipcode1" value
- * @method string              getZipcode2()           Returns the current record's "zipcode2" value
- * @method string              getAddress()            Returns the current record's "address" value
- * @method integer             getStateId()            Returns the current record's "state_id" value
- * @method integer             getCityId()             Returns the current record's "city_id" value
- * @method string              getContact()            Returns the current record's "contact" value
- * @method string              getPicture()            Returns the current record's "picture" value
- * @method enum                getStatus()             Returns the current record's "status" value
- * @method string              getActivation()         Returns the current record's "activation" value
- * @method timestamp           getUpdatedAt()          Returns the current record's "updated_at" value
- * @method timestamp           getCreatedAt()          Returns the current record's "created_at" value
- * @method City                getCity()               Returns the current record's "City" value
- * @method State               getState()              Returns the current record's "State" value
- * @method Doctrine_Collection getNewsletterXStudent() Returns the current record's "NewsletterXStudent" collection
- * @method Doctrine_Collection getSubscription()       Returns the current record's "Subscription" collection
- * @method Student             setId()                 Sets the current record's "id" value
- * @method Student             setName()               Sets the current record's "name" value
- * @method Student             setFurigana()           Sets the current record's "furigana" value
- * @method Student             setEmail()              Sets the current record's "email" value
- * @method Student             setPassword()           Sets the current record's "password" value
- * @method Student             setLoginType()          Sets the current record's "login_type" value
- * @method Student             setZipcode1()           Sets the current record's "zipcode1" value
- * @method Student             setZipcode2()           Sets the current record's "zipcode2" value
- * @method Student             setAddress()            Sets the current record's "address" value
- * @method Student             setStateId()            Sets the current record's "state_id" value
- * @method Student             setCityId()             Sets the current record's "city_id" value
- * @method Student             setContact()            Sets the current record's "contact" value
- * @method Student             setPicture()            Sets the current record's "picture" value
- * @method Student             setStatus()             Sets the current record's "status" value
- * @method Student             setActivation()         Sets the current record's "activation" value
- * @method Student             setUpdatedAt()          Sets the current record's "updated_at" value
- * @method Student             setCreatedAt()          Sets the current record's "created_at" value
- * @method Student             setCity()               Sets the current record's "City" value
- * @method Student             setState()              Sets the current record's "State" value
- * @method Student             setNewsletterXStudent() Sets the current record's "NewsletterXStudent" collection
- * @method Student             setSubscription()       Sets the current record's "Subscription" collection
+ * @method integer             getId()           Returns the current record's "id" value
+ * @method string              getName()         Returns the current record's "name" value
+ * @method string              getFurigana()     Returns the current record's "furigana" value
+ * @method string              getEmail()        Returns the current record's "email" value
+ * @method string              getPassword()     Returns the current record's "password" value
+ * @method enum                getLoginType()    Returns the current record's "login_type" value
+ * @method string              getZipcode1()     Returns the current record's "zipcode1" value
+ * @method string              getZipcode2()     Returns the current record's "zipcode2" value
+ * @method string              getAddress()      Returns the current record's "address" value
+ * @method integer             getStateId()      Returns the current record's "state_id" value
+ * @method integer             getCityId()       Returns the current record's "city_id" value
+ * @method string              getContact()      Returns the current record's "contact" value
+ * @method string              getPicture()      Returns the current record's "picture" value
+ * @method enum                getStatus()       Returns the current record's "status" value
+ * @method string              getActivation()   Returns the current record's "activation" value
+ * @method timestamp           getUpdatedAt()    Returns the current record's "updated_at" value
+ * @method timestamp           getCreatedAt()    Returns the current record's "created_at" value
+ * @method City                getCity()         Returns the current record's "City" value
+ * @method State               getState()        Returns the current record's "State" value
+ * @method Doctrine_Collection getSubscription() Returns the current record's "Subscription" collection
+ * @method Student             setId()           Sets the current record's "id" value
+ * @method Student             setName()         Sets the current record's "name" value
+ * @method Student             setFurigana()     Sets the current record's "furigana" value
+ * @method Student             setEmail()        Sets the current record's "email" value
+ * @method Student             setPassword()     Sets the current record's "password" value
+ * @method Student             setLoginType()    Sets the current record's "login_type" value
+ * @method Student             setZipcode1()     Sets the current record's "zipcode1" value
+ * @method Student             setZipcode2()     Sets the current record's "zipcode2" value
+ * @method Student             setAddress()      Sets the current record's "address" value
+ * @method Student             setStateId()      Sets the current record's "state_id" value
+ * @method Student             setCityId()       Sets the current record's "city_id" value
+ * @method Student             setContact()      Sets the current record's "contact" value
+ * @method Student             setPicture()      Sets the current record's "picture" value
+ * @method Student             setStatus()       Sets the current record's "status" value
+ * @method Student             setActivation()   Sets the current record's "activation" value
+ * @method Student             setUpdatedAt()    Sets the current record's "updated_at" value
+ * @method Student             setCreatedAt()    Sets the current record's "created_at" value
+ * @method Student             setCity()         Sets the current record's "City" value
+ * @method Student             setState()        Sets the current record's "State" value
+ * @method Student             setSubscription() Sets the current record's "Subscription" collection
  * 
  * @package    DOUBLECLICK
  * @subpackage model
@@ -261,10 +258,6 @@ abstract class BaseStudent extends sfDoctrineRecord
         $this->hasOne('State', array(
              'local' => 'state_id',
              'foreign' => 'id'));
-
-        $this->hasMany('NewsletterXStudent', array(
-             'local' => 'id',
-             'foreign' => 'student_id'));
 
         $this->hasMany('Subscription', array(
              'local' => 'id',
