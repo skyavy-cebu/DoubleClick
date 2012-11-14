@@ -1,4 +1,6 @@
 <?php
+// Connection Component Binding
+Doctrine_Manager::getInstance()->bindComponent('Subscription', 'doctrine');
 
 /**
  * BaseSubscription
@@ -7,23 +9,35 @@
  * 
  * @property integer $teacher_id
  * @property integer $student_id
+ * @property enum $status
  * @property enum $duration
+ * @property integer $price
  * @property timestamp $valid_until
- * @property Teacher $Teacher
+ * @property timestamp $modified_at
+ * @property timestamp $created_at
  * @property Student $Student
+ * @property Teacher $Teacher
  * 
  * @method integer      getTeacherId()   Returns the current record's "teacher_id" value
  * @method integer      getStudentId()   Returns the current record's "student_id" value
+ * @method enum         getStatus()      Returns the current record's "status" value
  * @method enum         getDuration()    Returns the current record's "duration" value
+ * @method integer      getPrice()       Returns the current record's "price" value
  * @method timestamp    getValidUntil()  Returns the current record's "valid_until" value
- * @method Teacher      getTeacher()     Returns the current record's "Teacher" value
+ * @method timestamp    getModifiedAt()  Returns the current record's "modified_at" value
+ * @method timestamp    getCreatedAt()   Returns the current record's "created_at" value
  * @method Student      getStudent()     Returns the current record's "Student" value
+ * @method Teacher      getTeacher()     Returns the current record's "Teacher" value
  * @method Subscription setTeacherId()   Sets the current record's "teacher_id" value
  * @method Subscription setStudentId()   Sets the current record's "student_id" value
+ * @method Subscription setStatus()      Sets the current record's "status" value
  * @method Subscription setDuration()    Sets the current record's "duration" value
+ * @method Subscription setPrice()       Sets the current record's "price" value
  * @method Subscription setValidUntil()  Sets the current record's "valid_until" value
- * @method Subscription setTeacher()     Sets the current record's "Teacher" value
+ * @method Subscription setModifiedAt()  Sets the current record's "modified_at" value
+ * @method Subscription setCreatedAt()   Sets the current record's "created_at" value
  * @method Subscription setStudent()     Sets the current record's "Student" value
+ * @method Subscription setTeacher()     Sets the current record's "Teacher" value
  * 
  * @package    DOUBLECLICK
  * @subpackage model
@@ -35,33 +49,89 @@ abstract class BaseSubscription extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('subscription');
-        $this->hasColumn('teacher_id', 'integer', 4, array(
+        $this->hasColumn('teacher_id', 'integer', 8, array(
              'type' => 'integer',
+             'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
              'autoincrement' => false,
-             'length' => 4,
+             'length' => 8,
              ));
-        $this->hasColumn('student_id', 'integer', 4, array(
+        $this->hasColumn('student_id', 'integer', 8, array(
              'type' => 'integer',
+             'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
              'autoincrement' => false,
-             'length' => 4,
+             'length' => 8,
              ));
-        $this->hasColumn('duration', 'enum', null, array(
+        $this->hasColumn('status', 'enum', 1, array(
              'type' => 'enum',
+             'fixed' => 0,
+             'unsigned' => false,
              'values' => 
              array(
-              0 => 0,
-              1 => 1,
-              2 => 2,
+              0 => '0',
+              1 => '1',
+              2 => '2',
              ),
+             'primary' => false,
+             'default' => '2',
              'notnull' => true,
+             'autoincrement' => false,
+             'length' => 1,
+             ));
+        $this->hasColumn('duration', 'enum', 1, array(
+             'type' => 'enum',
+             'fixed' => 0,
+             'unsigned' => false,
+             'values' => 
+             array(
+              0 => '0',
+              1 => '1',
+              2 => '2',
+             ),
+             'primary' => false,
+             'default' => '0',
+             'notnull' => true,
+             'autoincrement' => false,
+             'length' => 1,
+             ));
+        $this->hasColumn('price', 'integer', 4, array(
+             'type' => 'integer',
+             'fixed' => 0,
+             'unsigned' => true,
+             'primary' => false,
+             'default' => '0',
+             'notnull' => true,
+             'autoincrement' => false,
+             'length' => 4,
              ));
         $this->hasColumn('valid_until', 'timestamp', 25, array(
              'type' => 'timestamp',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
              'notnull' => false,
+             'autoincrement' => false,
+             'length' => 25,
+             ));
+        $this->hasColumn('modified_at', 'timestamp', 25, array(
+             'type' => 'timestamp',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => 25,
+             ));
+        $this->hasColumn('created_at', 'timestamp', 25, array(
+             'type' => 'timestamp',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
              'length' => 25,
              ));
     }
@@ -69,26 +139,12 @@ abstract class BaseSubscription extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Teacher', array(
-             'local' => 'teacher_id',
-             'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
-
         $this->hasOne('Student', array(
              'local' => 'student_id',
-             'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'foreign' => 'id'));
 
-        $timestampable0 = new Doctrine_Template_Timestampable(array(
-             'created' => 
-             array(
-              'expression' => 'NOW()',
-             ),
-             'updated' => 
-             array(
-              'disabled' => true,
-             ),
-             ));
-        $this->actAs($timestampable0);
+        $this->hasOne('Teacher', array(
+             'local' => 'teacher_id',
+             'foreign' => 'id'));
     }
 }

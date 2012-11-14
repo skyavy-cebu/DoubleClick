@@ -1,120 +1,673 @@
-Page:
-  actAs:          { Timestampable: ~ }
-  columns:
-    id:           { type: integer(1), unsigned: true, primary: true, autoincrement: true }
-    title:        { type: string(150), notnull: true }
-    image1:       { type: string(100), notnull: false }
-    image2:       { type: string(100), notnull: false }
-    body:         { type: clob(65532), notnull: false }
-
-State:
-  columns:
-    id:           { type: integer(2), unsigned: true, primary: true, autoincrement: true }
-    name:         { type: string(50), notnull: true }
-
-City:
-  columns:
-    id:           { type: integer(2), unsigned: true, primary: true, autoincrement: true }
-    state_id:     { type: integer(2), unsigned: true, notnull: true }
-    name:         { type: string(50), notnull: true }
-  relations:
-    State:        { class: State, local: state_id, foreign: id, onDelete: CASCADE }
-
 Admin:
-  actAs:          { Timestampable: ~ }
+  connection: doctrine
+  tableName: admin
   columns:
-    id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
-    name:         { type: string(100) }
-    email:        { type: string(80), notnull: true, unique: true }
-    password:     { type: string(32), notnull: true  }
-
-Teacher:
-  actAs:          { Timestampable: ~ }
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    name:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    email:
+      type: string(80)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    password:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+City:
+  connection: doctrine
+  tableName: city
   columns:
-    id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
-    title:        { type: string(100) }
-    email:        { type: string(80), notnull: true, unique: true }
-    password:     { type: string(32), notnull: true  }
-    portfolio:    { type: clob(65532), notnull: false }
-    details:      { type: clob(65532), notnull: false }
-
-Student:
-  actAs:          { Timestampable: ~ }
-  columns:
-    id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
-    name:         { type: string(100), notnull: true }
-    furigana:     { type: string(100), notnull: false }
-    email:        { type: string(80), notnull: true, unique: true }
-    password:     { type: string(32), notnull: false  }
-    login_type:   { type: enum, values: [0, 1], notnull: true, default: 0 }
-    zipcode1:     { type: string(3), notnull: false }
-    zipcode2:     { type: string(4), notnull: false }
-    address:      { type: string(150), notnull: false }
-    state_id:     { type: integer(2), unsigned: true, notnull: false }
-    city_id:      { type: integer(2), unsigned: true, notnull: false }
-    contact:      { type: string(20), notnull: false }
-    picture:      { type: string(42), notnull: false }
-    status:       { type: enum, values: [0, 1, 2, 3, 4], notnull: true, default: 0 }
+    id:
+      type: integer(2)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    state_id:
+      type: integer(2)
+      fixed: false
+      unsigned: true
+      primary: false
+      notnull: true
+      autoincrement: false
+    name:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
   relations:
-    State:        { class: State, local: state_id, foreign: id, onDelete: SET NULL }
-    City:         { class: City, local: city_id, foreign: id, onDelete: SET NULL }
-
-Subscription:
-  actAs:
-    Timestampable: 
-      created:
-        expression: 'NOW()'
-      updated:
-        disabled: true
-  columns:
-    teacher_id:   { type: integer(4), unsigned: true, primary: true, autoincrement: false }
-    student_id:   { type: integer(4), unsigned: true, primary: true, autoincrement: false }
-    duration:     { type: enum, values: [0,1,2], notnull: true }
-    valid_until:  { type: timestamp(25), notnull: false }
-  relations:
-    Teacher:      { class: Teacher, local: teacher_id, foreign: id, onDelete: CASCADE }
-    Student:      { class: Student, local: student_id, foreign: id, onDelete: CASCADE }
-
+    State:
+      local: state_id
+      foreign: id
+      type: one
+    Student:
+      local: id
+      foreign: city_id
+      type: many
 Feedback:
-  actAs:          { Timestampable: ~ }
+  connection: doctrine
+  tableName: feedback
   columns:
-    id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
-    admin_id:     { type: integer(4), unsigned: true, notnull: true }
-    customer_name: { type: string(80), notnull: true }
-    body:         { type: clob(65532), notnull: false }
-    publish_date: { type: timestamp(25), notnull: true }
-  relations:
-    Admin:        { class: Admin, local: admin_id, foreign: id, onDelete: CASCADE }
-
-NewsletterAdmin:
-  actAs:          { Timestampable: ~ }
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    customer_name:
+      type: string(80)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    body:
+      type: blob()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    publish_date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+Mailmagazine:
+  connection: doctrine
+  tableName: mailmagazine
   columns:
-    id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
-    admin_id:     { type: integer(4), unsigned: true, notnull: true }
-    title:        { type: string(150), notnull: true }
-    content:      { type: clob(65532), notnull: false }
-    publish_date: { type: timestamp(25), notnull: true }
-  relations:
-    Admin:         { class: Admin, local: admin_id, foreign: id, onDelete: CASCADE }
-
-NewsletterTeacher:
-  actAs:          { Timestampable: ~ }
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    title:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    content:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    publish_date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+Newsletter:
+  connection: doctrine
+  tableName: newsletter
   columns:
-    id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
-    teacher_id:   { type: integer(4), unsigned: true, notnull: true }
-    title:        { type: string(150), notnull: true }
-    content:      { type: clob(65532), notnull: false }
-    publish_date: { type: timestamp(25), notnull: true }
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    teacher_id:
+      type: integer(8)
+      fixed: false
+      unsigned: true
+      primary: false
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    content:
+      type: blob()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    publish_date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
   relations:
-    Admin:         { class: Teacher, local: teacher_id, foreign: id, onDelete: CASCADE }
-
+    Teacher:
+      local: teacher_id
+      foreign: id
+      type: one
+    NewsletterXStudent:
+      local: id
+      foreign: newsletter_id
+      type: many
+NewsletterXStudent:
+  connection: doctrine
+  tableName: newsletter_x_student
+  columns:
+    newsletter_id:
+      type: integer(8)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: false
+    student_id:
+      type: integer(8)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: false
+  relations:
+    Newsletter:
+      local: newsletter_id
+      foreign: id
+      type: one
+    Student:
+      local: student_id
+      foreign: id
+      type: one
+Page:
+  connection: doctrine
+  tableName: page
+  columns:
+    id:
+      type: integer(1)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    title:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    image1:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    image2:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    body:
+      type: blob()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+State:
+  connection: doctrine
+  tableName: state
+  columns:
+    id:
+      type: integer(2)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    name:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    City:
+      local: id
+      foreign: state_id
+      type: many
+    Student:
+      local: id
+      foreign: state_id
+      type: many
+Student:
+  connection: doctrine
+  tableName: student
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    name:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    furigana:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    email:
+      type: string(80)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    password:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    login_type:
+      type: enum(1)
+      fixed: false
+      unsigned: false
+      values:
+        - '0'
+        - '1'
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    zipcode1:
+      type: string(3)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    zipcode2:
+      type: string(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    address:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    state_id:
+      type: integer(2)
+      fixed: false
+      unsigned: true
+      primary: false
+      notnull: true
+      autoincrement: false
+    city_id:
+      type: integer(2)
+      fixed: false
+      unsigned: true
+      primary: false
+      notnull: false
+      autoincrement: false
+    contact:
+      type: string(20)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    picture:
+      type: string(42)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    status:
+      type: enum(1)
+      fixed: false
+      unsigned: false
+      values:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    activation:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    City:
+      local: city_id
+      foreign: id
+      type: one
+    State:
+      local: state_id
+      foreign: id
+      type: one
+    NewsletterXStudent:
+      local: id
+      foreign: student_id
+      type: many
+    Subscription:
+      local: id
+      foreign: student_id
+      type: many
+Subscription:
+  connection: doctrine
+  tableName: subscription
+  columns:
+    teacher_id:
+      type: integer(8)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: false
+    student_id:
+      type: integer(8)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: false
+    status:
+      type: enum(1)
+      fixed: false
+      unsigned: false
+      values:
+        - '0'
+        - '1'
+        - '2'
+      primary: false
+      default: '2'
+      notnull: true
+      autoincrement: false
+    duration:
+      type: enum(1)
+      fixed: false
+      unsigned: false
+      values:
+        - '0'
+        - '1'
+        - '2'
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    price:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    valid_until:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    modified_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    Student:
+      local: student_id
+      foreign: id
+      type: one
+    Teacher:
+      local: teacher_id
+      foreign: id
+      type: one
+Teacher:
+  connection: doctrine
+  tableName: teacher
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    title:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    email:
+      type: string(80)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    password:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    portfolio:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    details:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    Newsletter:
+      local: id
+      foreign: teacher_id
+      type: many
+    Subscription:
+      local: id
+      foreign: teacher_id
+      type: many
 Topic:
-  actAs:          { Timestampable: ~ }
+  connection: doctrine
+  tableName: topic
   columns:
-    id:           { type: integer(4), unsigned: true, primary: true, autoincrement: true }
-    admin_id:      { type: integer(4), unsigned: true, notnull: true }
-    title:        { type: string(255), notnull: true }
-    pdf_filename: { type: string(36), notnull: true }
-    publish_date: { type: timestamp(25), notnull: true }
-  relations:
-    Admin:         { class: Admin, local: admin_id, foreign: id, onDelete: CASCADE }
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    title:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pdf_filename:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    publish_date:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false

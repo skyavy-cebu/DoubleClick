@@ -1,4 +1,6 @@
 <?php
+// Connection Component Binding
+Doctrine_Manager::getInstance()->bindComponent('Admin', 'doctrine');
 
 /**
  * BaseAdmin
@@ -9,24 +11,21 @@
  * @property string $name
  * @property string $email
  * @property string $password
- * @property Doctrine_Collection $Feedback
- * @property Doctrine_Collection $NewsletterAdmin
- * @property Doctrine_Collection $Topic
+ * @property timestamp $updated_at
+ * @property timestamp $created_at
  * 
- * @method integer             getId()              Returns the current record's "id" value
- * @method string              getName()            Returns the current record's "name" value
- * @method string              getEmail()           Returns the current record's "email" value
- * @method string              getPassword()        Returns the current record's "password" value
- * @method Doctrine_Collection getFeedback()        Returns the current record's "Feedback" collection
- * @method Doctrine_Collection getNewsletterAdmin() Returns the current record's "NewsletterAdmin" collection
- * @method Doctrine_Collection getTopic()           Returns the current record's "Topic" collection
- * @method Admin               setId()              Sets the current record's "id" value
- * @method Admin               setName()            Sets the current record's "name" value
- * @method Admin               setEmail()           Sets the current record's "email" value
- * @method Admin               setPassword()        Sets the current record's "password" value
- * @method Admin               setFeedback()        Sets the current record's "Feedback" collection
- * @method Admin               setNewsletterAdmin() Sets the current record's "NewsletterAdmin" collection
- * @method Admin               setTopic()           Sets the current record's "Topic" collection
+ * @method integer   getId()         Returns the current record's "id" value
+ * @method string    getName()       Returns the current record's "name" value
+ * @method string    getEmail()      Returns the current record's "email" value
+ * @method string    getPassword()   Returns the current record's "password" value
+ * @method timestamp getUpdatedAt()  Returns the current record's "updated_at" value
+ * @method timestamp getCreatedAt()  Returns the current record's "created_at" value
+ * @method Admin     setId()         Sets the current record's "id" value
+ * @method Admin     setName()       Sets the current record's "name" value
+ * @method Admin     setEmail()      Sets the current record's "email" value
+ * @method Admin     setPassword()   Sets the current record's "password" value
+ * @method Admin     setUpdatedAt()  Sets the current record's "updated_at" value
+ * @method Admin     setCreatedAt()  Sets the current record's "created_at" value
  * 
  * @package    DOUBLECLICK
  * @subpackage model
@@ -40,6 +39,7 @@ abstract class BaseAdmin extends sfDoctrineRecord
         $this->setTableName('admin');
         $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
+             'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
              'autoincrement' => true,
@@ -47,37 +47,54 @@ abstract class BaseAdmin extends sfDoctrineRecord
              ));
         $this->hasColumn('name', 'string', 100, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'autoincrement' => false,
              'length' => 100,
              ));
         $this->hasColumn('email', 'string', 80, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
              'notnull' => true,
-             'unique' => true,
+             'autoincrement' => false,
              'length' => 80,
              ));
-        $this->hasColumn('password', 'string', 32, array(
+        $this->hasColumn('password', 'string', 50, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
              'notnull' => true,
-             'length' => 32,
+             'autoincrement' => false,
+             'length' => 50,
+             ));
+        $this->hasColumn('updated_at', 'timestamp', 25, array(
+             'type' => 'timestamp',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => 25,
+             ));
+        $this->hasColumn('created_at', 'timestamp', 25, array(
+             'type' => 'timestamp',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => 25,
              ));
     }
 
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Feedback', array(
-             'local' => 'id',
-             'foreign' => 'admin_id'));
-
-        $this->hasMany('NewsletterAdmin', array(
-             'local' => 'id',
-             'foreign' => 'admin_id'));
-
-        $this->hasMany('Topic', array(
-             'local' => 'id',
-             'foreign' => 'admin_id'));
-
-        $timestampable0 = new Doctrine_Template_Timestampable();
-        $this->actAs($timestampable0);
+        
     }
 }

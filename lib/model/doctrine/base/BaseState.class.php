@@ -1,4 +1,6 @@
 <?php
+// Connection Component Binding
+Doctrine_Manager::getInstance()->bindComponent('State', 'doctrine');
 
 /**
  * BaseState
@@ -31,6 +33,7 @@ abstract class BaseState extends sfDoctrineRecord
         $this->setTableName('state');
         $this->hasColumn('id', 'integer', 2, array(
              'type' => 'integer',
+             'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
              'autoincrement' => true,
@@ -38,7 +41,11 @@ abstract class BaseState extends sfDoctrineRecord
              ));
         $this->hasColumn('name', 'string', 50, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
              'notnull' => true,
+             'autoincrement' => false,
              'length' => 50,
              ));
     }
