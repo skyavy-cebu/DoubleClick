@@ -48,25 +48,11 @@ class registerActions extends sfActions
     $durations = array('1ヶ月コース', '3ヶ月コース', '6ヶ月コース');
     $this->durationLbl = $durations[$this->register['duration']];
     
-    /* uncomment when teachers are set in the db */
-    // $teachers = TeacherTable::getInstance()->findByDql('id IN ?', array($this->register['teacher_id']));
-    
-    /* temporary teachers array */
-    $teachers = array(
-      array('id' => 0, 'title' => 'OP先生'),
-      array('id' => 1, 'title' => 'CFD先生'),
-      array('id' => 2, 'title' => 'シロネコ先生'),
-      array('id' => 3, 'title' => '白虎先生'),
-      array('id' => 4, 'title' => 'スイング先生')
-    );
-    
+    $teachers = TeacherTable::getInstance()->findByDql('id IN ?', array($this->register['teacher_id']));
     $teacherTitles = array();
     foreach ($teachers as $teacher)
     {
-      if (in_array($teacher['id'], $this->register['teacher_id']))
-      {
-        $teacherTitles[] = $teacher['title'];
-      }
+      $teacherTitles[] = $teacher->getTitle();
     }
     
     $this->teacherTitlesStr = implode(', ', $teacherTitles);
@@ -74,40 +60,100 @@ class registerActions extends sfActions
     // if confirmed
     if ($request->isMethod('post'))
     {
-      echo 'Registered';
       // hash password;
-      // $salt = sfConfig::get('app_system_salt');
-      // $password = md5(md5($this->register['password']).$salt);
-      // $activation = md5(md5(time()).$salt);
+      $salt = sfConfig::get('app_system_salt');
+      $password = md5(md5($this->register['password']).$salt);
+      $activation = md5(md5(time()).$salt);
       
       // save new Student
-      // $student = new Student();
-      // $student->setName($this->register['name']);
-      // $student->setFurigana($this->register['furigana']);
-      // $student->setZipcode1($this->register['zipcode1']);
-      // $student->setZipcode2($this->register['zipcode2']);
-      // $student->setStateId($this->register['state_id']);
-      // $student->setAddress($this->register['address']);
-      // $student->setContact($this->register['contact']);
-      // $student->setEmail($this->register['email']);
-      // $student->setPassword($password);
-      // $student->save();
+      $student = new Student();
+      $student->setName($this->register['name']);
+      $student->setFurigana($this->register['furigana']);
+      $student->setZipcode1($this->register['zipcode1']);
+      $student->setZipcode2($this->register['zipcode2']);
+      $student->setStateId($this->register['state_id']);
+      $student->setAddress($this->register['address']);
+      $student->setContact($this->register['contact']);
+      $student->setEmail($this->register['email']);
+      $student->setPassword($password);
+      $student->setActivation($activation);
+      $student->save();
       
       // save new Subscription(s)
-      // if (0 < count($this->register['teacher_id'])) {
-        // foreach ($this->register['teacher_id'] as $teacherId) {
-          // $subscription = new Subscription();
-          // $subscription->setTeacherId($teacherId);
-          // $subscription->setStudentId($student->getId());
-          // $subscription->setDuration($this->register['duration']);
-          // $subscription->save();
-        // }
-      // }
+      if (0 < count($this->register['teacher_id'])) {
+        foreach ($this->register['teacher_id'] as $teacherId) {
+          $subscription = new Subscription();
+          $subscription->setTeacherId($teacherId);
+          $subscription->setStudentId($student->getId());
+          $subscription->setDuration($this->register['duration']);
+          $subscription->save();
+        }
+      }
       
       // send activation mail
+      $message = $this->getMailer()->compose(
+        /* from */
+        array('admin@doubleclick.co.jp' => 'DoubleClick Admin'),
+        /* to */
+        $this->register['email'],
+        /* subject */
+        '仮登録完了',
+        /* body */
+        <<<EOF
+以下のURLをクリックして、本登録を行ってください。
+
+{$this->getController()->genUrl('@register-activate?code='.$activation, true)}
+
+-------------------------------
+DoubleClick
+{$this->getController()->genUrl('@home', true)}
+EOF
+      );
+      
+      $this->getMailer()->send($message);
       
       /* destroy session variable: register */
       $this->getUser()->getAttributeHolder()->remove('register');
+      
+      // redirect
+      $this->redirect('@register-message');
     }
+  }
+  
+ /**
+  * Executes activate action.
+  *
+  * @param sfRequest $request A request object
+  */
+  public function executeActivate(sfWebRequest $request)
+  {
+    $this->forward404Unless($code = $request->getParameter('code'));
+    $this->forward404Unless($student = StudentTable::getInstance()->findOneByActivation($code));
+    
+    $student->setStatus(1);
+    $student->setActivation('');
+    $student->save();
+    
+    // send complete registration mail
+    $message = $this->getMailer()->compose(
+      /* from */
+      array('admin@doubleclick.co.jp' => 'DoubleClick Admin'),
+      /* to */
+      $student->getEmail(),
+      /* subject */
+      '本登録完了',
+      /* body */
+      <<<EOF
+Registration is complete.
+
+** Other info goes here **
+
+-------------------------------
+DoubleClick
+{$this->getController()->genUrl('@home', true)}
+EOF
+    );
+    
+    $this->getMailer()->send($message);
   }
 }

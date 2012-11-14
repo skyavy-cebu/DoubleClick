@@ -84,6 +84,14 @@
         <source>Passwords do not match.</source>
         <target>パスワードが一致しません。</target>
       </trans-unit>
+      <trans-unit id="21">
+        <source>Confirm Registration</source>
+        <target>登録内容確認</target>
+      </trans-unit>
+      <trans-unit id="22">
+        <source>Register</source>
+        <target>登録</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

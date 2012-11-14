@@ -43,4 +43,8 @@ class staticActions extends sfActions
   {
     
   }
+  public function executeRegistrationMessage(sfWebRequest $request)
+  {
+    
+  }
 }

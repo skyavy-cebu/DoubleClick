@@ -5,6 +5,14 @@ home:
   url:   /
   param: { module: home, action: index }
   
+register-message:
+  url: /register/message
+  param: { module: static, action: registrationMessage }
+  
+register-activate:
+  url: /register/activate
+  param: { module: register, action: activate }
+  
 register-confirm:
   url: /register/confirm
   param: { module: register, action: confirm }

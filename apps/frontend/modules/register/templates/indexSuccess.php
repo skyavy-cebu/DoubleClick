@@ -41,8 +41,9 @@
     </tr>
     <tr>
       <td colspan="3">
-        <input type="submit" value="<?php echo __('Submit'); ?>" />
+        <input type="submit" value="<?php echo __('Confirm Registration'); ?>" />
       </td>
     </tr>
   </table>
+  <?php echo $form->renderHiddenFields()?>
 </form>

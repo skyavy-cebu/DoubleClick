@@ -32,7 +32,7 @@
     </tr>
     <tr name="register-password">
       <th><?php echo __('Password')?></th>
-      <td><?php echo preg_replace("/^[a-zA-z0-9]/", "*", $register['password'])?></td>
+      <td><?php echo str_repeat("*", strlen($register['password']))?></td>
     </tr>
     <tr name="register-duration">
       <th><?php echo __('Courses')?></th>
@@ -45,7 +45,7 @@
     <tr>
       <td colspan="2">
         <input type="button" value="<?php echo __('Back')?>" onclick="javascript:history.go(-1); return false;" />
-        <input type="submit" value="<?php echo __('Submit'); ?>" />
+        <input type="submit" value="<?php echo __('Register'); ?>" />
       </td>
     </tr>
   </table>
