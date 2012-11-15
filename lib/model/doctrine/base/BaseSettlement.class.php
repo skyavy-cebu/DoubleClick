@@ -10,21 +10,15 @@ Doctrine_Manager::getInstance()->bindComponent('Settlement', 'doctrine');
  * @property integer $id
  * @property integer $status
  * @property timestamp $paid_at
- * @property timestamp $updated_at
- * @property timestamp $created_at
  * @property Doctrine_Collection $Subscription
  * 
  * @method integer             getId()           Returns the current record's "id" value
  * @method integer             getStatus()       Returns the current record's "status" value
  * @method timestamp           getPaidAt()       Returns the current record's "paid_at" value
- * @method timestamp           getUpdatedAt()    Returns the current record's "updated_at" value
- * @method timestamp           getCreatedAt()    Returns the current record's "created_at" value
  * @method Doctrine_Collection getSubscription() Returns the current record's "Subscription" collection
  * @method Settlement          setId()           Sets the current record's "id" value
  * @method Settlement          setStatus()       Sets the current record's "status" value
  * @method Settlement          setPaidAt()       Sets the current record's "paid_at" value
- * @method Settlement          setUpdatedAt()    Sets the current record's "updated_at" value
- * @method Settlement          setCreatedAt()    Sets the current record's "created_at" value
  * @method Settlement          setSubscription() Sets the current record's "Subscription" collection
  * 
  * @package    DOUBLECLICK
@@ -64,24 +58,6 @@ abstract class BaseSettlement extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => 25,
              ));
-        $this->hasColumn('updated_at', 'timestamp', 25, array(
-             'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
-             'autoincrement' => false,
-             'length' => 25,
-             ));
-        $this->hasColumn('created_at', 'timestamp', 25, array(
-             'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
-             'autoincrement' => false,
-             'length' => 25,
-             ));
     }
 
     public function setUp()
@@ -90,5 +66,21 @@ abstract class BaseSettlement extends sfDoctrineRecord
         $this->hasMany('Subscription', array(
              'local' => 'id',
              'foreign' => 'settlement_id'));
+
+        $timestampable0 = new Doctrine_Template_Timestampable(array(
+             'created' => 
+             array(
+              'name' => 'created_at',
+              'type' => 'timestamp(25)',
+              'expression' => 'NOW()',
+             ),
+             'updated' => 
+             array(
+              'name' => 'updated_at',
+              'type' => 'timestamp(25)',
+              'expression' => 'NOW()',
+             ),
+             ));
+        $this->actAs($timestampable0);
     }
 }

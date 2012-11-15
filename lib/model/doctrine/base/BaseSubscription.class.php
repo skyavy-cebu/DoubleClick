@@ -14,11 +14,9 @@ Doctrine_Manager::getInstance()->bindComponent('Subscription', 'doctrine');
  * @property enum $duration
  * @property decimal $price
  * @property timestamp $valid_until
- * @property timestamp $modified_at
- * @property timestamp $created_at
  * @property Teacher $Teacher
- * @property Settlement $Settlement
  * @property Student $Student
+ * @property Settlement $Settlement
  * 
  * @method integer      getTeacherId()     Returns the current record's "teacher_id" value
  * @method integer      getStudentId()     Returns the current record's "student_id" value
@@ -27,11 +25,9 @@ Doctrine_Manager::getInstance()->bindComponent('Subscription', 'doctrine');
  * @method enum         getDuration()      Returns the current record's "duration" value
  * @method decimal      getPrice()         Returns the current record's "price" value
  * @method timestamp    getValidUntil()    Returns the current record's "valid_until" value
- * @method timestamp    getModifiedAt()    Returns the current record's "modified_at" value
- * @method timestamp    getCreatedAt()     Returns the current record's "created_at" value
  * @method Teacher      getTeacher()       Returns the current record's "Teacher" value
- * @method Settlement   getSettlement()    Returns the current record's "Settlement" value
  * @method Student      getStudent()       Returns the current record's "Student" value
+ * @method Settlement   getSettlement()    Returns the current record's "Settlement" value
  * @method Subscription setTeacherId()     Sets the current record's "teacher_id" value
  * @method Subscription setStudentId()     Sets the current record's "student_id" value
  * @method Subscription setSettlementId()  Sets the current record's "settlement_id" value
@@ -39,11 +35,9 @@ Doctrine_Manager::getInstance()->bindComponent('Subscription', 'doctrine');
  * @method Subscription setDuration()      Sets the current record's "duration" value
  * @method Subscription setPrice()         Sets the current record's "price" value
  * @method Subscription setValidUntil()    Sets the current record's "valid_until" value
- * @method Subscription setModifiedAt()    Sets the current record's "modified_at" value
- * @method Subscription setCreatedAt()     Sets the current record's "created_at" value
  * @method Subscription setTeacher()       Sets the current record's "Teacher" value
- * @method Subscription setSettlement()    Sets the current record's "Settlement" value
  * @method Subscription setStudent()       Sets the current record's "Student" value
+ * @method Subscription setSettlement()    Sets the current record's "Settlement" value
  * 
  * @package    DOUBLECLICK
  * @subpackage model
@@ -126,24 +120,6 @@ abstract class BaseSubscription extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => 25,
              ));
-        $this->hasColumn('modified_at', 'timestamp', 25, array(
-             'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
-             'autoincrement' => false,
-             'length' => 25,
-             ));
-        $this->hasColumn('created_at', 'timestamp', 25, array(
-             'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
-             'autoincrement' => false,
-             'length' => 25,
-             ));
     }
 
     public function setUp()
@@ -153,12 +129,28 @@ abstract class BaseSubscription extends sfDoctrineRecord
              'local' => 'teacher_id',
              'foreign' => 'id'));
 
+        $this->hasOne('Student', array(
+             'local' => 'student_id',
+             'foreign' => 'id'));
+
         $this->hasOne('Settlement', array(
              'local' => 'settlement_id',
              'foreign' => 'id'));
 
-        $this->hasOne('Student', array(
-             'local' => 'student_id',
-             'foreign' => 'id'));
+        $timestampable0 = new Doctrine_Template_Timestampable(array(
+             'created' => 
+             array(
+              'name' => 'created_at',
+              'type' => 'timestamp(25)',
+              'expression' => 'NOW()',
+             ),
+             'updated' => 
+             array(
+              'name' => 'updated_at',
+              'type' => 'timestamp(25)',
+              'expression' => 'NOW()',
+             ),
+             ));
+        $this->actAs($timestampable0);
     }
 }

@@ -12,23 +12,17 @@ Doctrine_Manager::getInstance()->bindComponent('Page', 'doctrine');
  * @property string $image1
  * @property string $image2
  * @property blob $body
- * @property timestamp $updated_at
- * @property timestamp $created_at
  * 
- * @method integer   getId()         Returns the current record's "id" value
- * @method string    getTitle()      Returns the current record's "title" value
- * @method string    getImage1()     Returns the current record's "image1" value
- * @method string    getImage2()     Returns the current record's "image2" value
- * @method blob      getBody()       Returns the current record's "body" value
- * @method timestamp getUpdatedAt()  Returns the current record's "updated_at" value
- * @method timestamp getCreatedAt()  Returns the current record's "created_at" value
- * @method Page      setId()         Sets the current record's "id" value
- * @method Page      setTitle()      Sets the current record's "title" value
- * @method Page      setImage1()     Sets the current record's "image1" value
- * @method Page      setImage2()     Sets the current record's "image2" value
- * @method Page      setBody()       Sets the current record's "body" value
- * @method Page      setUpdatedAt()  Sets the current record's "updated_at" value
- * @method Page      setCreatedAt()  Sets the current record's "created_at" value
+ * @method integer getId()     Returns the current record's "id" value
+ * @method string  getTitle()  Returns the current record's "title" value
+ * @method string  getImage1() Returns the current record's "image1" value
+ * @method string  getImage2() Returns the current record's "image2" value
+ * @method blob    getBody()   Returns the current record's "body" value
+ * @method Page    setId()     Sets the current record's "id" value
+ * @method Page    setTitle()  Sets the current record's "title" value
+ * @method Page    setImage1() Sets the current record's "image1" value
+ * @method Page    setImage2() Sets the current record's "image2" value
+ * @method Page    setBody()   Sets the current record's "body" value
  * 
  * @package    DOUBLECLICK
  * @subpackage model
@@ -84,29 +78,25 @@ abstract class BasePage extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => '',
              ));
-        $this->hasColumn('updated_at', 'timestamp', 25, array(
-             'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
-             'autoincrement' => false,
-             'length' => 25,
-             ));
-        $this->hasColumn('created_at', 'timestamp', 25, array(
-             'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
-             'autoincrement' => false,
-             'length' => 25,
-             ));
     }
 
     public function setUp()
     {
         parent::setUp();
-        
+        $timestampable0 = new Doctrine_Template_Timestampable(array(
+             'created' => 
+             array(
+              'name' => 'created_at',
+              'type' => 'timestamp(25)',
+              'expression' => 'NOW()',
+             ),
+             'updated' => 
+             array(
+              'name' => 'updated_at',
+              'type' => 'timestamp(25)',
+              'expression' => 'NOW()',
+             ),
+             ));
+        $this->actAs($timestampable0);
     }
 }
