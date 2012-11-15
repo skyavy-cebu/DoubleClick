@@ -5,6 +5,14 @@ home:
   url:   /
   param: { module: home, action: index }
   
+change-password:
+  url: /change-password
+  param: { module: login, action: changePassword }
+  
+remind-password:
+  url: /remind-password
+  param: { module: login, action: remindPassword }
+  
 register-message:
   url: /register/message
   param: { module: static, action: registrationMessage }
