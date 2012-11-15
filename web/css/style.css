@@ -283,7 +283,7 @@ body {
         color: #FFFFFF;
       }
       .contentLeftLoginContent {
-        height: 187px;
+        height: 212px;
         border: 1px solid #DCDCDC;
         background: #FFFFFF;
         padding: 9px 9px 16px 9px;
@@ -294,7 +294,7 @@ body {
           width: 230px;
           margin: 0px 0px 10px 0px;
         }
-          .contentLeftLoginContent div input[type=text]{
+          .contentLeftLoginContent div input[type=text],.contentLeftLoginContent div input[type=password]{
             width: 229px;
             height: 28px;
             border: 1px solid #DCDCDC;

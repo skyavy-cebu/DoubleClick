@@ -12,7 +12,6 @@
       </td>
     </tr>
   </table>
-  <?php echo $form->renderHiddenFields()?>
 </form>
 <?php else :?>
 <p>Password changed successfully.</p>
