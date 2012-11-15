@@ -15,11 +15,13 @@
       <div class="contentLeftLogin">
         <div class="contentLeftLoginHeader">会員ログイン</div>
         <div class="contentLeftLoginContent">
-          <div><input type="text" placeholder="メールアドレス" /></div>
-          <div><input type="text" placeholder="パスワード" /></div>
-          
-          <input type="checkbox" /><span>次回から自動的にログイン</span>
-          <input type="submit" value="">
+          <form action="<?php echo url_for('@login')?>" method="POST">
+            <div><?php echo $loginForm['email']->render(array('placeholder' => 'メールアドレス'))?></div>
+            <div><?php echo $loginForm['password']->render(array('placeholder' => 'パスワード'))?></div>
+            
+            <input type="checkbox" /><span>次回から自動的にログイン</span>
+            <input type="submit" value="">
+          </form>
           
           <a href="<?php echo url_for('@remind-password')?>" alt="" title="Password Reminder"><?php echo __('Forgot your password?')?></a>
           <a href="<?php echo url_for('@register')?>" alt="" title="New Member Registration"><?php echo __('New Member Registration')?></a>

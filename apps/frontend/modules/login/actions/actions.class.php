@@ -17,7 +17,18 @@ class loginActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->setLayout('layoutLogin');
+    // $this->setLayout('layoutLogin');
+    $this->form = new LoginForm();
+    
+    if ($request->isMethod())
+    {
+      $this-form->bind($request->getParameter('login'));
+      
+      if ($this->form->isValid())
+      {
+        
+      }
+    }
   }
   
  /**

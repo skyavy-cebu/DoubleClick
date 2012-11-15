@@ -5,6 +5,10 @@ home:
   url:   /
   param: { module: home, action: index }
   
+login:
+  url: /login
+  param: { module: login, action: index }
+  
 change-password:
   url: /change-password
   param: { module: login, action: changePassword }
