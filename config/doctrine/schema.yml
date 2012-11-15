@@ -712,6 +712,14 @@ Teacher:
       primary: false
       notnull: false
       autoincrement: false
+    price:
+      type: 'decimal(9, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
     updated_at:
       type: timestamp(25)
       fixed: false

@@ -13,6 +13,7 @@ Doctrine_Manager::getInstance()->bindComponent('Teacher', 'doctrine');
  * @property string $password
  * @property string $portfolio
  * @property string $details
+ * @property decimal $price
  * @property timestamp $updated_at
  * @property timestamp $created_at
  * @property Doctrine_Collection $Newsletter
@@ -24,6 +25,7 @@ Doctrine_Manager::getInstance()->bindComponent('Teacher', 'doctrine');
  * @method string              getPassword()             Returns the current record's "password" value
  * @method string              getPortfolio()            Returns the current record's "portfolio" value
  * @method string              getDetails()              Returns the current record's "details" value
+ * @method decimal             getPrice()                Returns the current record's "price" value
  * @method timestamp           getUpdatedAt()            Returns the current record's "updated_at" value
  * @method timestamp           getCreatedAt()            Returns the current record's "created_at" value
  * @method Doctrine_Collection getNewsletter()           Returns the current record's "Newsletter" collection
@@ -34,6 +36,7 @@ Doctrine_Manager::getInstance()->bindComponent('Teacher', 'doctrine');
  * @method Teacher             setPassword()             Sets the current record's "password" value
  * @method Teacher             setPortfolio()            Sets the current record's "portfolio" value
  * @method Teacher             setDetails()              Sets the current record's "details" value
+ * @method Teacher             setPrice()                Sets the current record's "price" value
  * @method Teacher             setUpdatedAt()            Sets the current record's "updated_at" value
  * @method Teacher             setCreatedAt()            Sets the current record's "created_at" value
  * @method Teacher             setNewsletter()           Sets the current record's "Newsletter" collection
@@ -101,6 +104,17 @@ abstract class BaseTeacher extends sfDoctrineRecord
              'notnull' => false,
              'autoincrement' => false,
              'length' => '',
+             ));
+        $this->hasColumn('price', 'decimal', 9, array(
+             'type' => 'decimal',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'default' => '0.00',
+             'notnull' => true,
+             'autoincrement' => false,
+             'length' => 9,
+             'scale' => '2',
              ));
         $this->hasColumn('updated_at', 'timestamp', 25, array(
              'type' => 'timestamp',
