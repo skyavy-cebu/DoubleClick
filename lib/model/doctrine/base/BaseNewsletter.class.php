@@ -12,6 +12,8 @@ Doctrine_Manager::getInstance()->bindComponent('Newsletter', 'doctrine');
  * @property string $title
  * @property blob $content
  * @property timestamp $publish_date
+ * @property timestamp $updated_at
+ * @property timestamp $created_at
  * @property Teacher $Teacher
  * @property Doctrine_Collection $NewsletterXStudent
  * 
@@ -20,6 +22,8 @@ Doctrine_Manager::getInstance()->bindComponent('Newsletter', 'doctrine');
  * @method string              getTitle()              Returns the current record's "title" value
  * @method blob                getContent()            Returns the current record's "content" value
  * @method timestamp           getPublishDate()        Returns the current record's "publish_date" value
+ * @method timestamp           getUpdatedAt()          Returns the current record's "updated_at" value
+ * @method timestamp           getCreatedAt()          Returns the current record's "created_at" value
  * @method Teacher             getTeacher()            Returns the current record's "Teacher" value
  * @method Doctrine_Collection getNewsletterXStudent() Returns the current record's "NewsletterXStudent" collection
  * @method Newsletter          setId()                 Sets the current record's "id" value
@@ -27,6 +31,8 @@ Doctrine_Manager::getInstance()->bindComponent('Newsletter', 'doctrine');
  * @method Newsletter          setTitle()              Sets the current record's "title" value
  * @method Newsletter          setContent()            Sets the current record's "content" value
  * @method Newsletter          setPublishDate()        Sets the current record's "publish_date" value
+ * @method Newsletter          setUpdatedAt()          Sets the current record's "updated_at" value
+ * @method Newsletter          setCreatedAt()          Sets the current record's "created_at" value
  * @method Newsletter          setTeacher()            Sets the current record's "Teacher" value
  * @method Newsletter          setNewsletterXStudent() Sets the current record's "NewsletterXStudent" collection
  * 
@@ -84,6 +90,24 @@ abstract class BaseNewsletter extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => 25,
              ));
+        $this->hasColumn('updated_at', 'timestamp', 25, array(
+             'type' => 'timestamp',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => 25,
+             ));
+        $this->hasColumn('created_at', 'timestamp', 25, array(
+             'type' => 'timestamp',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => 25,
+             ));
     }
 
     public function setUp()
@@ -98,15 +122,13 @@ abstract class BaseNewsletter extends sfDoctrineRecord
              'foreign' => 'newsletter_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
-             'created' => 
+             'created_at' => 
              array(
-              'name' => 'created_at',
               'type' => 'timestamp(25)',
               'expression' => 'NOW()',
              ),
-             'updated' => 
+             'updated_at' => 
              array(
-              'name' => 'updated_at',
               'type' => 'timestamp(25)',
               'expression' => 'NOW()',
              ),

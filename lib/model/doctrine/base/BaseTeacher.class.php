@@ -13,25 +13,31 @@ Doctrine_Manager::getInstance()->bindComponent('Teacher', 'doctrine');
  * @property string $password
  * @property string $portfolio
  * @property string $details
+ * @property timestamp $updated_at
+ * @property timestamp $created_at
  * @property Doctrine_Collection $Newsletter
- * @property Doctrine_Collection $Subscription
+ * @property Doctrine_Collection $SubscriptionXTeacher
  * 
- * @method integer             getId()           Returns the current record's "id" value
- * @method string              getTitle()        Returns the current record's "title" value
- * @method string              getEmail()        Returns the current record's "email" value
- * @method string              getPassword()     Returns the current record's "password" value
- * @method string              getPortfolio()    Returns the current record's "portfolio" value
- * @method string              getDetails()      Returns the current record's "details" value
- * @method Doctrine_Collection getNewsletter()   Returns the current record's "Newsletter" collection
- * @method Doctrine_Collection getSubscription() Returns the current record's "Subscription" collection
- * @method Teacher             setId()           Sets the current record's "id" value
- * @method Teacher             setTitle()        Sets the current record's "title" value
- * @method Teacher             setEmail()        Sets the current record's "email" value
- * @method Teacher             setPassword()     Sets the current record's "password" value
- * @method Teacher             setPortfolio()    Sets the current record's "portfolio" value
- * @method Teacher             setDetails()      Sets the current record's "details" value
- * @method Teacher             setNewsletter()   Sets the current record's "Newsletter" collection
- * @method Teacher             setSubscription() Sets the current record's "Subscription" collection
+ * @method integer             getId()                   Returns the current record's "id" value
+ * @method string              getTitle()                Returns the current record's "title" value
+ * @method string              getEmail()                Returns the current record's "email" value
+ * @method string              getPassword()             Returns the current record's "password" value
+ * @method string              getPortfolio()            Returns the current record's "portfolio" value
+ * @method string              getDetails()              Returns the current record's "details" value
+ * @method timestamp           getUpdatedAt()            Returns the current record's "updated_at" value
+ * @method timestamp           getCreatedAt()            Returns the current record's "created_at" value
+ * @method Doctrine_Collection getNewsletter()           Returns the current record's "Newsletter" collection
+ * @method Doctrine_Collection getSubscriptionXTeacher() Returns the current record's "SubscriptionXTeacher" collection
+ * @method Teacher             setId()                   Sets the current record's "id" value
+ * @method Teacher             setTitle()                Sets the current record's "title" value
+ * @method Teacher             setEmail()                Sets the current record's "email" value
+ * @method Teacher             setPassword()             Sets the current record's "password" value
+ * @method Teacher             setPortfolio()            Sets the current record's "portfolio" value
+ * @method Teacher             setDetails()              Sets the current record's "details" value
+ * @method Teacher             setUpdatedAt()            Sets the current record's "updated_at" value
+ * @method Teacher             setCreatedAt()            Sets the current record's "created_at" value
+ * @method Teacher             setNewsletter()           Sets the current record's "Newsletter" collection
+ * @method Teacher             setSubscriptionXTeacher() Sets the current record's "SubscriptionXTeacher" collection
  * 
  * @package    DOUBLECLICK
  * @subpackage model
@@ -96,6 +102,24 @@ abstract class BaseTeacher extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => '',
              ));
+        $this->hasColumn('updated_at', 'timestamp', 25, array(
+             'type' => 'timestamp',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => 25,
+             ));
+        $this->hasColumn('created_at', 'timestamp', 25, array(
+             'type' => 'timestamp',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => 25,
+             ));
     }
 
     public function setUp()
@@ -105,20 +129,18 @@ abstract class BaseTeacher extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'teacher_id'));
 
-        $this->hasMany('Subscription', array(
+        $this->hasMany('SubscriptionXTeacher', array(
              'local' => 'id',
              'foreign' => 'teacher_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
-             'created' => 
+             'created_at' => 
              array(
-              'name' => 'created_at',
               'type' => 'timestamp(25)',
               'expression' => 'NOW()',
              ),
-             'updated' => 
+             'updated_at' => 
              array(
-              'name' => 'updated_at',
               'type' => 'timestamp(25)',
               'expression' => 'NOW()',
              ),

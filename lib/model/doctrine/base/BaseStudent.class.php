@@ -271,15 +271,13 @@ abstract class BaseStudent extends sfDoctrineRecord
              'foreign' => 'student_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
-             'created' => 
+             'created_at' => 
              array(
-              'name' => 'created_at',
               'type' => 'timestamp(25)',
               'expression' => 'NOW()',
              ),
-             'updated' => 
+             'updated_at' => 
              array(
-              'name' => 'updated_at',
               'type' => 'timestamp(25)',
               'expression' => 'NOW()',
              ),

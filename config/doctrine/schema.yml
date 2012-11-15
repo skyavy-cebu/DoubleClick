@@ -3,12 +3,10 @@ Admin:
   tableName: admin
   actAs:
     Timestampable:
-      created:
-        name: created_at
+      created_at:
         type: timestamp(25)
         expression: 'NOW()'
-      updated:
-        name: updated_at
+      updated_at:
         type: timestamp(25)
         expression: 'NOW()'
   columns:
@@ -38,6 +36,20 @@ Admin:
       unsigned: false
       primary: false
       notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
       autoincrement: false
 City:
   connection: doctrine
@@ -77,17 +89,15 @@ Feedback:
   tableName: feedback
   actAs:
     Timestampable:
-      created:
-        name: created_at
+      created_at:
         type: timestamp(25)
         expression: 'NOW()'
-      updated:
-        name: updated_at
+      updated_at:
         type: timestamp(25)
         expression: 'NOW()'
   columns:
     id:
-      type: integer(4)
+      type: integer(8)
       fixed: false
       unsigned: true
       primary: true
@@ -113,17 +123,29 @@ Feedback:
       primary: false
       notnull: true
       autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
 Mailmagazine:
   connection: doctrine
   tableName: mailmagazine
   actAs:
     Timestampable:
-      created:
-        name: created_at
+      created_at:
         type: timestamp(25)
         expression: 'NOW()'
-      updated:
-        name: updated_at
+      updated_at:
         type: timestamp(25)
         expression: 'NOW()'
   columns:
@@ -154,17 +176,29 @@ Mailmagazine:
       primary: false
       notnull: true
       autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
 Newsletter:
   connection: doctrine
   tableName: newsletter
   actAs:
     Timestampable:
-      created:
-        name: created_at
+      created_at:
         type: timestamp(25)
         expression: 'NOW()'
-      updated:
-        name: updated_at
+      updated_at:
         type: timestamp(25)
         expression: 'NOW()'
   columns:
@@ -201,6 +235,20 @@ Newsletter:
       unsigned: false
       primary: false
       notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
       autoincrement: false
   relations:
     Teacher:
@@ -241,12 +289,10 @@ Page:
   tableName: page
   actAs:
     Timestampable:
-      created:
-        name: created_at
+      created_at:
         type: timestamp(25)
         expression: 'NOW()'
-      updated:
-        name: updated_at
+      updated_at:
         type: timestamp(25)
         expression: 'NOW()'
   columns:
@@ -284,46 +330,20 @@ Page:
       primary: false
       notnull: false
       autoincrement: false
-Settlement:
-  connection: doctrine
-  tableName: settlement
-  actAs:
-    Timestampable:
-      created:
-        name: created_at
-        type: timestamp(25)
-        expression: 'NOW()'
-      updated:
-        name: updated_at
-        type: timestamp(25)
-        expression: 'NOW()'
-  columns:
-    id:
-      type: integer(8)
-      fixed: false
-      unsigned: true
-      primary: true
-      autoincrement: false
-    status:
-      type: integer(1)
-      fixed: false
-      unsigned: false
-      primary: false
-      default: '0'
-      notnull: true
-      autoincrement: false
-    paid_at:
+    updated_at:
       type: timestamp(25)
       fixed: false
       unsigned: false
       primary: false
       notnull: false
       autoincrement: false
-  relations:
-    Subscription:
-      local: id
-      foreign: settlement_id
-      type: many
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
 State:
   connection: doctrine
   tableName: state
@@ -355,12 +375,10 @@ Student:
   tableName: student
   actAs:
     Timestampable:
-      created:
-        name: created_at
+      created_at:
         type: timestamp(25)
         expression: 'NOW()'
-      updated:
-        name: updated_at
+      updated_at:
         type: timestamp(25)
         expression: 'NOW()'
   columns:
@@ -515,28 +533,20 @@ Subscription:
   tableName: subscription
   actAs:
     Timestampable:
-      created:
-        name: created_at
+      created_at:
         type: timestamp(25)
         expression: 'NOW()'
-      updated:
-        name: updated_at
+      updated_at:
         type: timestamp(25)
         expression: 'NOW()'
   columns:
-    teacher_id:
+    id:
       type: integer(8)
       fixed: false
       unsigned: true
       primary: true
-      autoincrement: false
+      autoincrement: true
     student_id:
-      type: integer(8)
-      fixed: false
-      unsigned: true
-      primary: true
-      autoincrement: false
-    settlement_id:
       type: integer(8)
       fixed: false
       unsigned: true
@@ -563,14 +573,6 @@ Subscription:
       default: '0'
       notnull: true
       autoincrement: false
-    price:
-      type: 'decimal(9, 2)'
-      fixed: false
-      unsigned: true
-      primary: false
-      default: '0.00'
-      notnull: true
-      autoincrement: false
     valid_until:
       type: timestamp(25)
       fixed: false
@@ -578,17 +580,83 @@ Subscription:
       primary: false
       notnull: false
       autoincrement: false
+    price:
+      type: 'decimal(9, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    is_paid:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    paid_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
   relations:
-    Teacher:
-      local: teacher_id
-      foreign: id
-      type: one
     Student:
       local: student_id
       foreign: id
       type: one
-    Settlement:
-      local: settlement_id
+    SubscriptionXTeacher:
+      local: id
+      foreign: subscription_id
+      type: many
+SubscriptionXTeacher:
+  connection: doctrine
+  tableName: subscription_x_teacher
+  columns:
+    subscription_id:
+      type: integer(8)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: false
+    teacher_id:
+      type: integer(8)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: false
+    price:
+      type: 'decimal(9, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+  relations:
+    Subscription:
+      local: subscription_id
+      foreign: id
+      type: one
+    Teacher:
+      local: teacher_id
       foreign: id
       type: one
 Teacher:
@@ -596,12 +664,10 @@ Teacher:
   tableName: teacher
   actAs:
     Timestampable:
-      created:
-        name: created_at
+      created_at:
         type: timestamp(25)
         expression: 'NOW()'
-      updated:
-        name: updated_at
+      updated_at:
         type: timestamp(25)
         expression: 'NOW()'
   columns:
@@ -646,12 +712,26 @@ Teacher:
       primary: false
       notnull: false
       autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
   relations:
     Newsletter:
       local: id
       foreign: teacher_id
       type: many
-    Subscription:
+    SubscriptionXTeacher:
       local: id
       foreign: teacher_id
       type: many
@@ -660,12 +740,10 @@ Topic:
   tableName: topic
   actAs:
     Timestampable:
-      created:
-        name: created_at
+      created_at:
         type: timestamp(25)
         expression: 'NOW()'
-      updated:
-        name: updated_at
+      updated_at:
         type: timestamp(25)
         expression: 'NOW()'
   columns:
@@ -695,4 +773,18 @@ Topic:
       unsigned: false
       primary: false
       notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
       autoincrement: false

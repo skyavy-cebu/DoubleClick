@@ -11,15 +11,21 @@ Doctrine_Manager::getInstance()->bindComponent('Admin', 'doctrine');
  * @property string $name
  * @property string $email
  * @property string $password
+ * @property timestamp $updated_at
+ * @property timestamp $created_at
  * 
- * @method integer getId()       Returns the current record's "id" value
- * @method string  getName()     Returns the current record's "name" value
- * @method string  getEmail()    Returns the current record's "email" value
- * @method string  getPassword() Returns the current record's "password" value
- * @method Admin   setId()       Sets the current record's "id" value
- * @method Admin   setName()     Sets the current record's "name" value
- * @method Admin   setEmail()    Sets the current record's "email" value
- * @method Admin   setPassword() Sets the current record's "password" value
+ * @method integer   getId()         Returns the current record's "id" value
+ * @method string    getName()       Returns the current record's "name" value
+ * @method string    getEmail()      Returns the current record's "email" value
+ * @method string    getPassword()   Returns the current record's "password" value
+ * @method timestamp getUpdatedAt()  Returns the current record's "updated_at" value
+ * @method timestamp getCreatedAt()  Returns the current record's "created_at" value
+ * @method Admin     setId()         Sets the current record's "id" value
+ * @method Admin     setName()       Sets the current record's "name" value
+ * @method Admin     setEmail()      Sets the current record's "email" value
+ * @method Admin     setPassword()   Sets the current record's "password" value
+ * @method Admin     setUpdatedAt()  Sets the current record's "updated_at" value
+ * @method Admin     setCreatedAt()  Sets the current record's "created_at" value
  * 
  * @package    DOUBLECLICK
  * @subpackage model
@@ -66,21 +72,37 @@ abstract class BaseAdmin extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => 50,
              ));
+        $this->hasColumn('updated_at', 'timestamp', 25, array(
+             'type' => 'timestamp',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => 25,
+             ));
+        $this->hasColumn('created_at', 'timestamp', 25, array(
+             'type' => 'timestamp',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => 25,
+             ));
     }
 
     public function setUp()
     {
         parent::setUp();
         $timestampable0 = new Doctrine_Template_Timestampable(array(
-             'created' => 
+             'created_at' => 
              array(
-              'name' => 'created_at',
               'type' => 'timestamp(25)',
               'expression' => 'NOW()',
              ),
-             'updated' => 
+             'updated_at' => 
              array(
-              'name' => 'updated_at',
               'type' => 'timestamp(25)',
               'expression' => 'NOW()',
              ),
