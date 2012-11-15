@@ -19,16 +19,12 @@ class RegisterForm extends BaseForm
       $statesChoice[$state['id']] = $state['name'];
     }
     
-    /* uncomment when teachers are set in the db */
     $teachersArr = TeacherTable::getInstance()->createQuery()->fetchArray();
     $teachersChoice = array();
     foreach ($teachersArr as $teacher)
     {
       $teachersChoice[$teacher['id']] = $teacher['title'];
     }
-    
-    /* temporary choices for teachers */
-    // $teachersChoice = array('OP先生', 'CFD先生', 'シロネコ先生', '白虎先生', 'スイング先生');
     
     $this->setWidgets(array(
       'name'       => new sfWidgetFormInputText(),

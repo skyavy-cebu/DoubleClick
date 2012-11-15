@@ -21,7 +21,8 @@
           <input type="checkbox" /><span>次回から自動的にログイン</span>
           <input type="submit" value="">
           
-          <a href="<?php echo url_for('@register')?>" alt="" title="Register New User">パスワードを忘れた方</a>
+          <a href="<?php echo url_for('@remind-password')?>" alt="" title="Password Reminder"><?php echo __('Forgot your password?')?></a>
+          <a href="<?php echo url_for('@register')?>" alt="" title="New Member Registration"><?php echo __('New Member Registration')?></a>
         </div>
       </div>
       
