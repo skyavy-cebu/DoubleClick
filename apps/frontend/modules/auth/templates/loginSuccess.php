@@ -3,7 +3,10 @@
 <form action="<?php echo url_for('@login') ?>" method="POST">
   <table>
     <tr>
-      <td><?php echo $form?></td>
+      <td><?php echo $form['email']->renderRow()?></td>
+    </tr>
+    <tr>
+      <td><?php echo $form['password']->renderRow()?></td>
     </tr>
     <tr>
       <td colspan="3">
@@ -11,4 +14,5 @@
       </td>
     </tr>
   </table>
+  <?php echo $form->renderHiddenFields()?>
 </form>

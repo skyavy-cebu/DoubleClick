@@ -1,34 +1,57 @@
 <?php
 
 /**
- * login actions.
+ * auth actions.
  *
  * @package    DOUBLECLICK
  * @subpackage login
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class loginActions extends sfActions
+class authActions extends sfActions
 {
  /**
-  * Executes index action
+  * Executes login action
   *
   * @param sfRequest $request A request object
   */
-  public function executeIndex(sfWebRequest $request)
+  public function executeLogin(sfWebRequest $request)
   {
     // $this->setLayout('layoutLogin');
+    
+    if ($this->getUser()->isAuthenticated())
+    {
+      $this->redirect('@dashboard');
+    }
     $this->form = new LoginForm();
     
-    if ($request->isMethod())
+    if ($request->isMethod('post'))
     {
-      $this-form->bind($request->getParameter('login'));
+      $login = $request->getParameter('login');
+      $this->form->bind($login);
       
       if ($this->form->isValid())
       {
+        $oStudent = StudentTable::getInstance()->findOneByEmail($login['email']);
         
+        $this->getUser()->signIn('student', $oStudent);
+        
+        $this->redirect('@dashboard');
       }
     }
+  }
+  
+ /**
+  * Executes remind password action
+  *
+  * @param sfRequest $request A request object
+  */
+  public function executeLogout(sfWebRequest $request)
+  {
+    $this->forward404Unless($this->getUser()->isAuthenticated());
+    $this->getUser()->signOut();
+    
+    $this->redirect('home');
   }
   
  /**

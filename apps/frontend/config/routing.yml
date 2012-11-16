@@ -5,17 +5,25 @@ home:
   url:   /
   param: { module: home, action: index }
   
+dashboard:
+  url:   /dashboard
+  param: { module: static, action: feedback }
+  
+logout:
+  url: /logout
+  param: { module: auth, action: logout }
+  
 login:
   url: /login
-  param: { module: login, action: index }
+  param: { module: auth, action: login }
   
 change-password:
   url: /change-password
-  param: { module: login, action: changePassword }
+  param: { module: auth, action: changePassword }
   
 remind-password:
   url: /remind-password
-  param: { module: login, action: remindPassword }
+  param: { module: auth, action: remindPassword }
   
 register-message:
   url: /register/message

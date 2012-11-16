@@ -104,6 +104,14 @@
         <source>Reset Password</source>
         <target>パスワード再設定</target>
       </trans-unit>
+      <trans-unit id="26">
+        <source>Login</source>
+        <target>ログイン</target>
+      </trans-unit>
+      <trans-unit id="27">
+        <source>Remember Me</source>
+        <target>次回から自動的にログイン</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

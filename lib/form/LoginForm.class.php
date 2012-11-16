@@ -15,17 +15,18 @@ class LoginForm extends BaseForm
     $this->setWidgets(array(
       'email'       => new sfWidgetFormInputText(array('label' => 'Email')),
       'password'    => new sfWidgetFormInputPassword(array('label' => 'Password')),
-      'remenber_me' => new sfWidgetFormInputCheckbox(array('label' => 'Remeber Me')),
+      'remember_me' => new sfWidgetFormInputCheckbox(array('label' => 'Remember Me')),
     ));
     
     $this->setValidators(array(
-      'email'    => new sfValidatorEmail(array('required' => true)),
-      'password' => new sfValidatorString(array('required' => true))
+      'email'       => new sfValidatorEmail(array('required' => true)),
+      'password'    => new sfValidatorString(array('required' => true)),
+      'remember_me' => new sfValidatorPass()
     ));
     
     $this->mergePostValidator(new sfValidatorCallback(array('callback' => array($this, 'checkLoginCredentials'))));
     
-    $this->widgetSchema->setNameFormat('register[%s]');
+    $this->widgetSchema->setNameFormat('login[%s]');
   }
   
   /**
@@ -34,7 +35,7 @@ class LoginForm extends BaseForm
    * @param $validator
    * @param $values
    */
-  public function checkUniqueEmail($validator, $values)
+  public function checkLoginCredentials($validator, $values)
   {
     $oStudent = StudentTable::getInstance()->findOneByEmail($values['email']);
     if (!$oStudent)

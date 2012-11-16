@@ -19,7 +19,8 @@
             <div><?php echo $loginForm['email']->render(array('placeholder' => 'メールアドレス'))?></div>
             <div><?php echo $loginForm['password']->render(array('placeholder' => 'パスワード'))?></div>
             
-            <input type="checkbox" /><span>次回から自動的にログイン</span>
+            <!--input type="checkbox" /><span>次回から自動的にログイン</span-->
+            <?php echo $loginForm->renderHiddenFields()?>
             <input type="submit" value="">
           </form>
           
