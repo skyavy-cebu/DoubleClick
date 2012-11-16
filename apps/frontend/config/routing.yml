@@ -33,6 +33,14 @@ register:
   url: /register
   param: { module: register, action: index }
 
+dashboard-newsletter:
+  url:   /newsletter/:id  
+  class:   sfDoctrineRoute
+  options: { model: Newsletter, type: object }
+  param:   { module: dashboard, action: show }
+  requirements:
+    id: \d+
+    sf_method: [get] 
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
