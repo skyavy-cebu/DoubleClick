@@ -45,8 +45,12 @@ class registerActions extends sfActions
     
     $this->stateName = StateTable::getInstance()->findOneById($this->register['state_id'])->getName();
     
-    $durations = array('1ヶ月コース', '3ヶ月コース', '6ヶ月コース');
-    $this->durationLbl = $durations[$this->register['duration']];
+    $durations = array(
+      array('label' => '1ヶ月コース', 'time' => '+1 month'),
+      array('label' => '3ヶ月コース', 'time' => '+3 months'),
+      array('label' => '6ヶ月コース', 'time' => '+6 months')
+    );
+    $this->durationLbl = $durations[$this->register['duration']]['label'];
     
     $teachers = TeacherTable::getInstance()->findByDql('id IN ?', array($this->register['teacher_id']));
     $teacherTitles = array();
@@ -79,15 +83,35 @@ class registerActions extends sfActions
       $student->setActivation($activation);
       $student->save();
       
-      // save new Subscription(s)
-      if (0 < count($this->register['teacher_id'])) {
-        foreach ($this->register['teacher_id'] as $teacherId) {
-          $subscription = new Subscription();
-          $subscription->setTeacherId($teacherId);
-          $subscription->setStudentId($student->getId());
-          $subscription->setDuration($this->register['duration']);
-          $subscription->save();
+      // save new Subscription
+      if (0 < count($this->register['teacher_id']))
+      {
+        $subscription = new Subscription();
+        $subscription->setStudentId($student->getId());
+        $subscription->setStatus(1);
+        $subscription->setDuration($this->register['duration']);
+        $subscription->setValidUntil(date('Y-m-d H:i:s', strtotime($durations[$this->register['duration']]['time'])));
+        $subscription->save();
+        
+        $totalPrice = 0;
+        foreach ($teachers as $teacher)
+        {
+          $teacherPrice = $teacher->getPrice();
+          
+          // save Teacher(s) in Subscription
+          $subscriptionTeacher = new SubscriptionXTeacher();
+          $subscriptionTeacher->setSubscriptionId($subscription->getId());
+          $subscriptionTeacher->setTeacherId($teacher->getId());
+          $subscriptionTeacher->setPrice($teacherPrice);
+          $subscriptionTeacher->save();
+          
+          $totalPrice += $teacherPrice;
         }
+        
+        // settlement for Subscription
+        $subscription->setPrice($totalPrice);
+        $subscription->setIsPaid(false);
+        $subscription->save();
       }
       
       // send activation mail
