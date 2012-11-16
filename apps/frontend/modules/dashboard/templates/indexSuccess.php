@@ -40,19 +40,16 @@
         <div class="contentContentSubscriptionWrapper">
             <ul class="contentDasboardContent1">
               <table><tr>
-              
               <?php  foreach ($teacherslist as $i => $teacher):?>
-             
               <td>
               <div>
                 <li>
                   <div class="contentContentTeacherIntroductionContentHeader">
                     <div class="contentContentTeacherIntroductionContentHeaderTitle"> <?php echo $teacher->getTitle() ?></div>
-                    <div class="contentContentTeacherIntroductionContentHeaderLink"><a alt="" href="">詳細を見る</a></div>
+                    <div class="contentContentTeacherIntroductionContentHeaderLink"><a href="<?php echo url_for('dashboard-teacher-newsletter',$teacher) ?>">詳細を見る</a></div>
                   </div>
                    <div class="contentContentSubscriptionContent">
                     <ul>
-                     
                       <?php $b=(($i % 2) );?>
                       <?php foreach ($teacher->getNewsletter() as $i => $newsletter): ?>
                         <li>

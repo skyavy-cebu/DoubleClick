@@ -36,4 +36,9 @@ class dashboardActions extends sfActions
     $this->newsletters = Doctrine::getTable('Newsletter')-> find($request->getParameter('id'));
     $this->forward404Unless($this->newsletters);
   }
+  public function executeList(sfWebRequest $request)
+  {
+    $this->teacher = Doctrine::getTable('Teacher')-> find($request->getParameter('id'));
+    $this->forward404Unless($this->teacher);
+  }
 }

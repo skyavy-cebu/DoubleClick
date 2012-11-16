@@ -1,4 +1,4 @@
-  <?php use_helper('Text') ?>
+
 <!-- content -->
 <div class="contentWrapper">
   <div class="content">
@@ -33,25 +33,26 @@
       </div>  
     </div>
     <div class="contentContent">
-   <div>
-        <div class="contentContentTeachersHeader">
-          先生紹介
+   <div class="contentContentList">
+        <div class="contentContentListHeader">
+          <?php echo $teacher->getTitle() ?>
         </div>
-        <div class="contentContentNewsletterContent">
-         <div>
-          <div class="contentContentHeaderLeft">配信日: <?php echo $newsletters->getPublishDate() ?></div>
-          <div class="clear"></div>
-          <div class="contentContentHeaderLeft">タイトル： <?php echo $newsletters->getTitle() ?></div>
-          <div class="clear"></div>
-          <div class="contentContentHeaderLeft">記事：</div>
-          <div class="clear"></div>
-          <div class="contentContentHeaderLeft">
-             <?php echo simple_format_text($newsletters->getContent()) ?>
-          </div>
+        <div class="contentContentListContent2">
+              <?php foreach ($teacher->getNewsletter() as $i => $newsletter): ?>
+              <ul>
+                <li>
+                  <span> <?php echo $newsletter->getPublishDate() ?></span>
+                  <p>
+                    <a href="<?php echo url_for('dashboard-newsletter',$newsletter) ?>">
+                      <?php echo $newsletter->getTitle() ?>
+                    </a>
+                  </p>
+                </li>
+                </ul> 
+              <?php endforeach ?>
+            
             <div class="clear"></div>
         </div>
-         <div class="clear"></div>
-      </div>
       </div>
     </div><!-- end Contentcontent -->
     <div class="clear"></div>

@@ -546,7 +546,7 @@ body {
     .contentContentMenu {
       margin: 27px 0px 0px 0px;
     }
-      .contentContentMenuContent,.contentContentListContent {
+      .contentContentMenuContent,.contentContentListContent,.contentContentListContent2 {
         border: 1px solid #DCDCDC;
         padding: 11px;
       }
@@ -556,6 +556,12 @@ body {
 						color: #969696;
 						font-size: 12px;
 						line-height: 40px;
+				}
+				.contentContentListContent2 ul li,.contentContentHeaderLeft{
+						padding: 9px 0 0 14px;
+						color: #969696;
+						font-size: 12px;
+						line-height: 20px;
 				}
         .contentContentMenuContent>div {
           background: #f5f5f5;
@@ -651,7 +657,8 @@ body {
 				list-style:none;
 				padding-bottom: 15px;
 			}
-      .contentContentNewsContent ul li:nth-child(even), .contentContentSubscriptionContent ul li:nth-child(even),, .contentContentBlogContent ul li:nth-child(even), .contentContentLatestColumnContent ul li:nth-child(even),.contentContentListContent ul li:nth-child(even) { background-color: #F5F5F5; }
+      .contentContentNewsContent ul li:nth-child(even), .contentContentSubscriptionContent ul li:nth-child(even),, .contentContentBlogContent ul li:nth-child(even), .contentContentLatestColumnContent ul li:nth-child(even),
+			.contentContentListContent ul li:nth-child(even) { background-color: #F5F5F5; }
       .contentContentNewsContent ul li:last-child,  .contentContentSubscriptionContent ul li:last-child, .contentContentBlogContent ul li:last-child, .contentContentLatestColumnContent ul li:last-child { border-bottom: none; }
       .contentContentNewsContent ul li span, .contentContentSubscriptionContent ul li span, .contentContentBlogContent ul li span, .contentContentLatestColumnContent ul li span {
         color: #969696;
