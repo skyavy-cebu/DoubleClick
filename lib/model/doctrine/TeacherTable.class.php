@@ -22,18 +22,19 @@ class TeacherTable extends Doctrine_Table
    
       return $q->execute();
     }
-    public function getTeachersWithSubscription()
+    public function getTeacherNewsletters()
     {
        $q = $this->createQuery('c')
-       ->leftJoin('c.Subscription s');
+        ->leftJoin('c.Newsletter n');
    
       return $q->execute();
     }
-    public function getNewsletter()
+    public function getNewsletters()
     {
        $student=1;
        $q = $this->createQuery('c')
-        ->leftJoin('c.Subscription s')
+       ->leftJoin('c.SubscriptionXTeacher sx')
+        ->leftJoin('sx.Subscription s')
         ->leftJoin('s.Student st')
         ->leftJoin('st.NewsletterXStudent x')
         ->leftJoin('x.Newsletter n')

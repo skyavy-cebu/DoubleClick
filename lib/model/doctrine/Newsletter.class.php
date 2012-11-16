@@ -12,4 +12,5 @@
  */
 class Newsletter extends BaseNewsletter
 {
+  
 }

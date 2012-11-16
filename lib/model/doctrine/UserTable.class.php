@@ -16,13 +16,5 @@ class UserTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('User');
     }
-    public function getActiveNewsletter()
-    {
-       $q = $this->createQuery('n')
-        ->leftJoin('n.NewsletterXStudent x')
-        ->leftJoin('n.Subscription s')
-        ->where('s.valid_until > ?', date('Y-m-d H:i:s', time()));
-   
-      return $q->execute();
-    }
+  
 }

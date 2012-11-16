@@ -16,11 +16,13 @@ class NewsletterXStudentTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('NewsletterXStudent');
     }
-    public function getActiveNewsletter()
+    public function getStudentNewsletters()
      {
-       $user = 1;
+       $student = 1;
        $q = $this->createQuery('a')
-         ->where('a.student_id = ?', $user);
+       ->leftJoin('a.Newsletter n')
+       ->leftJoin('a.Student s')
+         ->where('a.student_id = ?', $student);
     
        return $q->execute();
      }

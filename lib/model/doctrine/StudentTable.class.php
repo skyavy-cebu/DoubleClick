@@ -17,7 +17,7 @@ class StudentTable extends Doctrine_Table
         return Doctrine_Core::getTable('Student');
     }
     
-    public function getStudentNewsletter()
+    public function getStudentNewsletters()
     {
         $student = 1;
         $q = $this->createQuery('s')
@@ -26,6 +26,14 @@ class StudentTable extends Doctrine_Table
        ->where('student_id = ?', $student);
       /* ->where('s.valid_until > ?', date('Y-m-d H:i:s', time()));*/
    
+      return $q->execute();
+    }
+    public function getStudentTeachers()
+    {
+        $q = $this->createQuery('a')
+        ->leftJoin('a.Subscription b')
+        ->leftJoin('b.SubscriptionXTeacher x'); 
+         
       return $q->execute();
     }
     
