@@ -16,29 +16,43 @@ abstract class BaseStudentForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'         => new sfWidgetFormInputHidden(),
-      'user_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'add_empty' => false)),
+      'name'       => new sfWidgetFormInputText(),
       'furigana'   => new sfWidgetFormInputText(),
-      'zipcode'    => new sfWidgetFormInputText(),
+      'email'      => new sfWidgetFormInputText(),
+      'password'   => new sfWidgetFormInputText(),
+      'login_type' => new sfWidgetFormChoice(array('choices' => array(0 => '0', 1 => '1'))),
+      'zipcode1'   => new sfWidgetFormInputText(),
+      'zipcode2'   => new sfWidgetFormInputText(),
       'address'    => new sfWidgetFormInputText(),
+      'state_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('State'), 'add_empty' => false)),
+      'city_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('City'), 'add_empty' => true)),
       'contact'    => new sfWidgetFormInputText(),
-      'created_at' => new sfWidgetFormDateTime(),
+      'picture'    => new sfWidgetFormInputText(),
+      'status'     => new sfWidgetFormChoice(array('choices' => array(0 => '0', 1 => '1', 2 => '2', 3 => '3', 4 => '4'))),
+      'activation' => new sfWidgetFormInputText(),
       'updated_at' => new sfWidgetFormDateTime(),
+      'created_at' => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
       'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'user_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('User'))),
+      'name'       => new sfValidatorString(array('max_length' => 100)),
       'furigana'   => new sfValidatorString(array('max_length' => 100, 'required' => false)),
-      'zipcode'    => new sfValidatorInteger(array('required' => false)),
+      'email'      => new sfValidatorString(array('max_length' => 80)),
+      'password'   => new sfValidatorString(array('max_length' => 50, 'required' => false)),
+      'login_type' => new sfValidatorChoice(array('choices' => array(0 => '0', 1 => '1'), 'required' => false)),
+      'zipcode1'   => new sfValidatorString(array('max_length' => 3, 'required' => false)),
+      'zipcode2'   => new sfValidatorString(array('max_length' => 4, 'required' => false)),
       'address'    => new sfValidatorString(array('max_length' => 150, 'required' => false)),
+      'state_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('State'))),
+      'city_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('City'), 'required' => false)),
       'contact'    => new sfValidatorString(array('max_length' => 20, 'required' => false)),
-      'created_at' => new sfValidatorDateTime(),
-      'updated_at' => new sfValidatorDateTime(),
+      'picture'    => new sfValidatorString(array('max_length' => 42, 'required' => false)),
+      'status'     => new sfValidatorChoice(array('choices' => array(0 => '0', 1 => '1', 2 => '2', 3 => '3', 4 => '4'), 'required' => false)),
+      'activation' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'updated_at' => new sfValidatorDateTime(array('required' => false)),
+      'created_at' => new sfValidatorDateTime(array('required' => false)),
     ));
-
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'Student', 'column' => array('user_id')))
-    );
 
     $this->widgetSchema->setNameFormat('student[%s]');
 

@@ -16,18 +16,22 @@ abstract class BasePageForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'         => new sfWidgetFormInputHidden(),
-      'name'       => new sfWidgetFormInputText(),
-      'content'    => new sfWidgetFormTextarea(),
-      'created_at' => new sfWidgetFormDateTime(),
+      'title'      => new sfWidgetFormInputText(),
+      'image1'     => new sfWidgetFormInputText(),
+      'image2'     => new sfWidgetFormInputText(),
+      'body'       => new sfWidgetFormTextarea(),
       'updated_at' => new sfWidgetFormDateTime(),
+      'created_at' => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
       'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'name'       => new sfValidatorString(array('max_length' => 100, 'required' => false)),
-      'content'    => new sfValidatorString(array('required' => false)),
-      'created_at' => new sfValidatorDateTime(),
-      'updated_at' => new sfValidatorDateTime(),
+      'title'      => new sfValidatorString(array('max_length' => 150)),
+      'image1'     => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'image2'     => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'body'       => new sfValidatorString(array('required' => false)),
+      'updated_at' => new sfValidatorDateTime(array('required' => false)),
+      'created_at' => new sfValidatorDateTime(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('page[%s]');

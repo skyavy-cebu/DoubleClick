@@ -16,20 +16,20 @@ abstract class BaseTopicForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'           => new sfWidgetFormInputHidden(),
-      'user_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'add_empty' => false)),
       'title'        => new sfWidgetFormInputText(),
       'pdf_filename' => new sfWidgetFormInputText(),
-      'created_at'   => new sfWidgetFormDateTime(),
+      'publish_date' => new sfWidgetFormDateTime(),
       'updated_at'   => new sfWidgetFormDateTime(),
+      'created_at'   => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
       'id'           => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'user_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('User'))),
-      'title'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'pdf_filename' => new sfValidatorString(array('max_length' => 36, 'required' => false)),
-      'created_at'   => new sfValidatorDateTime(),
-      'updated_at'   => new sfValidatorDateTime(),
+      'title'        => new sfValidatorString(array('max_length' => 255)),
+      'pdf_filename' => new sfValidatorString(array('max_length' => 50)),
+      'publish_date' => new sfValidatorDateTime(),
+      'updated_at'   => new sfValidatorDateTime(array('required' => false)),
+      'created_at'   => new sfValidatorDateTime(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('topic[%s]');

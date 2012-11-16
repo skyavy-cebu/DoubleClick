@@ -1,0 +1,12 @@
+# data/fixtures/teacher.yml
+Teacher:
+  teacher1:
+    title: OP先生の新着配信
+  teacher2:
+    title: シロネコ先生の新着配信
+  teacher3:
+    title: スイング先生の新着配信
+  teacher4:
+    title: CFD先生の新着配信
+  teacher5:
+    title: 白虎先生の新着配信

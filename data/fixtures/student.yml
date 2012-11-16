@@ -1,0 +1,10 @@
+# data/fixtures/student.yml
+Student:
+  student1:
+    id: 1
+    name: Student1
+    state_id: 1
+  student2:
+    id: 2
+    name: Student2
+    state_id: 2

@@ -13,23 +13,41 @@ abstract class BaseStudentFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'user_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'add_empty' => true)),
+      'name'       => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'furigana'   => new sfWidgetFormFilterInput(),
-      'zipcode'    => new sfWidgetFormFilterInput(),
+      'email'      => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'password'   => new sfWidgetFormFilterInput(),
+      'login_type' => new sfWidgetFormChoice(array('choices' => array('' => '', 0 => '0', 1 => '1'))),
+      'zipcode1'   => new sfWidgetFormFilterInput(),
+      'zipcode2'   => new sfWidgetFormFilterInput(),
       'address'    => new sfWidgetFormFilterInput(),
+      'state_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('State'), 'add_empty' => true)),
+      'city_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('City'), 'add_empty' => true)),
       'contact'    => new sfWidgetFormFilterInput(),
-      'created_at' => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
-      'updated_at' => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
+      'picture'    => new sfWidgetFormFilterInput(),
+      'status'     => new sfWidgetFormChoice(array('choices' => array('' => '', 0 => '0', 1 => '1', 2 => '2', 3 => '3', 4 => '4'))),
+      'activation' => new sfWidgetFormFilterInput(),
+      'updated_at' => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
+      'created_at' => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
     ));
 
     $this->setValidators(array(
-      'user_id'    => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('User'), 'column' => 'id')),
+      'name'       => new sfValidatorPass(array('required' => false)),
       'furigana'   => new sfValidatorPass(array('required' => false)),
-      'zipcode'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'email'      => new sfValidatorPass(array('required' => false)),
+      'password'   => new sfValidatorPass(array('required' => false)),
+      'login_type' => new sfValidatorChoice(array('required' => false, 'choices' => array(0 => '0', 1 => '1'))),
+      'zipcode1'   => new sfValidatorPass(array('required' => false)),
+      'zipcode2'   => new sfValidatorPass(array('required' => false)),
       'address'    => new sfValidatorPass(array('required' => false)),
+      'state_id'   => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('State'), 'column' => 'id')),
+      'city_id'    => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('City'), 'column' => 'id')),
       'contact'    => new sfValidatorPass(array('required' => false)),
-      'created_at' => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
+      'picture'    => new sfValidatorPass(array('required' => false)),
+      'status'     => new sfValidatorChoice(array('required' => false, 'choices' => array(0 => '0', 1 => '1', 2 => '2', 3 => '3', 4 => '4'))),
+      'activation' => new sfValidatorPass(array('required' => false)),
       'updated_at' => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
+      'created_at' => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
     ));
 
     $this->widgetSchema->setNameFormat('student_filters[%s]');
@@ -50,13 +68,22 @@ abstract class BaseStudentFormFilter extends BaseFormFilterDoctrine
   {
     return array(
       'id'         => 'Number',
-      'user_id'    => 'ForeignKey',
+      'name'       => 'Text',
       'furigana'   => 'Text',
-      'zipcode'    => 'Number',
+      'email'      => 'Text',
+      'password'   => 'Text',
+      'login_type' => 'Enum',
+      'zipcode1'   => 'Text',
+      'zipcode2'   => 'Text',
       'address'    => 'Text',
+      'state_id'   => 'ForeignKey',
+      'city_id'    => 'ForeignKey',
       'contact'    => 'Text',
-      'created_at' => 'Date',
+      'picture'    => 'Text',
+      'status'     => 'Enum',
+      'activation' => 'Text',
       'updated_at' => 'Date',
+      'created_at' => 'Date',
     );
   }
 }

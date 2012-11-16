@@ -1,0 +1,14 @@
+# data/fixtures/newsletterxstudent.yml
+NewsletterXStudent:
+  Newsletterxstudent_1:
+    newsletter_id: 1
+    student_id: 1
+  Newsletterxstudent_2:
+    newsletter_id: 2
+    student_id: 1
+  Newsletterxstudent_3:
+    newsletter_id: 3
+    student_id: 2
+  Newsletterxstudent_4:
+    newsletter_id: 4
+    student_id: 1

@@ -1,0 +1,18 @@
+# data/fixtures/subscriptionxteacher.yml
+SubscriptionXTeacher:
+  subscriptionxteacher1:
+    student_id: 1
+    teacher_id: 1
+    price: 1
+  subscriptionxteache2:
+    student_id: 1
+    teacher_id: 2
+    price: 2
+  subscriptionxteache3:
+    student_id: 2
+    teacher_id: 3
+    price: 3
+  subscriptionxteache4:
+    student_id: 1
+    teacher_id: 4
+    price: 4

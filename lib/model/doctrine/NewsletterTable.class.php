@@ -16,4 +16,11 @@ class NewsletterTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Newsletter');
     }
+    public function getActiveNewsletters()
+    {
+         $q = $this->createQuery('n');
+         return $q->execute();
+    }
+    
+   
 }

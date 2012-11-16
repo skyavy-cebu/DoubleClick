@@ -15,21 +15,21 @@ abstract class BaseFeedbackForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'         => new sfWidgetFormInputHidden(),
-      'user_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'add_empty' => false)),
-      'name'       => new sfWidgetFormInputText(),
-      'content'    => new sfWidgetFormTextarea(),
-      'created_at' => new sfWidgetFormDateTime(),
-      'updated_at' => new sfWidgetFormDateTime(),
+      'id'            => new sfWidgetFormInputHidden(),
+      'customer_name' => new sfWidgetFormInputText(),
+      'body'          => new sfWidgetFormTextarea(),
+      'publish_date'  => new sfWidgetFormDateTime(),
+      'updated_at'    => new sfWidgetFormDateTime(),
+      'created_at'    => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
-      'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'user_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('User'))),
-      'name'       => new sfValidatorString(array('max_length' => 80, 'required' => false)),
-      'content'    => new sfValidatorString(array('required' => false)),
-      'created_at' => new sfValidatorDateTime(),
-      'updated_at' => new sfValidatorDateTime(),
+      'id'            => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'customer_name' => new sfValidatorString(array('max_length' => 80)),
+      'body'          => new sfValidatorString(array('required' => false)),
+      'publish_date'  => new sfValidatorDateTime(),
+      'updated_at'    => new sfValidatorDateTime(array('required' => false)),
+      'created_at'    => new sfValidatorDateTime(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('feedback[%s]');

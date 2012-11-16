@@ -16,4 +16,30 @@ class TeacherTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Teacher');
     }
+     public function getTeachers()
+    {
+       $q = $this->createQuery('c');
+   
+      return $q->execute();
+    }
+    public function getTeachersWithSubscription()
+    {
+       $q = $this->createQuery('c')
+       ->leftJoin('c.Subscription s');
+   
+      return $q->execute();
+    }
+    public function getNewsletter()
+    {
+       $student=1;
+       $q = $this->createQuery('c')
+        ->leftJoin('c.Subscription s')
+        ->leftJoin('s.Student st')
+        ->leftJoin('st.NewsletterXStudent x')
+        ->leftJoin('x.Newsletter n')
+       ->where('s.student_id = ?', $student);
+      /* ->where('s.valid_until > ?', date('Y-m-d H:i:s', time()));*/
+   
+      return $q->execute();
+    }
 }

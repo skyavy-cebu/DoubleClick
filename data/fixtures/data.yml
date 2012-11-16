@@ -7,6 +7,8 @@ City:
     name: 'Mandaue City'
 State:
   State_1:
+    id: 1
     name: Luzon
   State_2:
+    id: 2
     name: Visayas

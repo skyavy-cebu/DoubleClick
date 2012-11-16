@@ -12,4 +12,5 @@
  */
 class Teacher extends BaseTeacher
 {
+  
 }

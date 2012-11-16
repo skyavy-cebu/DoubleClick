@@ -16,4 +16,5 @@ class StateTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('State');
     }
+    
 }

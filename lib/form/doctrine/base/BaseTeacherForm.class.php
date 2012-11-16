@@ -16,27 +16,25 @@ abstract class BaseTeacherForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'         => new sfWidgetFormInputHidden(),
-      'user_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'add_empty' => false)),
       'title'      => new sfWidgetFormInputText(),
+      'email'      => new sfWidgetFormInputText(),
+      'password'   => new sfWidgetFormInputText(),
       'portfolio'  => new sfWidgetFormTextarea(),
       'details'    => new sfWidgetFormTextarea(),
-      'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
+      'created_at' => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
       'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'user_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('User'))),
-      'title'      => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'title'      => new sfValidatorString(array('max_length' => 100)),
+      'email'      => new sfValidatorString(array('max_length' => 80)),
+      'password'   => new sfValidatorString(array('max_length' => 50)),
       'portfolio'  => new sfValidatorString(array('required' => false)),
       'details'    => new sfValidatorString(array('required' => false)),
-      'created_at' => new sfValidatorDateTime(),
-      'updated_at' => new sfValidatorDateTime(),
+      'updated_at' => new sfValidatorDateTime(array('required' => false)),
+      'created_at' => new sfValidatorDateTime(array('required' => false)),
     ));
-
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'Teacher', 'column' => array('user_id')))
-    );
 
     $this->widgetSchema->setNameFormat('teacher[%s]');
 

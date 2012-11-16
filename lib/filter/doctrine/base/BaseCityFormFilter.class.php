@@ -14,7 +14,7 @@ abstract class BaseCityFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'state_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('State'), 'add_empty' => true)),
-      'name'     => new sfWidgetFormFilterInput(),
+      'name'     => new sfWidgetFormFilterInput(array('with_empty' => false)),
     ));
 
     $this->setValidators(array(

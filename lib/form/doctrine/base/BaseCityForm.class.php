@@ -16,14 +16,14 @@ abstract class BaseCityForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'       => new sfWidgetFormInputHidden(),
-      'state_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('State'), 'add_empty' => true)),
+      'state_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('State'), 'add_empty' => false)),
       'name'     => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
       'id'       => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'state_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('State'), 'required' => false)),
-      'name'     => new sfValidatorString(array('max_length' => 50, 'required' => false)),
+      'state_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('State'))),
+      'name'     => new sfValidatorString(array('max_length' => 50)),
     ));
 
     $this->widgetSchema->setNameFormat('city[%s]');

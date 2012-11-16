@@ -1,0 +1,26 @@
+# data/fixtures/subscription.yml
+Subscription:
+  subscription1:
+    student_id: 1
+    status: 1
+    duration: '0'
+    price: 1
+    is_paid: 0
+  subscription2:
+    student_id: 1
+    status: 0
+    duration: '1'
+    price: 2
+    is_paid: 1
+  subscription3:
+    student_id: 2
+    status: 1
+    duration: '2'
+    price: 3
+    is_paid: 1
+  subscription4:
+    student_id: 1
+    status: 1
+    duration: '0'
+    price: 4
+    is_paid: 1

@@ -16,4 +16,17 @@ class SubscriptionTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Subscription');
     }
+    public function getActive()
+    {
+      $student=1;
+      $q = $this->createQuery('s')
+        ->leftJoin('s.Teacher t')
+        ->leftJoin('s.Student st')
+        ->leftJoin('st.NewsletterXStudent x')
+        ->leftJoin('x.Newsletter n')
+       /* ->where('s.valid_until > ?', date('Y-m-d H:i:s', time()))*/
+        ->where('s.student_id = ?', $student);
+   
+      return $q->execute();
+    }
 }

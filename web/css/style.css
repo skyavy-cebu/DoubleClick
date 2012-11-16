@@ -323,6 +323,22 @@ body {
           background: url('../images/btn-content-left-login-hover.png');
           cursor: pointer;
         }
+				.contentContactContent input[type=submit] {
+          width: 172px;
+          height: 46px;
+          
+          display: block;
+          
+          margin: 10px auto 0px auto;
+          
+          border: none;
+          
+          background: url('../images/btn-contact.png');
+        }
+				.contentContactContent input[type=submit]:hover {
+          background: url('../images/btn-contact-hover.png');
+          cursor: pointer;
+        }
       .contentLeftLogin a {
         display: block;
         text-decoration: none;
@@ -353,10 +369,21 @@ body {
           
           padding: 7px 0px 0px 14px;
         }
-        .contentLeftColumnContent ul li:nth-child(even) { background-color: #F5F5F5; }
-        .contentLeftColumnContent ul li:last-child { border-bottom: none; }
+				.contentDasboardContent ul li {
+					width: 244px;
+          height: 45px;
+          border-bottom: 1px dotted #E0E0E0;
+          
+          padding: 7px 0px 0px 14px;
+				}
+				.contentDasboardContent li {
+						height: 325px;
+						width: 320px;
+				}
+        .contentLeftColumnContent ul li:nth-child(even), .contentDasboardContent ul li:nth-child(even)  { background-color: #F5F5F5; }
+        .contentLeftColumnContent ul li:last-child, .contentDasboardContent ul li:last-child { border-bottom: none; }
         
-        .contentLeftColumnContent ul li span {
+        .contentLeftColumnContent ul li span, .contentDasboardContent ul li span {
           color: #969696;
           font-size: 12px;
           line-height: 19px;
@@ -472,7 +499,7 @@ body {
                   
         color: #a9a9a9;
       }
-      .contentContentAboutContent, .contentContentFeedbackContentDetails, .contentContentOptionContentDetails, .contentContentTeacherDetail, .contentContentTeacherPerformanceContents {
+      .contentContentAboutContent, .contentContentFeedbackContentDetails, .contentContentOptionContentDetails, .contentContentTeacherDetail, .contentContentTeacherPerformanceContents, .contentContactContent {
         width: 620px;
         
         padding: 10px 19px 17px 19px;
@@ -534,8 +561,8 @@ body {
           background: #f5f5f5;
           padding: 14px 13px 14px 13px;
         }
-          .contentContentMenuContent1 { float: left; }
-          .contentContentMenuContent2 { float: right; }
+          .contentContentMenuContent1, .contentContentHeaderLeft { float: left; }
+          .contentContentMenuContent2, .contentContentHeaderRight { float: right; }
           .contentContentMenuContent1 li, .contentContentMenuContent2 li { margin-bottom: 18px; }
           .contentContentMenuContent1 li:last-child, .contentContentMenuContent2 li:last-child { margin-bottom: 0px; }
           .contentContentMenuContent1 a, .contentContentMenuContent2 a {
@@ -554,6 +581,16 @@ body {
             
             color: #1E1E1E;
           }
+					.contentContentHeaderLeft{
+						padding:15px;
+					}
+					.contentContentSubscriptionWrapper{
+						height:400px;
+					}
+					.contentContentSubscriptionWrapper li{
+						width:320px;
+						padding: 0 5px;
+					}
             .contentContentMenuContent1 a h3, .contentContentMenuContent2 a h3 {
               text-shadow: 1px 1px 1px #FFFFFF;
               
@@ -579,6 +616,9 @@ body {
 		.contentContentTeacherIntroductionContentHeaderTitle{
 			text-shadow: 0px 0px 3px #000000;
 		}
+		.contentContentSubscription{
+			width: 200px;
+		}
     .contentContentNews, .contentContentLatestColumn, .contentContentLatestColumnHeaderTitle, .contentContentFeedbackContentHeaderTitle, .contentContentTeacherIntroductionContentHeaderTitle { float: left; }
       .contentContentNewsHeader, .contentContentBlogHeader, .contentContentLatestColumnHeader {
         height: 31px;
@@ -594,10 +634,13 @@ body {
         
         text-shadow: 0 -1px 1px #FFFFFF;
       }
-      .contentContentNewsContent, .contentContentBlogContent, .contentContentLatestColumnContent, .contentContentTeacherIntroDetails {
+      .contentContentNewsContent, .contentContentSubscriptionContent, .contentContentBlogContent, .contentContentLatestColumnContent, .contentContentTeacherIntroDetails,.contentContentNewsletterContent, .contentContentSubscriptionContentDetails {
         border: 1px solid #DCDCDC;
       }
-      .contentContentNewsContent ul li, .contentContentBlogContent ul li, .contentContentLatestColumnContent ul li {
+			.contentContentSubscriptionContent{
+				height: 160px;
+			}
+      .contentContentNewsContent ul li, .contentContentSubscriptionContent ul li, .contentContentBlogContent ul li, .contentContentLatestColumnContent ul li {
         width: 304px;
         height: 45px;
         border-bottom: 1px dotted #E0E0E0;
@@ -608,14 +651,14 @@ body {
 				list-style:none;
 				padding-bottom: 15px;
 			}
-      .contentContentNewsContent ul li:nth-child(even), .contentContentBlogContent ul li:nth-child(even), .contentContentLatestColumnContent ul li:nth-child(even),.contentContentListContent ul li:nth-child(even) { background-color: #F5F5F5; }
-      .contentContentNewsContent ul li:last-child, .contentContentBlogContent ul li:last-child, .contentContentLatestColumnContent ul li:last-child { border-bottom: none; }
-      .contentContentNewsContent ul li span, .contentContentBlogContent ul li span, .contentContentLatestColumnContent ul li span {
+      .contentContentNewsContent ul li:nth-child(even), .contentContentSubscriptionContent ul li:nth-child(even),, .contentContentBlogContent ul li:nth-child(even), .contentContentLatestColumnContent ul li:nth-child(even),.contentContentListContent ul li:nth-child(even) { background-color: #F5F5F5; }
+      .contentContentNewsContent ul li:last-child,  .contentContentSubscriptionContent ul li:last-child, .contentContentBlogContent ul li:last-child, .contentContentLatestColumnContent ul li:last-child { border-bottom: none; }
+      .contentContentNewsContent ul li span, .contentContentSubscriptionContent ul li span, .contentContentBlogContent ul li span, .contentContentLatestColumnContent ul li span {
         color: #969696;
         font-size: 12px;
         line-height: 19px;
       }
-      .contentContentNewsContent ul li p, .contentContentBlogContent ul li p, .contentContentLatestColumnContent ul li p,  .contentContentTeacherDetail p {
+      .contentContentNewsContent ul li p, .contentContentSubscriptionContent ul li p, .contentContentBlogContent ul li p, .contentContentLatestColumnContent ul li p,  .contentContentTeacherDetail p {
         color: #1E1E1E;
         font-family: Hiragino;
         font-size: 12px;
@@ -627,11 +670,11 @@ body {
 			margin-top: 26px;
 		}
 			/* Find ".contentContentAboutHeader, .contentContentMenuHeader, .contentContentTeachersHeader {" for reference on the parent's header style */
-			.contentContentTeachersContent, .contentContentFeedbackContent, .contentContentTeachersIntroductionContent, .contentContentTeacherIntroDetails{
+			.contentContentTeachersContent, .contentContentFeedbackContent, .contentContentTeachersIntroductionContent,.contentContentSubscriptionContentDetails .contentContentTeacherIntroDetails,.contentContentNewsletterContent, .contentDasboardContent1{
 				padding: 9px 0px 0px 0px;
       }
-          .contentContentTeachersContent1, .contentContentTeacherImage, .contentContentTeachersIntroductionContent1 { float: left; }
-          .contentContentTeachersContent2, .contentContentTeacherDetail, .contentContentTeachersIntroductionContent2{ float: right; }
+          .contentContentTeachersContent1, .contentContentTeacherImage, .contentContentTeachersIntroductionContent1, .contentDasboardContent1 { float: left; }
+          .contentContentTeachersContent2, .contentContentTeacherDetail, .contentContentTeachersIntroductionContent2, .contentDasboardContent2{ float: right; }
           .contentContentTeachersContent1 li, .contentContentTeachersContent2 li {
 						margin-bottom: 20px;
 						border: 1px solid #DCDCDC;
@@ -681,12 +724,15 @@ body {
 					.contentContentTeachersContent1 li h3, .contentContentTeachersContent2 li h3 { margin-top: 11px; font-size: 20px; color: #1E1E1E; }
 					.contentContentTeachersContent1 li h5, .contentContentTeachersContent2 li h5 { margin-top: 3px; font-size: 12px; color: #1E1E1E; line-height: 20px; }
 					.contentContentTeachersContent1 li h5 span, .contentContentTeachersContent1 li h5 span a, .contentContentTeachersContent2 li h5 span, .contentContentTeachersContent2 li h5 span a { color: #005dfe; }
-					.contentContentTeachersIntroductionContent1 li, .contentContentTeachersIntroductionContent2 li  {
+					.contentContentTeachersIntroductionContent1 li, .contentContentTeachersIntroductionContent2 li {
 							border: 1px solid #DCDCDC;
 							height: 210px;
 							margin-bottom: 20px;
 							width: 320px;
 					}
+					 .contentDasboardContent1 li, .contentDasboardContent2 li{
+						height: 215px;
+					 }
 /* Banners */
 .banners {
   padding: 24px 0px 25px 0px;
