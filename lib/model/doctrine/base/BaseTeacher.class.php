@@ -14,6 +14,7 @@ Doctrine_Manager::getInstance()->bindComponent('Teacher', 'doctrine');
  * @property string $portfolio
  * @property string $details
  * @property decimal $price
+ * @property string $change_password
  * @property timestamp $updated_at
  * @property timestamp $created_at
  * @property Doctrine_Collection $Newsletter
@@ -26,6 +27,7 @@ Doctrine_Manager::getInstance()->bindComponent('Teacher', 'doctrine');
  * @method string              getPortfolio()            Returns the current record's "portfolio" value
  * @method string              getDetails()              Returns the current record's "details" value
  * @method decimal             getPrice()                Returns the current record's "price" value
+ * @method string              getChangePassword()       Returns the current record's "change_password" value
  * @method timestamp           getUpdatedAt()            Returns the current record's "updated_at" value
  * @method timestamp           getCreatedAt()            Returns the current record's "created_at" value
  * @method Doctrine_Collection getNewsletter()           Returns the current record's "Newsletter" collection
@@ -37,6 +39,7 @@ Doctrine_Manager::getInstance()->bindComponent('Teacher', 'doctrine');
  * @method Teacher             setPortfolio()            Sets the current record's "portfolio" value
  * @method Teacher             setDetails()              Sets the current record's "details" value
  * @method Teacher             setPrice()                Sets the current record's "price" value
+ * @method Teacher             setChangePassword()       Sets the current record's "change_password" value
  * @method Teacher             setUpdatedAt()            Sets the current record's "updated_at" value
  * @method Teacher             setCreatedAt()            Sets the current record's "created_at" value
  * @method Teacher             setNewsletter()           Sets the current record's "Newsletter" collection
@@ -115,6 +118,15 @@ abstract class BaseTeacher extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => 9,
              'scale' => '2',
+             ));
+        $this->hasColumn('change_password', 'string', 255, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => 255,
              ));
         $this->hasColumn('updated_at', 'timestamp', 25, array(
              'type' => 'timestamp',

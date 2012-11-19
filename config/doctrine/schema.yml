@@ -720,6 +720,13 @@ Teacher:
       default: '0.00'
       notnull: true
       autoincrement: false
+    change_password:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
     updated_at:
       type: timestamp(25)
       fixed: false
