@@ -2,6 +2,8 @@
 
 class myUser extends sfBasicSecurityUser
 {  
+  $account = null;
+  
   public function __initialize(sfEventDispatcher $dispatcher, sfStorage $storage, $options = array())
   {
     parent::__initialize($dispatcher, $storage, $options);
@@ -34,6 +36,10 @@ class myUser extends sfBasicSecurityUser
 
     //remove credentials
     $this->clearCredentials();
+  }
+  
+  public function getDetails() {
+    return $this->account;
   }
   
   protected function _refreshAccountObject()
