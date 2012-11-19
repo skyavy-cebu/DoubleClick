@@ -155,7 +155,7 @@ EOF
     $this->forward404Unless($student = StudentTable::getInstance()->findOneByActivation($code));
     
     $student->setStatus(1);
-    $student->setActivation('');
+    $student->setActivation(NULL);
     $student->save();
     
     // send complete registration mail

@@ -173,11 +173,11 @@ EOF
     
         if ('teacher' == $this->userType)
         {
-          $oUser->setChangePassword('');
+          $oUser->setChangePassword(NULL);
         }
         else
         {
-          $oUser->setActivation('');
+          $oUser->setActivation(NULL);
         }
         
         $oUser->save();
