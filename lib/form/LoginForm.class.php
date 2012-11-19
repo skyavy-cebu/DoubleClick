@@ -12,6 +12,9 @@ class LoginForm extends BaseForm
 {
   public function configure()
   {
+    // '' (Student) or 'teacher' (Teacher)
+    $this->userType = $this->getOption('userType');
+
     $this->setWidgets(array(
       'email'       => new sfWidgetFormInputText(array('label' => 'Email')),
       'password'    => new sfWidgetFormInputPassword(array('label' => 'Password')),
@@ -37,14 +40,24 @@ class LoginForm extends BaseForm
    */
   public function checkLoginCredentials($validator, $values)
   {
-    $oStudent = StudentTable::getInstance()->findOneByEmail($values['email']);
-    if (!$oStudent)
+    if ('teacher' == $this->userType)
     {
-			throw new sfValidatorErrorSchema($validator, array('email' => new sfValidatorError($validator, 'Email is not registered to any Student')));
+      $oUser = TeacherTable::getInstance()->findOneByEmail($values['email']);
+      $emailErrorMsg = 'Email is not assigned to any Teacher';
     }
     else
     {
-      if ($oStudent->getPassword() != md5(md5($values['password']).sfConfig::get('app_system_salt')))
+      $oUser = StudentTable::getInstance()->findOneByEmail($values['email']);
+      $emailErrorMsg = 'Email is not registered to any Student';
+    }
+    
+    if (!$oUser)
+    {
+      throw new sfValidatorErrorSchema($validator, array('email' => new sfValidatorError($validator, $emailErrorMsg)));
+    }
+    else
+    {
+      if ($oUser->getPassword() != md5(md5($values['password']).sfConfig::get('app_system_salt')))
       {
         throw new sfValidatorErrorSchema($validator, array('password' => new sfValidatorError($validator, 'Incorrect password.')));
       }

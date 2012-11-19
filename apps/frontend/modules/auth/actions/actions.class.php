@@ -4,8 +4,8 @@
  * auth actions.
  *
  * @package    DOUBLECLICK
- * @subpackage login
- * @author     Your name here
+ * @subpackage auth
+ * @author     Jane Lois E. de Veyra
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 class authActions extends sfActions
@@ -23,7 +23,10 @@ class authActions extends sfActions
     {
       $this->redirect('@dashboard');
     }
-    $this->form = new LoginForm();
+    
+    $this->userType = $request->getParameter('userType');
+    
+    $this->form = new LoginForm(null, array('userType' => $this->userType));
     
     if ($request->isMethod('post'))
     {
@@ -32,11 +35,19 @@ class authActions extends sfActions
       
       if ($this->form->isValid())
       {
-        $oStudent = StudentTable::getInstance()->findOneByEmail($login['email']);
+        if ('teacher' == $this->userType)
+        {
+          $oUser= TeacherTable::getInstance()->findOneByEmail($login['email']);
+          $redirect = '@dashboard'; // temp
+        }
+        else
+        {
+          $oUser = StudentTable::getInstance()->findOneByEmail($login['email']);
+          $redirect = '@dashboard';
+        }
         
-        $this->getUser()->signIn('student', $oStudent);
-        
-        $this->redirect('@dashboard');
+        $this->getUser()->signIn(('' == $this->userType) ? 'student' : $this->userType, $oUser);
+        $this->redirect($redirect);
       }
     }
   }
