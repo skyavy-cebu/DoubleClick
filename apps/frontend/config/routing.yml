@@ -18,12 +18,12 @@ login:
   param: { userType: "", module: auth, action: login }
   
 change-password:
-  url: /change-password
-  param: { module: auth, action: changePassword }
+  url: /change-password/:userType
+  param: { userType: "", module: auth, action: changePassword }
   
 remind-password:
-  url: /remind-password
-  param: { module: auth, action: remindPassword }
+  url: /remind-password/:userType
+  param: { userType: "", module: auth, action: remindPassword }
   
 register-message:
   url: /register/message

@@ -12,7 +12,8 @@ class ChangePasswordForm extends BaseForm
 {
   public function configure()
   {
-    $this->oStudent = StudentTable::getInstance()->findOneByActivation($this->getOption('code'));
+    $this->userType = $this->getOption('userType');
+    $this->code = $this->getOption('code');
     
     $this->setWidgets(array(
       'oldpassword'   => new sfWidgetFormInputPassword(array('label' => 'Old Password')),
@@ -38,12 +39,12 @@ class ChangePasswordForm extends BaseForm
     $this->mergePostValidator(
       new sfValidatorAnd(
         array(
-          // correct password
-          new sfValidatorCallback(array('callback' => array($this, 'checkPassword'))),
           // same password and password confirmation
           new sfValidatorSchemaCompare(
             'newpassword', sfValidatorSchemaCompare::EQUAL, 'cnewpassword',
-            array(), array('invalid' => 'パスワードが一致しません。'))
+            array(), array('invalid' => 'パスワードが一致しません。')),
+          // correct password
+          new sfValidatorCallback(array('callback' => array($this, 'checkPassword')))
         )
       )
     );
@@ -59,7 +60,16 @@ class ChangePasswordForm extends BaseForm
    */
   public function checkPassword($validator, $values)
   {
-    if ($this->oStudent->getPassword() != md5(md5($values['oldpassword']).sfConfig::get('app_system_salt')))
+    if ('teacher' == $this->userType)
+    {
+      $oUser = TeacherTable::getInstance()->findOneByChangePassword($this->code);
+    }
+    else
+    {
+      $oUser = StudentTable::getInstance()->findOneByActivation($this->code);
+    }
+    
+    if ($oUser->getPassword() != md5(md5($values['oldpassword']).sfConfig::get('app_system_salt')))
     {
 			throw new sfValidatorErrorSchema($validator, array('oldpassword' => new sfValidatorError($validator, 'Incorrect password.')));
     }

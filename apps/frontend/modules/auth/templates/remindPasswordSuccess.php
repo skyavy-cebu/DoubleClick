@@ -1,6 +1,7 @@
 <h1><?php echo __('Password Reminder'); ?></h1>
 <?php if ($showForm) :?>
-<form action="<?php echo url_for('@remind-password') ?>" method="POST">
+<form action="<?php echo url_for('@remind-password?userType=' .  $userType) ?>" method="POST">
+  <?php echo $form->renderGlobalErrors()?>
   <table>
     <tr>
       <td><?php echo $form['email']->renderRow()?></td>

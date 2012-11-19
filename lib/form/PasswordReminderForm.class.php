@@ -12,6 +12,8 @@ class PasswordReminderForm extends BaseForm
 {
   public function configure()
   {
+    $this->userType = $this->getOption('userType');
+    
     $this->setWidget('email', new sfWidgetFormInputText());
     $this->setValidator('email', new sfValidatorEmail(array('required' => true)));
     
@@ -21,33 +23,46 @@ class PasswordReminderForm extends BaseForm
   }
   
   /**
-   * Check if the Student exists and is active.
+   * Check if the Student or Teacher exists and is active.
    *
    * @param $validator
    * @param $values
    */
   public function checkUserStatus($validator, $values)
   {
-    $oStudent = StudentTable::getInstance()->findOneByEmail($values['email']);
-    if (!$oStudent)
+    if ('teacher' == $this->userType)
     {
-			throw new sfValidatorErrorSchema($validator, array('email' => new sfValidatorError($validator, 'Email is not registered to any Student')));
+      $oUser = TeacherTable::getInstance()->findOneByEmail($values['email']);
+      $emailErrorMsg = 'Email is not assigned to any Teacher';
     }
     else
     {
-      $errorMessage = '';
-      switch ($oStudent->getStatus())
+      $oUser = StudentTable::getInstance()->findOneByEmail($values['email']);
+      $emailErrorMsg = 'Email is not registered to any Student';
+    }
+    
+    if (!$oUser)
+    {
+			throw new sfValidatorErrorSchema($validator, array('email' => new sfValidatorError($validator, $emailErrorMsg)));
+    }
+    else
+    {
+      if ('' == $this->userType)
       {
-        case 0: $errorMessage = 'The account requires activation. Please check your mail for the activation link.'; break;
-        case 1: break;
-        case 2: $errorMessage = 'The account has been deactivated.'; break;
-        case 3: $errorMessage = 'The account has been deleted.'; break;
-        case 4: break;
-      }
-      
-      if ('' != $errorMessage)
-      {
-        throw new sfValidatorErrorSchema($validator, array('email' => new sfValidatorError($validator, $errorMessage)));
+        $statusErrorMsg = '';
+        switch ($oUser->getStatus())
+        {
+          case 0: $statusErrorMsg = 'The account requires activation. Please check your mail for the activation link.'; break;
+          case 1: break;
+          case 2: $statusErrorMsg = 'The account has been deactivated.'; break;
+          case 3: $statusErrorMsg = 'The account has been deleted.'; break;
+          case 4: break;
+        }
+        
+        if ('' != $statusErrorMsg)
+        {
+          throw new sfValidatorErrorSchema($validator, array('email' => new sfValidatorError($validator, $statusErrorMsg)));
+        }
       }
     }
   }

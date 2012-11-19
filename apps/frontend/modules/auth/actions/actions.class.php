@@ -19,12 +19,21 @@ class authActions extends sfActions
   {
     // $this->setLayout('layoutLogin');
     
-    if ($this->getUser()->isAuthenticated())
+    $this->userType = $request->getParameter('userType');
+    
+    if ('teacher' == $this->userType)
     {
-      $this->redirect('@dashboard');
+      $redirect = '@dashboard'; // temp
+    }
+    else
+    {
+      $redirect = '@dashboard';
     }
     
-    $this->userType = $request->getParameter('userType');
+    if ($this->getUser()->isAuthenticated())
+    {
+      $this->redirect($redirect);
+    }
     
     $this->form = new LoginForm(null, array('userType' => $this->userType));
     
@@ -38,12 +47,10 @@ class authActions extends sfActions
         if ('teacher' == $this->userType)
         {
           $oUser= TeacherTable::getInstance()->findOneByEmail($login['email']);
-          $redirect = '@dashboard'; // temp
         }
         else
         {
           $oUser = StudentTable::getInstance()->findOneByEmail($login['email']);
-          $redirect = '@dashboard';
         }
         
         $this->getUser()->signIn(('' == $this->userType) ? 'student' : $this->userType, $oUser);
@@ -72,8 +79,10 @@ class authActions extends sfActions
   */
   public function executeRemindPassword(sfWebRequest $request)
   {
+    $this->userType = $request->getParameter('userType');
+    
     $this->showForm = true;
-    $this->form = new PasswordReminderForm();
+    $this->form = new PasswordReminderForm(null, array('userType' => $this->userType));
     
     if ($request->isMethod('post'))
     {
@@ -83,25 +92,38 @@ class authActions extends sfActions
       if ($this->form->isValid())
       {
         $this->showForm = false;
-        $activation = md5(md5(time()).sfConfig::get('app_system_salt'));
+        $passwordHash = md5(md5(time()) . sfConfig::get('app_system_salt'));
         
-        $oStudent = StudentTable::getInstance()->findOneByEmail($passwordReminder['email']);
-        $oStudent->setActivation($activation);
-        $oStudent->save();
+        if ('teacher' == $this->userType)
+        {
+          $oUser = TeacherTable::getInstance()->findOneByEmail($passwordReminder['email']);
+          $oUser->setChangePassword($passwordHash);
+          $oUser->save();
+          
+          $changePasswordUrl = $this->getController()->genUrl('@change-password?userType=teacher&code=' . $passwordHash, true);
+        }
+        else
+        {
+          $oUser = StudentTable::getInstance()->findOneByEmail($passwordReminder['email']);
+          $oUser->setActivation($passwordHash);
+          $oUser->save();
+          
+          $changePasswordUrl = $this->getController()->genUrl('@change-password?code=' . $passwordHash, true);
+        }
         
         // send activation mail
         $message = $this->getMailer()->compose(
           /* from */
           array('admin@doubleclick.co.jp' => 'DoubleClick Admin'),
           /* to */
-          $oStudent->getEmail(),
+          $oUser->getEmail(),
           /* subject */
           'パスワードを忘れた方へ',
           /* body */
           <<<EOF
 以下のURLをクリックして、パスワードを変更出来ます。
 
-{$this->getController()->genUrl('@change-password?code='.$activation, true)}
+{$changePasswordUrl}
 
 -------------------------------
 DoubleClick
@@ -122,10 +144,22 @@ EOF
   public function executeChangePassword(sfWebRequest $request)
   {
     $this->forward404Unless($this->code = $request->getParameter('code'));
-    $this->forward404Unless($oStudent = StudentTable::getInstance()->findOneByActivation($this->code));
+    
+    $this->userType = $request->getParameter('userType');
+    
+    if ('teacher' == $this->userType)
+    {
+      $oUser = TeacherTable::getInstance()->findOneByChangePassword($this->code);
+    }
+    else
+    {
+      $oUser = StudentTable::getInstance()->findOneByActivation($this->code);
+    }
+    
+    $this->forward404Unless($oUser);
     
     $this->showForm = true;
-    $this->form = new ChangePasswordForm(null, array('code' => $this->code));
+    $this->form = new ChangePasswordForm(null, array('userType' => $this->userType, 'code' => $this->code));
     
     if ($request->isMethod('post'))
     {
@@ -135,9 +169,18 @@ EOF
       if ($this->form->isValid())
       {
         $this->showForm = false;
-        $oStudent->setPassword(md5(md5($changePassword['newpassword']).sfConfig::get('app_system_salt')));
-        $oStudent->setActivation('');
-        $oStudent->save();
+        $oUser->setPassword(md5(md5($changePassword['newpassword']) . sfConfig::get('app_system_salt')));
+    
+        if ('teacher' == $this->userType)
+        {
+          $oUser->setChangePassword('');
+        }
+        else
+        {
+          $oUser->setActivation('');
+        }
+        
+        $oUser->save();
       }
     }
   }

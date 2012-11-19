@@ -1,7 +1,7 @@
 <h1><?php echo __('Change Password'); ?></h1>
 
 <?php if ($showForm) :?>
-<form action="<?php echo url_for('@change-password?code='.$code) ?>" method="POST">
+<form action="<?php echo url_for('@change-password?userType=' . $userType . '&code=' . $code) ?>" method="POST">
   <table>
     <tr>
       <td><?php echo $form?></td>
