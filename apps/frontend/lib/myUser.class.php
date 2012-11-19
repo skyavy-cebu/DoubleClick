@@ -1,15 +1,22 @@
 <?php
 
 class myUser extends sfBasicSecurityUser
-{  
-  $account = null;
+{
+  protected $account = null;
+
+  public function __construct(sfEventDispatcher $dispatcher, sfStorage $storage, $options = array()) {
+    parent::__construct($dispatcher, $storage, $options);
+    
+    if ($this->isAuthenticated()) {
+      $this->_refreshAccountObject();
+    }
+  }
   
   public function __initialize(sfEventDispatcher $dispatcher, sfStorage $storage, $options = array())
   {
     parent::__initialize($dispatcher, $storage, $options);
     
     $this->getUser()->setCulture('ja_JP');
-    $this->_refreshAccountObject();
   }
   
   public function signIn($type, $account)
@@ -45,6 +52,7 @@ class myUser extends sfBasicSecurityUser
   protected function _refreshAccountObject()
   {
     $accountId = $this->getAttribute('account_id', 'visitor', 'doubleclick_frontend');
+    
     switch($this->getAttribute('user_type', 'visitor', 'doubleclick_frontend'))
     {
       case 'student': $this->account = StudentTable::getInstance()->find($accountId); break;

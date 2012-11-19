@@ -14,8 +14,8 @@ logout:
   param: { module: auth, action: logout }
   
 login:
-  url: /login
-  param: { module: auth, action: login }
+  url: /login/:userType
+  param: { userType: "", module: auth, action: login }
   
 change-password:
   url: /change-password

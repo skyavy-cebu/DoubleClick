@@ -1,6 +1,6 @@
 <h1><?php echo __('Login'); ?></h1>
 
-<form action="<?php echo url_for('@login') ?>" method="POST">
+<form action="<?php echo url_for('@login?userType=' . $userType) ?>" method="POST">
   <table>
     <tr>
       <td><?php echo $form['email']->renderRow()?></td>
