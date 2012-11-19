@@ -80,8 +80,6 @@ class RegisterForm extends BaseForm
     $this->mergePostValidator(
       new sfValidatorAnd(
         array(
-          // unique email
-          new sfValidatorCallback(array('callback' => array($this, 'checkUniqueEmail'))),
           // same email and email confirmation
           new sfValidatorSchemaCompare(
             'email', sfValidatorSchemaCompare::EQUAL, 'cemail',
@@ -89,7 +87,9 @@ class RegisterForm extends BaseForm
           // same password and password confirmation
           new sfValidatorSchemaCompare(
             'password', sfValidatorSchemaCompare::EQUAL, 'cpassword',
-            array(), array('invalid' => 'パスワードが一致しません。'))
+            array(), array('invalid' => 'パスワードが一致しません。')),
+          // unique email
+          new sfValidatorCallback(array('callback' => array($this, 'checkUniqueEmail')))
         )
       )
     );

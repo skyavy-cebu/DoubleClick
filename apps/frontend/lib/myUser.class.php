@@ -4,10 +4,12 @@ class myUser extends sfBasicSecurityUser
 {
   protected $account = null;
 
-  public function __construct(sfEventDispatcher $dispatcher, sfStorage $storage, $options = array()) {
+  public function __construct(sfEventDispatcher $dispatcher, sfStorage $storage, $options = array())
+  {
     parent::__construct($dispatcher, $storage, $options);
     
-    if ($this->isAuthenticated()) {
+    if ($this->isAuthenticated())
+    {
       $this->_refreshAccountObject();
     }
   }
