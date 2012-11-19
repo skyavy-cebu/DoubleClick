@@ -6,8 +6,8 @@ home:
   param: { module: home, action: index }
   
 dashboard:
-  url:   /dashboard
-  param: { module: static, action: feedback }
+  url:   /student
+  param: { module: student, action: dashboard }
   
 logout:
   url: /logout
@@ -45,7 +45,7 @@ dashboard-newsletter:
   url:   /newsletter/:id  
   class:   sfDoctrineRoute
   options: { model: Newsletter, type: object }
-  param:   { module: dashboard, action: show }
+  param:   { module: student, action: show }
   requirements:
     id: \d+
     sf_method: [get]
@@ -54,7 +54,7 @@ dashboard-teacher-newsletter:
   url:   /teacher/:id  
   class:   sfDoctrineRoute
   options: { model: Newsletter, type: object }
-  param:   { module: dashboard, action: list }
+  param:   { module: student, action: list }
   requirements:
     id: \d+
 # generic rules

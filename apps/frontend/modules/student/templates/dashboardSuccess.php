@@ -7,6 +7,7 @@
        <div class="contentLeftColumnHeader">???</div>
         <div class="contentLeftColumnContent">
 			<ul>
+				
 				<?php  foreach ($teacherslist as $i => $teachers):?>
 					<li>
 					  <span>&nbsp;</span>
@@ -34,40 +35,36 @@
                 <li>
                   <div class="contentContentTeacherIntroductionContentHeader">
                     <div class="contentContentTeacherIntroductionContentHeaderTitle"><?php echo $teachers->getTitle() ?></div>
-                    <?php $b=(($i % 2) );?>
-                    <?php  foreach ($studentteachers as $i => $studentteacher):?>	
-                      <?php IF ($teachers['id'] == $studentteacher['id']):?>
-                        <div class="contentContentTeacherIntroductionContentHeaderLink"><a href="<?php echo url_for('dashboard-teacher-newsletter',$teachers) ?>">もっと見る</a></div>
-                      <?php endif ?>		
-                    <?php endforeach ?>
+										<div class="contentContentTeacherIntroductionContentHeaderLink"><a href="<?php echo url_for('dashboard-teacher-newsletter',$teachers) ?>">もっと見る</a></div>
                   </div>
                    <div class="contentContentSubscriptionContent">
-                    <ul>                  
-					  <?php  foreach ($studentteachers as $i => $studentteacher):?>
-              <?php  foreach ($studentnewsletters as $y => $studentnewsletter):?>	
-                <?php foreach ($teachers->getNewsletter() as $i => $newsletterlist):?> 
-                  <?php if ($teachers['id'] == $studentteacher['id']):?>
-                    <?php if ($newsletterlist->getID() == $studentnewsletter['newsletter_id']):?>
-                        <li>
-                          <span> <?php echo $newsletterlist->getPublishDate() ?></span>
-                          <p>
-                          <a href="<?php echo url_for('dashboard-newsletter',$newsletterlist) ?>">
-                            <?php echo $newsletterlist->getTitle() ?>
-                          </a>
-                          </p>
-                        </li>
-                    <?php endif ?>
-                  <?php endif ?>
-                <?php endforeach ?>					
-              <?php endforeach ?>
-            <?php endforeach ?>
-					  <?php  foreach ($studentforsubscribeteachers as $i => $studentforsubscribeteacher):?>					  
-						<?php IF ($teachers['id'] == $studentforsubscribeteacher['id']):?>						
-							<div class="contentContentSubscribeContent">
-								<a title="" alt="" href=""></a>
-							</div>
-						<?php endif ?>
-					<?php endforeach ?>
+                    <ul>
+											<?php $b=(($i % 2) );?>
+											<?php  foreach ($studentteachers as $i => $studentteacher):?>
+												<?php  foreach ($studentnewsletters as $y => $studentnewsletter):?>	
+													<?php foreach ($teachers->getNewsletter() as $i => $newsletterlist):?> 
+														<?php if ($teachers['id'] == $studentteacher['id']):?>
+															<?php if ($newsletterlist->getID() == $studentnewsletter['newsletter_id'] AND ($studentnewsletter['student_id'] == $user->getId())):?>
+																	<li>
+																		<span> <?php echo $newsletterlist->getPublishDate() ?></span>
+																		<p>
+																		<a href="<?php echo url_for('dashboard-newsletter',$newsletterlist) ?>">
+																			<?php echo $newsletterlist->getTitle() ?>
+																		</a>
+																		</p>
+																	</li>
+															<?php endif ?>
+														<?php endif ?>
+													<?php endforeach ?>					
+												<?php endforeach ?>
+											<?php endforeach ?>
+											<?php  foreach ($studentforsubscribeteachers as $i => $studentforsubscribeteacher):?>					  
+												<?php IF ($teachers['id'] != $studentforsubscribeteacher['id'] ):?>						
+													<div class="contentContentSubscribeContent">
+														<a title="" alt="" href=""></a>
+													</div>
+												<?php endif ?>
+											<?php endforeach ?>
                     </ul> 
                     <div class="clear"></div>
                   </div>

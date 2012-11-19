@@ -33,30 +33,28 @@ class TeacherTable extends Doctrine_Table
     {
       $student=1;
        $q = $this->createQuery('c')
-       ->leftJoin('c.SubscriptionXTeacher sx')
+        ->leftJoin('c.SubscriptionXTeacher sx')
         ->leftJoin('sx.Subscription s')
-        ->leftJoin('s.Student st')
-       ->where('s.student_id = ?', $student);
+        ->leftJoin('s.Student st');
+       /* ->where('s.student_id = ?', $student);*/
       return $q->execute();
     }
 	public function getStudentTeachers()
     {
-		$student =1;
         $q = $this->createQuery('a')
         ->leftJoin('a.SubscriptionXTeacher x')
-		->leftJoin('x.Subscription b')
-       ->where('student_id = ?', $student);
+        ->leftJoin('x.Subscription b');
+        /*->where('student_id = ?', $student);*/
          
       return $q->execute();
     }
-	public function getStudentForSubscribeTeachers()
+	public function getStudentForSubscribeTeachers($id)
     {
-		$student =1;
         $q = $this->createQuery('a')
         ->leftJoin('a.SubscriptionXTeacher x')
-		->leftJoin('x.Subscription b')
-        ->where('student_id != ?', $student);
-         
+        ->leftJoin('x.Subscription b')
+        ->leftJoin('b.Student s')
+        ->where('s.id = ?', $id);
       return $q->execute();
     }
 	public function getTeachersPortfolio()

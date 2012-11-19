@@ -32,7 +32,7 @@
         <?php  foreach ($studentnewsletters as $y => $studentnewsletter):?>
           <?php foreach ($teacher->getNewsletter() as $i => $newsletterlist):?> 
             <?php if ($teacher['id'] == $studentteacher['id']):?>
-              <?php if ($newsletterlist->getID() == $studentnewsletter['newsletter_id']):?>
+						<?php if ($newsletterlist->getID() == $studentnewsletter['newsletter_id'] AND ($studentnewsletter['student_id'] == $user->getId())):?>
                 <li>
                   <span> <?php echo $newsletterlist->getPublishDate() ?></span>
                   <p>
@@ -47,7 +47,7 @@
         <?php endforeach ?>
 			<?php endforeach ?>
 			<?php  foreach ($studentforsubscribeteachers as $i => $studentforsubscribeteacher):?>
-				<?php IF ($teacher['id'] == $studentforsubscribeteacher['id']):?>
+				<?php IF ($teacher['id'] != $studentforsubscribeteacher['id']):?>
 					<div class="contentContentSubscribeContent">
 						<a title="" alt="" href=""></a>
 					</div>
