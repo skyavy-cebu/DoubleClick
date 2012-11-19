@@ -2,11 +2,31 @@
 Teacher:
   teacher1:
     title: OP先生の新着配信
+    portfolio: |
+     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum tempor urna. Nam fringilla consectetur ligula, vitae vehicula augue dapibus ac. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consectetur augue sit amet odio vestibulum non congue lectus vestibulum. Donec bibendum dui non ante aliquet in facilisis risus eleifend. Suspendisse potenti. Ut non nunc libero, eu fringilla risus. Aenean aliquam ligula est, ac sollicitudin purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas elementum venenatist 
+    details: |
+     sample details 1
   teacher2:
     title: シロネコ先生の新着配信
+    portfolio: |
+     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum tempor urna. Nam fringilla consectetur ligula, vitae vehicula augue dapibus ac. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consectetur augue sit amet odio vestibulum non congue lectus vestibulum. Donec bibendum dui non ante aliquet in facilisis risus eleifend. Suspendisse potenti. Ut non nunc libero, eu fringilla risus. Aenean aliquam ligula est, ac sollicitudin purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas elementum venenatist
+    details: |
+     sample details 2
   teacher3:
     title: スイング先生の新着配信
+    portfolio: |
+     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum tempor urna. Nam fringilla consectetur ligula, vitae vehicula augue dapibus ac. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consectetur augue sit amet odio vestibulum non congue lectus vestibulum. Donec bibendum dui non ante aliquet in facilisis risus eleifend. Suspendisse potenti. Ut non nunc libero, eu fringilla risus. Aenean aliquam ligula est, ac sollicitudin purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas elementum venenatist
+    details: |
+     sample details 3
   teacher4:
     title: CFD先生の新着配信
+    portfolio: |
+     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum tempor urna. Nam fringilla consectetur ligula, vitae vehicula augue dapibus ac. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consectetur augue sit amet odio vestibulum non congue lectus vestibulum. Donec bibendum dui non ante aliquet in facilisis risus eleifend. Suspendisse potenti. Ut non nunc libero, eu fringilla risus. Aenean aliquam ligula est, ac sollicitudin purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas elementum venenatist
+    details: |
+     sample details 4
   teacher5:
     title: 白虎先生の新着配信
+    portfolio: |
+     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum tempor urna. Nam fringilla consectetur ligula, vitae vehicula augue dapibus ac. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consectetur augue sit amet odio vestibulum non congue lectus vestibulum. Donec bibendum dui non ante aliquet in facilisis risus eleifend. Suspendisse potenti. Ut non nunc libero, eu fringilla risus. Aenean aliquam ligula est, ac sollicitudin purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas elementum venenatist
+    details: |
+     sample details 5

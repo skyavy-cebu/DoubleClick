@@ -24,3 +24,9 @@ Subscription:
     duration: '0'
     price: 4
     is_paid: 1
+  subscription5:
+    student_id: 2
+    status: 1
+    duration: '0'
+    price: 4
+    is_paid: 1
