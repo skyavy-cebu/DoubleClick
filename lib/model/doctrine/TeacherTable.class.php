@@ -31,16 +31,40 @@ class TeacherTable extends Doctrine_Table
     }
     public function getNewsletters()
     {
-       $student=1;
+      $student=1;
        $q = $this->createQuery('c')
        ->leftJoin('c.SubscriptionXTeacher sx')
         ->leftJoin('sx.Subscription s')
         ->leftJoin('s.Student st')
-        ->leftJoin('st.NewsletterXStudent x')
-        ->leftJoin('x.Newsletter n')
        ->where('s.student_id = ?', $student);
-      /* ->where('s.valid_until > ?', date('Y-m-d H:i:s', time()));*/
-   
       return $q->execute();
     }
+	public function getStudentTeachers()
+    {
+		$student =1;
+        $q = $this->createQuery('a')
+        ->leftJoin('a.SubscriptionXTeacher x')
+		->leftJoin('x.Subscription b')
+       ->where('student_id = ?', $student);
+         
+      return $q->execute();
+    }
+	public function getStudentForSubscribeTeachers()
+    {
+		$student =1;
+        $q = $this->createQuery('a')
+        ->leftJoin('a.SubscriptionXTeacher x')
+		->leftJoin('x.Subscription b')
+        ->where('student_id != ?', $student);
+         
+      return $q->execute();
+    }
+	public function getTeachersPortfolio()
+    {
+	   $teacher_id =1;
+	   $q = $this->createQuery('a')
+	  ->where('id = ?', $teacher_id);
+      
+	  return $q->execute();
+	}
 }

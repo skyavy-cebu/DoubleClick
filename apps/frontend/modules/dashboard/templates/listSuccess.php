@@ -3,32 +3,21 @@
 <div class="contentWrapper">
   <div class="content">
     <div class="contentLeft">
-      
       <div>
-        <div class="contentLeftColumnHeader">コラム</div>
+       <div class="contentLeftColumnHeader">???</div>
         <div class="contentLeftColumnContent">
-          <ul>
-            <li>
-              <span>&nbsp;</span>
-              <p>OP先生配信履歴</p>
-            </li>
-            <li>
-              <span>&nbsp;</span>
-              <p>CFD先生配信履歴</p>
-            </li>
-            <li>
-              <span>&nbsp;</span>
-              <p>シロネコ先生配信履歴</p>
-            </li>
-            <li>
-              <span>&nbsp;</span>
-              <p>白虎先生配信履歴</p>
-            </li>
-            <li>
-              <span>&nbsp;</span>
-              <p>スイング先生配信履歴</p>
-            </li>
-          </ul>
+			<ul>
+				<?php  foreach ($teacherslist as $i => $teachers):?>
+					<li>
+					  <span>&nbsp;</span>
+					  <p>
+						<a href="<?php echo url_for('dashboard-teacher-newsletter',$teachers) ?>">
+						  <?php echo $teachers->getTitle() ?>
+						</a>
+					  </p>
+					</li>
+				<?php endforeach ?>
+			</ul>
         </div>
       </div>  
     </div>
@@ -38,20 +27,34 @@
           <?php echo $teacher->getTitle() ?>
         </div>
         <div class="contentContentListContent2">
-              <?php foreach ($teacher->getNewsletter() as $i => $newsletter): ?>
-              <ul>
+		<ul>
+			<?php  foreach ($studentteachers as $i => $studentteacher):?>
+        <?php  foreach ($studentnewsletters as $y => $studentnewsletter):?>
+          <?php foreach ($teacher->getNewsletter() as $i => $newsletterlist):?> 
+            <?php if ($teacher['id'] == $studentteacher['id']):?>
+              <?php if ($newsletterlist->getID() == $studentnewsletter['newsletter_id']):?>
                 <li>
-                  <span> <?php echo $newsletter->getPublishDate() ?></span>
+                  <span> <?php echo $newsletterlist->getPublishDate() ?></span>
                   <p>
-                    <a href="<?php echo url_for('dashboard-newsletter',$newsletter) ?>">
-                      <?php echo $newsletter->getTitle() ?>
-                    </a>
+                  <a href="<?php echo url_for('dashboard-newsletter',$newsletterlist) ?>">
+                    <?php echo $newsletterlist->getTitle() ?>
+                  </a>
                   </p>
                 </li>
-                </ul> 
-              <?php endforeach ?>
-            
+              <?php endif ?>
+            <?php endif ?>		
+          <?php endforeach ?>
+        <?php endforeach ?>
+			<?php endforeach ?>
+			<?php  foreach ($studentforsubscribeteachers as $i => $studentforsubscribeteacher):?>
+				<?php IF ($teacher['id'] == $studentforsubscribeteacher['id']):?>
+					<div class="contentContentSubscribeContent">
+						<a title="" alt="" href=""></a>
+					</div>
+				<?php endif ?>
+			<?php endforeach ?>
             <div class="clear"></div>
+		</ul>
         </div>
       </div>
     </div><!-- end Contentcontent -->

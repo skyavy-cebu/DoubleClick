@@ -530,7 +530,17 @@ body {
           
           margin: 20px auto 0px auto;
         }
-				 .contentContentTeacherIntroDetail a{
+		.contentContentSubscribeContent a{
+          width: 172px;
+          height: 46px;
+          
+          display: block;
+          
+          background: url('../images/btn-subscribe.png');
+          
+          margin: 60px auto 0px auto;
+        }
+		.contentContentTeacherIntroDetail a{
           width: 172px;
           height: 46px;
           
@@ -542,6 +552,9 @@ body {
         }
         .contentContentAboutContent a:hover, .contentContentTeacherIntroDetail a:hover{
           background: url('../images/btn-content-content-about-hover.png');
+        }
+		.contentContentSubscribeContent a:hover{
+          background: url('../images/btn-subscribe-hover.png');
         }
     .contentContentMenu {
       margin: 27px 0px 0px 0px;

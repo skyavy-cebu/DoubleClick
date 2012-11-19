@@ -3,32 +3,21 @@
 <div class="contentWrapper">
   <div class="content">
     <div class="contentLeft">
-      
       <div>
-        <div class="contentLeftColumnHeader">コラム</div>
+       <div class="contentLeftColumnHeader">???</div>
         <div class="contentLeftColumnContent">
-          <ul>
-            <li>
-              <span>&nbsp;</span>
-              <p>OP先生配信履歴</p>
-            </li>
-            <li>
-              <span>&nbsp;</span>
-              <p>CFD先生配信履歴</p>
-            </li>
-            <li>
-              <span>&nbsp;</span>
-              <p>シロネコ先生配信履歴</p>
-            </li>
-            <li>
-              <span>&nbsp;</span>
-              <p>白虎先生配信履歴</p>
-            </li>
-            <li>
-              <span>&nbsp;</span>
-              <p>スイング先生配信履歴</p>
-            </li>
-          </ul>
+			<ul>
+				<?php  foreach ($teacherslist as $i => $teachers):?>
+					<li>
+					  <span>&nbsp;</span>
+					  <p>
+						<a href="<?php echo url_for('dashboard-teacher-newsletter',$teachers) ?>">
+						  <?php echo $teachers->getTitle() ?>
+						</a>
+					  </p>
+					</li>
+				<?php endforeach ?>
+			</ul>
         </div>
       </div>  
     </div>
