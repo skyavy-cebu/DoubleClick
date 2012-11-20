@@ -23,7 +23,7 @@ class registerActions extends sfActions
     
     if ($request->isMethod('post'))
     {
-      $register = $request->getParameter('register');
+      $register = $request->getParameter($this->form->getName());
       $this->form->bind($register);
       
       if ($this->form->isValid())

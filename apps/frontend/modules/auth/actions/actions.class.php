@@ -39,7 +39,7 @@ class authActions extends sfActions
     
     if ($request->isMethod('post'))
     {
-      $login = $request->getParameter('login');
+      $login = $request->getParameter($this->form->getName());
       $this->form->bind($login);
       
       if ($this->form->isValid())
@@ -86,7 +86,7 @@ class authActions extends sfActions
     
     if ($request->isMethod('post'))
     {
-      $passwordReminder = $request->getParameter('password-reminder');
+      $passwordReminder = $request->getParameter($this->form->getName());
       $this->form->bind($passwordReminder);
       
       if ($this->form->isValid())
@@ -163,7 +163,7 @@ EOF
     
     if ($request->isMethod('post'))
     {
-      $changePassword = $request->getParameter('change-password');
+      $changePassword = $request->getParameter($this->form->getName());
       $this->form->bind($changePassword);
       
       if ($this->form->isValid())
