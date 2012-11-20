@@ -22,6 +22,6 @@ class Teacher extends BaseTeacher
    */
   public function getSubscribedStudents($limit = 0, $offset = 0)
   {
-    return StudentTable::getInstance()->getSubscribedToTeacher($this->getId(), $limit, $offset);
+    return StudentTable::getInstance()->getSubscribedToTeacherQuery($this->getId(), $limit, $offset)->execute();
   }
 }

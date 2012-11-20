@@ -3,3 +3,6 @@ all:
   
   system:
     salt: wi47m86vvmlahmtl86d5
+    
+  student_search:
+    limit: 1

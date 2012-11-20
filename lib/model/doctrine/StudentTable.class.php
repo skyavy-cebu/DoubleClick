@@ -18,21 +18,34 @@ class StudentTable extends Doctrine_Table
   }
   
   /**
-   * Returns the Students with active and valid subscription to the given Teacher.
+   * Query for retreiving Students with active and valid subscription to the given Teacher.
    *
-   * @param int $teacherId Id of Teacher that the Student should be subscribed to.
-   * @param int $limit     Optional. Defaults to 0. Limit to query.
-   * @param int $offset    Optional. Defaults to 0. Offset to query.
-   * @return Doctrine_Collection Collection of Students.
+   * @param int   $teacherId Id of Teacher that the Student should be subscribed to.
+   * @param mixed $options   Optional. Defaults to empty array. Possible values: 'name', 'email'.
+   * @param int   $limit     Optional. Defaults to 0. Limit to query.
+   * @param int   $offset    Optional. Defaults to 0. Offset to query.
+   * @return Doctrine_Query Query for retrieving Students.
    */
-  public function getSubscribedToTeacher($teacherId, $limit = 0, $offset = 0)
+  public function getSubscribedToTeacherQuery($teacherId, $options = array(), $limit = 0, $offset = 0)
   {
     $q = $this->createQuery('stu')
-          ->leftJoin('stu.Subscription sub')
-          ->leftJoin('sub.SubscriptionXTeacher sxs')
+          ->innerJoin('stu.Subscription sub')
+          ->innerJoin('sub.SubscriptionXTeacher sxs')
           ->where('sxs.teacher_id = ?', $teacherId)
           ->andWhere('sub.status = ?', 1) // active subscription
           ->andWhere('sub.valid_until >= NOW()'); // valid subscription
+    
+    if (0 < count($options))
+    {
+      if (array_key_exists('name', $options) && ('' != $options['name']))
+      {
+        $q->andWhere('stu.name LIKE ?', '%' . $options['name'] . '%');
+      }
+      if (array_key_exists('email', $options) && ('' != $options['email']))
+      {
+        $q->andWhere('stu.email LIKE ?', '%' . $options['email'] . '%');
+      }
+    }
     
     if (0 < $limit)
     {
@@ -44,6 +57,6 @@ class StudentTable extends Doctrine_Table
       $q->offset($offset);
     }
     
-    return $q->execute();
+    return $q;
   }
 }

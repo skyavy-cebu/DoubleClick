@@ -19,6 +19,13 @@ class teacherActions extends sfActions
   {
     $this->forward404Unless($this->getUser()->isAuthenticated());
     
-    $this->students = $this->getUser()->getDetails()->getSubscribedStudents(sfConfig::get('app_student_search_limit'));
+    $this->searchForm = new SearchStudentForm();
+    $searchStudentParams = array('name' => $request->getParameter('name'), 'email' => $request->getParameter('email'));
+    $this->searchForm->bind($searchStudentParams);
+    
+    $this->pager = new sfDoctrinePager('Student', sfConfig::get('app_student_search_limit'));
+    $this->pager->setQuery(StudentTable::getInstance()->getSubscribedToTeacherQuery($this->getUser()->getDetails()->getId(), $searchStudentParams));
+    $this->pager->setPage($request->getParameter('page', 1));
+    $this->pager->init();
   }
 }
