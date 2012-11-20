@@ -12,5 +12,16 @@
  */
 class Teacher extends BaseTeacher
 {
-  
+  /**
+   * Gets Students that have active and valid subscription to this Teacher.
+   *
+   * @see StudentTable::getSubscribedToTeacher()
+   * @param int $limit  Optional. Defaults to 0. Limit to query.
+   * @param int $offset Optional. Defaults to 0. Offset to query.
+   * @return Doctrine_Collection Collection of Students.
+   */
+  public function getSubscribedStudents($limit = 0, $offset = 0)
+  {
+    return StudentTable::getInstance()->getSubscribedToTeacher($this->getId(), $limit, $offset);
+  }
 }

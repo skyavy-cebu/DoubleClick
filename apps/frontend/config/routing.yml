@@ -5,6 +5,10 @@ home:
   url:   /
   param: { module: home, action: index }
   
+teacher_students:
+  url: /teacher/students-list
+  param: { module: teacher, action: studentsList }
+  
 dashboard:
   url:   /dashboard
   param: { module: student, action: dashboard }

@@ -7,15 +7,43 @@
  */
 class StudentTable extends Doctrine_Table
 {
-    /**
-     * Returns an instance of this class.
-     *
-     * @return object StudentTable
-     */
-    public static function getInstance()
+  /**
+   * Returns an instance of this class.
+   *
+   * @return object StudentTable
+   */
+  public static function getInstance()
+  {
+      return Doctrine_Core::getTable('Student');
+  }
+  
+  /**
+   * Returns the Students with active and valid subscription to the given Teacher.
+   *
+   * @param int $teacherId Id of Teacher that the Student should be subscribed to.
+   * @param int $limit     Optional. Defaults to 0. Limit to query.
+   * @param int $offset    Optional. Defaults to 0. Offset to query.
+   * @return Doctrine_Collection Collection of Students.
+   */
+  public function getSubscribedToTeacher($teacherId, $limit = 0, $offset = 0)
+  {
+    $q = $this->createQuery('stu')
+          ->leftJoin('stu.Subscription sub')
+          ->leftJoin('sub.SubscriptionXTeacher sxs')
+          ->where('sxs.teacher_id = ?', $teacherId)
+          ->andWhere('sub.status = ?', 1) // active subscription
+          ->andWhere('sub.valid_until >= NOW()'); // valid subscription
+    
+    if (0 < $limit)
     {
-        return Doctrine_Core::getTable('Student');
+      $q->limit($limit);
     }
     
-   
+    if (0 < $offset)
+    {
+      $q->offset($offset);
+    }
+    
+    return $q->execute();
+  }
 }
