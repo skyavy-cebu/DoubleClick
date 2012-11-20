@@ -16,11 +16,37 @@ class NewsletterTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Newsletter');
     }
+    
     public function getActiveNewsletters()
     {
          $q = $this->createQuery('n');
          return $q->execute();
     }
     
+<<<<<<< Updated upstream
+    public function getDeliveredNewsletters($id)
+    {
+         $q = $this->createQuery('n')
+         ->where('n.teacher_id = ?', $id)
+         ->addOrderBy('created_at ASC');
+         
+         return $q;
+    }
    
+=======
+    /* teachers delivered newsletters*/
+  
+    public function getDeliveredNewsletters($id,$max=1)
+    {
+     
+      $q = $this->createQuery('n')
+      ->where('n.publish_date < ?', date('Y-m-d H:i:s', time()))
+      ->andwhere('n.teacher_id = ?', $id)
+      ->addOrderBy('n.created_at ASC')
+      ->limit($max);
+     
+      return $q->execute();
+    }
+
+>>>>>>> Stashed changes
 }

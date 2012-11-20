@@ -4,6 +4,14 @@
 home:
   url:   /
   param: { module: home, action: index }
+    
+teacher-account-settings:
+  url:   /teacher/account-settings
+  param:   { module: teacher, action: edit }
+
+teacher-account-settings-confirm:
+  url: /teacher/account-settings/confirm
+  param: { module: teacher, action: confirm }
   
 teacher-students:
   url: /teacher/students-list
@@ -61,6 +69,37 @@ dashboard-teacher-newsletter:
   param:   { module: student, action: list }
   requirements:
     id: \d+
+
+<<<<<<< Updated upstream
+delivered-newsletters:
+  url: /delivered-newsletters
+  param: { module: newsletter, action: index }
+
+new-newsletter:
+  url: /new-newsletter
+  param: { module: newsletter, action: new }
+  
+delivered-newsletter-detail:
+  url:   /delivered-newsletter/:id  
+=======
+delivered-newsletter-list:
+  url: /delivered-newsletter
+  param: { module: newsletter, action: index }
+  
+delivered-newsletter:
+  url:   /delivered-newsletter/id/:id  
+>>>>>>> Stashed changes
+  class:   sfDoctrineRoute
+  options: { model: Newsletter, type: object }
+  param:   { module: newsletter, action: show }
+  requirements:
+    id: \d+
+<<<<<<< Updated upstream
+  
+=======
+    sf_method: [get]
+    
+>>>>>>> Stashed changes
 # generic rules
 # please, remove them by adding more specific rules
 default_index:

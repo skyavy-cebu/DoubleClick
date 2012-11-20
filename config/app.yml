@@ -6,3 +6,6 @@ all:
     
   student_search:
     limit: 1
+
+  delivered_newsletters:
+    limit: 1

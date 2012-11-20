@@ -12,5 +12,6 @@ class NewsletterForm extends BaseNewsletterForm
 {
   public function configure()
   {
+    $this->useFields(array('title','content'));
   }
 }
