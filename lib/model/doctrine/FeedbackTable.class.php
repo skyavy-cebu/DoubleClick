@@ -16,4 +16,10 @@ class FeedbackTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Feedback');
     }
+    public function getFeedbacks()
+    {
+       $q = $this->createQuery('f');
+   
+      return $q->execute();
+    }
 }

@@ -6,7 +6,7 @@ home:
   param: { module: home, action: index }
   
 dashboard:
-  url:   /student
+  url:   /dashboard
   param: { module: student, action: dashboard }
   
 logout:
