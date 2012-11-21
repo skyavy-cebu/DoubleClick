@@ -12,39 +12,39 @@ teacher-account-settings:
 teacher-account-settings-confirm:
   url: /teacher/account-settings/confirm
   param: { module: teacher, action: confirm }
-  
+
 teacher-students:
   url: /teacher/students-list
   param: { module: teacher, action: studentsList }
-  
+
 dashboard:
   url:   /dashboard
   param: { module: student, action: dashboard }
-  
+
 logout:
   url: /logout
   param: { module: auth, action: logout }
-  
+
 login:
   url: /login/:userType
   param: { userType: "", module: auth, action: login }
-  
+
 change-password:
   url: /change-password/:userType
   param: { userType: "", module: auth, action: changePassword }
-  
+
 remind-password:
   url: /remind-password/:userType
   param: { userType: "", module: auth, action: remindPassword }
-  
+
 register-message:
   url: /register/message
   param: { module: static, action: registrationMessage }
-  
+
 register-activate:
   url: /register/activate
   param: { module: register, action: activate }
-  
+
 register-confirm:
   url: /register/confirm
   param: { module: register, action: confirm }
@@ -61,7 +61,7 @@ dashboard-newsletter:
   requirements:
     id: \d+
     sf_method: [get]
-    
+
 dashboard-teacher-newsletter:
   url:   /teacher/:id  
   class:   sfDoctrineRoute
@@ -70,36 +70,20 @@ dashboard-teacher-newsletter:
   requirements:
     id: \d+
 
-<<<<<<< Updated upstream
-delivered-newsletters:
-  url: /delivered-newsletters
-  param: { module: newsletter, action: index }
-
 new-newsletter:
-  url: /new-newsletter
-  param: { module: newsletter, action: new }
-  
-delivered-newsletter-detail:
-  url:   /delivered-newsletter/:id  
-=======
-delivered-newsletter-list:
-  url: /delivered-newsletter
-  param: { module: newsletter, action: index }
-  
-delivered-newsletter:
-  url:   /delivered-newsletter/id/:id  
->>>>>>> Stashed changes
+  url:   /new-newsletter
   class:   sfDoctrineRoute
   options: { model: Newsletter, type: object }
-  param:   { module: newsletter, action: show }
-  requirements:
-    id: \d+
-<<<<<<< Updated upstream
-  
-=======
-    sf_method: [get]
-    
->>>>>>> Stashed changes
+  param:   { module: newsletter, action: new }
+
+newsletter-confirm:
+  url: /newsletter/confirm
+  param: { module: newsletter, action: confirm }
+
+new-newsletter-message:
+  url: /new-newsletter/message
+  param: { module: static, action: newsletterMessage }
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
