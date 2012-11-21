@@ -611,13 +611,6 @@ Subscription:
       unsigned: false
       primary: true
       autoincrement: true
-    teacher_id:
-      type: integer(8)
-      fixed: false
-      unsigned: true
-      primary: false
-      notnull: true
-      autoincrement: false
     student_id:
       type: integer(8)
       fixed: false
