@@ -53,7 +53,7 @@ class myUser extends sfBasicSecurityUser
   
   protected function _refreshAccountObject()
   {
-    $accountId = $this->getAttribute('account_id', 'visitor', 'doubleclick_frontend');
+    $accountId = $this->getAttribute('account_id', 0, 'doubleclick_frontend');
     
     switch($this->getAttribute('user_type', 'visitor', 'doubleclick_frontend'))
     {
