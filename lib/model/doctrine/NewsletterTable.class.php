@@ -23,7 +23,6 @@ class NewsletterTable extends Doctrine_Table
          return $q->execute();
     }
     
-<<<<<<< Updated upstream
     public function getDeliveredNewsletters($id)
     {
          $q = $this->createQuery('n')
@@ -33,20 +32,4 @@ class NewsletterTable extends Doctrine_Table
          return $q;
     }
    
-=======
-    /* teachers delivered newsletters*/
-  
-    public function getDeliveredNewsletters($id,$max=1)
-    {
-     
-      $q = $this->createQuery('n')
-      ->where('n.publish_date < ?', date('Y-m-d H:i:s', time()))
-      ->andwhere('n.teacher_id = ?', $id)
-      ->addOrderBy('n.created_at ASC')
-      ->limit($max);
-     
-      return $q->execute();
-    }
-
->>>>>>> Stashed changes
 }
