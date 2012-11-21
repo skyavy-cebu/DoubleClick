@@ -1,10 +1,23 @@
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
 
+
+students:
+  url:   /students
+  param: { module: student, action: index }
+
+logout:
+  url: /logout
+  param: { module: auth, action: logout }
+
+login:
+  url:   /login
+  param: { module: auth, action: login }
+  
 # default rules
-homepage:
+home:
   url:   /
-  param: { module: default, action: index }
+  param: { module: auth, action: login }
 
 # generic rules
 # please, remove them by adding more specific rules
