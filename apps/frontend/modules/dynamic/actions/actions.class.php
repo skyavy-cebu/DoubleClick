@@ -43,8 +43,5 @@ class dynamicActions extends sfActions
   {
     
   }
-  public function executeRegistrationMessage(sfWebRequest $request)
-  {
-    
-  }
+
 }

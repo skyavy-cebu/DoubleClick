@@ -15,35 +15,11 @@ class staticActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-   public function executeFeedback(sfWebRequest $request)
-  {
-    
-  }
-   public function executeOption(sfWebRequest $request)
-  {
-    
-  }
-   public function executeCfd(sfWebRequest $request)
-  {
-    
-  }
-  public function executeList(sfWebRequest $request)
-  {
-    
-  }
-  public function executeTeacherIntroduction(sfWebRequest $request)
-  {
-    
-  }
-  public function executeTeacherIntroductionDetail(sfWebRequest $request)
-  {
-    
-  }
-  public function executeTeacherPerformance(sfWebRequest $request)
-  {
-    
-  }
   public function executeRegistrationMessage(sfWebRequest $request)
+  {
+    
+  }
+  public function executeNewsletternMessage(sfWebRequest $request)
   {
     
   }
