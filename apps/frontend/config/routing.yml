@@ -70,6 +70,18 @@ dashboard-teacher-newsletter:
   requirements:
     id: \d+
 
+delivered-newsletters:
+  url: /delivered-newsletters
+  param: { module: newsletter, action: index }
+  
+delivered-newsletter-detail:
+  url:   /delivered-newsletter/:id  
+  class:   sfDoctrineRoute
+  options: { model: Newsletter, type: object }
+  param:   { module: newsletter, action: show }
+  requirements:
+    id: \d+
+
 new-newsletter:
   url:   /new-newsletter
   class:   sfDoctrineRoute

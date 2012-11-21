@@ -19,7 +19,7 @@ class staticActions extends sfActions
   {
     
   }
-  public function executeNewsletternMessage(sfWebRequest $request)
+  public function executeNewsletterMessage(sfWebRequest $request)
   {
     
   }

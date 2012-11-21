@@ -11,8 +11,9 @@
         <td colspan="2">
           
           <?php if (!$form->getObject()->isNew()): ?>
-            &nbsp;<?php echo link_to('Delete', 'newsletter/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?')) ?>
-          <?php endif; ?>
+            &nbsp;<?php /*echo link_to('Delete', 'newsletter/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?'))*/ ?>
+			<input type="button" value="<?php echo __('Back')?>" onclick="javascript:history.go(-1); return false;" />
+		  <?php endif; ?>
           <input type="submit" value="Save" />
         </td>
       </tr>

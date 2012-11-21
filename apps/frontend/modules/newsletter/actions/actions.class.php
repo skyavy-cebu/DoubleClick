@@ -27,6 +27,7 @@ class newsletterActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
+		$this->newsletter = $this->getRoute()->getObject();
     $this->form = new NewsletterForm();
   }
 
@@ -58,12 +59,13 @@ class newsletterActions extends sfActions
     $this->forward404Unless($newsletter = Doctrine_Core::getTable('Newsletter')->find(array($request->getParameter('id'))), sprintf('Object newsletter does not exist (%s).', $request->getParameter('id')));
     $this->form = new NewsletterForm($newsletter);
 
-    $this->processForm($request, $this->form);
+    /*$this->processForm($request, $this->form);*/
 
     $this->setTemplate('edit');
+	$this->redirect('@newsletter-confirm');
   }
 
-  public function executeDelete(sfWebRequest $request)
+  /*public function executeDelete(sfWebRequest $request)
   {
     $request->checkCSRFProtection();
 
@@ -71,7 +73,7 @@ class newsletterActions extends sfActions
     $newsletter->delete();
 
     $this->redirect('newsletter/index');
-  }
+  }*/
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
@@ -80,7 +82,20 @@ class newsletterActions extends sfActions
     {
       $newsletter = $form->save();
 
-      $this->redirect('newsletter/edit?id='.$newsletter->getId());
+      /*$this->redirect('newsletter/edit?id='.$newsletter->getId());*/
+	  
     }
   }
+  public function executeConfirm(sfWebRequest $request)
+  {
+		/*$this->newsletter = $this->getRoute()->getObject();*/
+		
+		if ($request->isMethod('post'))
+			{
+			$this->processForm($request, $this->form);
+			}
+			
+		$this->redirect('@new-newsletter-message');	
+  }
+  
 }
