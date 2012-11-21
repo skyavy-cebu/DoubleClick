@@ -12,15 +12,15 @@ Doctrine_Manager::getInstance()->bindComponent('Student', 'doctrine');
  * @property string $furigana
  * @property string $email
  * @property string $password
+ * @property enum $status
  * @property enum $login_type
  * @property string $zipcode1
  * @property string $zipcode2
- * @property string $address
  * @property integer $state_id
  * @property integer $city_id
+ * @property string $address
  * @property string $contact
  * @property string $picture
- * @property enum $status
  * @property string $activation
  * @property timestamp $updated_at
  * @property timestamp $created_at
@@ -34,15 +34,15 @@ Doctrine_Manager::getInstance()->bindComponent('Student', 'doctrine');
  * @method string              getFurigana()           Returns the current record's "furigana" value
  * @method string              getEmail()              Returns the current record's "email" value
  * @method string              getPassword()           Returns the current record's "password" value
+ * @method enum                getStatus()             Returns the current record's "status" value
  * @method enum                getLoginType()          Returns the current record's "login_type" value
  * @method string              getZipcode1()           Returns the current record's "zipcode1" value
  * @method string              getZipcode2()           Returns the current record's "zipcode2" value
- * @method string              getAddress()            Returns the current record's "address" value
  * @method integer             getStateId()            Returns the current record's "state_id" value
  * @method integer             getCityId()             Returns the current record's "city_id" value
+ * @method string              getAddress()            Returns the current record's "address" value
  * @method string              getContact()            Returns the current record's "contact" value
  * @method string              getPicture()            Returns the current record's "picture" value
- * @method enum                getStatus()             Returns the current record's "status" value
  * @method string              getActivation()         Returns the current record's "activation" value
  * @method timestamp           getUpdatedAt()          Returns the current record's "updated_at" value
  * @method timestamp           getCreatedAt()          Returns the current record's "created_at" value
@@ -55,15 +55,15 @@ Doctrine_Manager::getInstance()->bindComponent('Student', 'doctrine');
  * @method Student             setFurigana()           Sets the current record's "furigana" value
  * @method Student             setEmail()              Sets the current record's "email" value
  * @method Student             setPassword()           Sets the current record's "password" value
+ * @method Student             setStatus()             Sets the current record's "status" value
  * @method Student             setLoginType()          Sets the current record's "login_type" value
  * @method Student             setZipcode1()           Sets the current record's "zipcode1" value
  * @method Student             setZipcode2()           Sets the current record's "zipcode2" value
- * @method Student             setAddress()            Sets the current record's "address" value
  * @method Student             setStateId()            Sets the current record's "state_id" value
  * @method Student             setCityId()             Sets the current record's "city_id" value
+ * @method Student             setAddress()            Sets the current record's "address" value
  * @method Student             setContact()            Sets the current record's "contact" value
  * @method Student             setPicture()            Sets the current record's "picture" value
- * @method Student             setStatus()             Sets the current record's "status" value
  * @method Student             setActivation()         Sets the current record's "activation" value
  * @method Student             setUpdatedAt()          Sets the current record's "updated_at" value
  * @method Student             setCreatedAt()          Sets the current record's "created_at" value
@@ -126,6 +126,24 @@ abstract class BaseStudent extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => 50,
              ));
+        $this->hasColumn('status', 'enum', 1, array(
+             'type' => 'enum',
+             'fixed' => 0,
+             'unsigned' => false,
+             'values' => 
+             array(
+              0 => '0',
+              1 => '1',
+              2 => '2',
+              3 => '3',
+              4 => '4',
+             ),
+             'primary' => false,
+             'default' => '0',
+             'notnull' => true,
+             'autoincrement' => false,
+             'length' => 1,
+             ));
         $this->hasColumn('login_type', 'enum', 1, array(
              'type' => 'enum',
              'fixed' => 0,
@@ -159,15 +177,6 @@ abstract class BaseStudent extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => 4,
              ));
-        $this->hasColumn('address', 'string', 150, array(
-             'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
-             'autoincrement' => false,
-             'length' => 150,
-             ));
         $this->hasColumn('state_id', 'integer', 2, array(
              'type' => 'integer',
              'fixed' => 0,
@@ -186,6 +195,15 @@ abstract class BaseStudent extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => 2,
              ));
+        $this->hasColumn('address', 'string', 150, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => 150,
+             ));
         $this->hasColumn('contact', 'string', 20, array(
              'type' => 'string',
              'fixed' => 0,
@@ -203,24 +221,6 @@ abstract class BaseStudent extends sfDoctrineRecord
              'notnull' => false,
              'autoincrement' => false,
              'length' => 42,
-             ));
-        $this->hasColumn('status', 'enum', 1, array(
-             'type' => 'enum',
-             'fixed' => 0,
-             'unsigned' => false,
-             'values' => 
-             array(
-              0 => '0',
-              1 => '1',
-              2 => '2',
-              3 => '3',
-              4 => '4',
-             ),
-             'primary' => false,
-             'default' => '0',
-             'notnull' => true,
-             'autoincrement' => false,
-             'length' => 1,
              ));
         $this->hasColumn('activation', 'string', 255, array(
              'type' => 'string',
