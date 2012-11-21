@@ -16,12 +16,14 @@ class TeacherTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Teacher');
     }
-     public function getTeachers()
+    
+    public function getTeachers()
     {
        $q = $this->createQuery('c');
    
       return $q->execute();
     }
+    
     public function getTeacherNewsletters()
     {
        $q = $this->createQuery('c')
@@ -29,6 +31,7 @@ class TeacherTable extends Doctrine_Table
    
       return $q->execute();
     }
+    
     public function getNewsletters()
     {
       $student=1;
@@ -39,7 +42,7 @@ class TeacherTable extends Doctrine_Table
        /* ->where('s.student_id = ?', $student);*/
       return $q->execute();
     }
-	public function getStudentTeachers()
+	  public function getStudentTeachers()
     {
         $q = $this->createQuery('a')
         ->leftJoin('a.SubscriptionXTeacher x')
@@ -48,7 +51,8 @@ class TeacherTable extends Doctrine_Table
          
       return $q->execute();
     }
-	public function getStudentForSubscribeTeachers($id)
+    
+	  public function getStudentForSubscribeTeachers($id)
     {
         $q = $this->createQuery('a')
         ->leftJoin('a.SubscriptionXTeacher x')
@@ -57,12 +61,5 @@ class TeacherTable extends Doctrine_Table
         ->where('s.id = ?', $id);
       return $q->execute();
     }
-	public function getTeachersPortfolio()
-    {
-	   $teacher_id =1;
-	   $q = $this->createQuery('a')
-	  ->where('id = ?', $teacher_id);
-      
-	  return $q->execute();
-	}
+  
 }

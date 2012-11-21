@@ -7,7 +7,7 @@ home:
     
 teacher-account-settings:
   url:   /teacher/account-settings
-  param:   { module: teacher, action: edit }
+  param:   { module: teacher, action: accountSettings }
 
 teacher-account-settings-confirm:
   url: /teacher/account-settings/confirm
