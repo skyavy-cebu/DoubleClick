@@ -30,9 +30,9 @@ class StudentTable extends Doctrine_Table
   {
     $q = $this->createQuery('stu')
           ->innerJoin('stu.Subscription sub')
-          ->innerJoin('sub.SubscriptionXTeacher sxs')
-          ->where('sxs.teacher_id = ?', $teacherId)
-          ->andWhere('sub.status = ?', 1) // active subscription
+          ->innerJoin('sub.SubscriptionPlan sbp')
+          ->where('sbp.teacher_id = ?', $teacherId)
+          ->andWhere('sub.is_active = ?', 1) // active subscription
           ->andWhere('sub.valid_until >= NOW()'); // valid subscription
     
     if (0 < count($options))
