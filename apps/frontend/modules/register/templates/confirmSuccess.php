@@ -1,7 +1,7 @@
 <h1><?php echo __('Confirm Registration'); ?></h1>
 
 <form action="<?php echo url_for('@register-confirm') ?>" method="POST">
-  <table>
+  <table summary="confirm user (Student) registration details">
     <tr name="register-name">
       <th><?php echo __('Name')?></th>
       <td><?php echo $register['name']?></td>
@@ -34,19 +34,21 @@
       <th><?php echo __('Password')?></th>
       <td><?php echo str_repeat("*", strlen($register['password']))?></td>
     </tr>
-    <tr name="register-duration">
-      <th><?php echo __('Courses')?></th>
-      <td><?php echo $durationLbl?></td>
-    </tr>
-    <tr name="register-teachers">
-      <th><?php echo __('Teachers')?></th>
-      <td><?php echo $teacherTitlesStr?></td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <input type="button" value="<?php echo __('Back')?>" onclick="javascript:history.go(-1); return false;" />
-        <input type="submit" value="<?php echo __('Register'); ?>" />
-      </td>
-    </tr>
   </table>
+  
+  <!-- subscriptions -->
+  <h2><?php echo __('Subscriptions')?></h2>
+  <table summary="confirm subscription application details">
+    <?php foreach ($subscriptionPlans as $subscriptionPlan) :?>
+    <tr>
+      <th><?php echo $subscriptionPlan->getTeacher()->getTitle()?></th>
+      <td><?php echo $subscriptionPlan->getName()?></td>
+      <td><?php echo $subscriptionPlan->getDuration() . __('month(s)')?></td>
+      <td><?php echo $subscriptionPlan->getPrice()?>円</td>
+    </tr>
+    <?php endforeach;?>
+  </table>
+  
+  <input type="button" value="<?php echo __('Back')?>" onclick="javascript:history.go(-1); return false;" />
+  <input type="submit" value="<?php echo __('Register'); ?>" />
 </form>

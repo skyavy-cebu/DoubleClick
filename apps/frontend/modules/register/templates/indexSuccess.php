@@ -1,7 +1,7 @@
 <h1><?php echo __('Register'); ?></h1>
 
 <form action="<?php echo url_for('@register') ?>" method="POST">
-  <table>
+  <table summary="User (Student) registration form">
     <tr>
       <td><?php echo $form['name']->renderRow()?></td>
     </tr>
@@ -33,17 +33,16 @@
     <tr>
       <td><?php echo $form['cpassword']->renderRow()?></td>
     </tr>
-    <tr>
-      <td><?php echo $form['duration']->renderRow()?></td>
-    </tr>
-    <tr>
-      <td><?php echo $form['teacher_id']->renderRow()?></td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <input type="submit" value="<?php echo __('Confirm Registration'); ?>" />
-      </td>
-    </tr>
   </table>
+  
+  <table summary="available Subscription Plans application form">
+    <?php foreach ($form['subscription_plans'] as $subsPlansForm) :?>
+    <tr>
+      <td><?php echo $subsPlansForm['subs_plans']->renderRow()?></td>
+    </tr>
+    <?php endforeach;?>
+  </table>
+  
+  <input type="submit" value="<?php echo __('Confirm Registration'); ?>" />
   <?php echo $form->renderHiddenFields()?>
 </form>

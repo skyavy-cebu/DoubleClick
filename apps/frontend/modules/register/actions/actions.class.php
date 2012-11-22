@@ -17,8 +17,9 @@ class registerActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    //$this->setLayout('layoutRegister');
+    $this->forward404If($this->getUser()->isAuthenticated(), 'Please logout to register a new User.');
     
+    //$this->setLayout('layoutRegister');
     $this->form = new RegisterForm();
     
     if ($request->isMethod('post'))
@@ -45,21 +46,13 @@ class registerActions extends sfActions
     
     $this->stateName = StateTable::getInstance()->findOneById($this->register['state_id'])->getName();
     
-    $durations = array(
-      array('label' => '1ヶ月コース', 'time' => '+1 month'),
-      array('label' => '3ヶ月コース', 'time' => '+3 months'),
-      array('label' => '6ヶ月コース', 'time' => '+6 months')
-    );
-    $this->durationLbl = $durations[$this->register['duration']]['label'];
-    
-    $teachers = TeacherTable::getInstance()->findByDql('id IN ?', array($this->register['teacher_id']));
-    $teacherTitles = array();
-    foreach ($teachers as $teacher)
+    // Subscriptions
+    $this->subscriptionPlans = array();
+    foreach ($this->register['subscription_plans'] as $teacherId => $subscriptionPlanId)
     {
-      $teacherTitles[] = $teacher->getTitle();
+      $subscriptionPlan = SubscriptionPlanTable::getInstance()->find($subscriptionPlanId);
+      $this->subscriptionPlans[$teacherId] = $subscriptionPlan;
     }
-    
-    $this->teacherTitlesStr = implode(', ', $teacherTitles);
     
     // if confirmed
     if ($request->isMethod('post'))
@@ -83,43 +76,33 @@ class registerActions extends sfActions
       $student->setActivation($activation);
       $student->save();
       
-      // save new Subscription
-      if (0 < count($this->register['teacher_id']))
+      // save new Settlment (temporary)
+      $settlement = new Settlement();
+      $settlement->save();
+      
+      // save new Subscriptions
+      $totalPrice = 0;
+      foreach ($this->subscriptionPlans as $teacherId => $subscriptionPlan)
       {
         $subscription = new Subscription();
         $subscription->setStudentId($student->getId());
-        $subscription->setStatus(1);
-        $subscription->setDuration($this->register['duration']);
-        $subscription->setValidUntil(date('Y-m-d H:i:s', strtotime($durations[$this->register['duration']]['time'])));
+        $subscription->setSubscriptionPlanId($subscriptionPlan->getId());
+        $subscription->setSettlementId($settlement->getId());
         $subscription->save();
         
-        $totalPrice = 0;
-        foreach ($teachers as $teacher)
-        {
-          $teacherPrice = $teacher->getPrice();
-          
-          // save Teacher(s) in Subscription
-          $subscriptionTeacher = new SubscriptionXTeacher();
-          $subscriptionTeacher->setSubscriptionId($subscription->getId());
-          $subscriptionTeacher->setTeacherId($teacher->getId());
-          $subscriptionTeacher->setPrice($teacherPrice);
-          $subscriptionTeacher->save();
-          
-          $totalPrice += $teacherPrice;
-        }
-        
-        // settlement for Subscription
-        $subscription->setPrice($totalPrice);
-        $subscription->setIsPaid(false);
-        $subscription->save();
+        $totalPrice += $subscriptionPlan->getPrice();
       }
+      
+      // set Settlement price
+      $settlement->setPrice($totalPrice);
+      $settlement->save();
       
       // send activation mail
       $message = $this->getMailer()->compose(
         /* from */
         array('admin@doubleclick.co.jp' => 'DoubleClick Admin'),
         /* to */
-        $this->register['email'],
+        $student->getEmail(),
         /* subject */
         '仮登録完了',
         /* body */

@@ -13,18 +13,12 @@ class RegisterForm extends BaseForm
 {
   public function configure()
   {
+    // all states
     $statesArr = StateTable::getInstance()->createQuery()->fetchArray();
     $statesChoice = array('全ての県');
     foreach ($statesArr as $state)
     {
       $statesChoice[$state['id']] = $state['name'];
-    }
-    
-    $teachersArr = TeacherTable::getInstance()->createQuery()->fetchArray();
-    $teachersChoice = array();
-    foreach ($teachersArr as $teacher)
-    {
-      $teachersChoice[$teacher['id']] = $teacher['title'];
     }
     
     $this->setWidgets(array(
@@ -38,19 +32,7 @@ class RegisterForm extends BaseForm
       'email'      => new sfWidgetFormInputText(array('label' => 'Email')),
       'cemail'     => new sfWidgetFormInputText(array('label' => 'Confirm Email')),
       'password'   => new sfWidgetFormInputPassword(array('label' => 'Password')),
-      'cpassword'  => new sfWidgetFormInputPassword(array('label' => 'Confirm Password')),
-      'duration'   => new sfWidgetFormChoice(array(
-                      'label' => 'Courses',
-                      'expanded' => true,
-                      'multiple' => false,
-                      'choices' => array('1ヶ月コース', '3ヶ月コース', '6ヶ月コース')
-                     )),
-      'teacher_id' => new sfWidgetFormChoice(array(
-                      'label' => 'Teachers',
-                      'expanded' => true,
-                      'multiple' => true,
-                      'choices' => $teachersChoice
-                     ))
+      'cpassword'  => new sfWidgetFormInputPassword(array('label' => 'Confirm Password'))
     ));
     
     $this->setValidators(array(
@@ -73,9 +55,7 @@ class RegisterForm extends BaseForm
                           'max_length' => '8-16 alphanumeric characters.'
                         )
                       ),
-      'cpassword'  => new sfValidatorString(array('required' => true)),
-      'duration'   => new sfValidatorChoice(array('choices' => array('0', '1', '2'))),
-      'teacher_id' => new sfValidatorChoice(array('choices' => array_keys($teachersChoice), 'multiple' => true))
+      'cpassword'  => new sfValidatorString(array('required' => true))
     ));
     
     $this->mergePostValidator(
@@ -94,6 +74,15 @@ class RegisterForm extends BaseForm
         )
       )
     );
+    
+    // embed forms for subscription application (TeacherSubscriptionPlansForm)
+    $teachers = TeacherTable::getInstance()->createQuery()->fetchArray();
+    $subsPlansForm = new sfForm();
+    foreach ($teachers as $teacher)
+    {
+      $subsPlansForm->embedForm($teacher['id'], new TeacherSubscriptionPlansForm(null, array('teacher_id' => $teacher['id'])));
+    }
+    $this->embedForm('subscription_plans', $subsPlansForm);
     
     $this->widgetSchema->setNameFormat('register[%s]');
   }
