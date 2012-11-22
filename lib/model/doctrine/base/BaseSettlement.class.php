@@ -45,7 +45,7 @@ abstract class BaseSettlement extends sfDoctrineRecord
              'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
-             'autoincrement' => false,
+             'autoincrement' => true,
              'length' => 8,
              ));
         $this->hasColumn('status', 'enum', 1, array(

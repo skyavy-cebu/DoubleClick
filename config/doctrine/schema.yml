@@ -361,7 +361,7 @@ Settlement:
       fixed: false
       unsigned: true
       primary: true
-      autoincrement: false
+      autoincrement: true
     status:
       type: enum(1)
       fixed: false
