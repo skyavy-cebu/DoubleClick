@@ -59,7 +59,7 @@
 												<?php endforeach ?>
 											<?php endforeach ?>
 											<?php  foreach ($studentforsubscribeteachers as $i => $studentforsubscribeteacher):?>					  
-												<?php IF ($teachers['id'] != $studentforsubscribeteacher['id'] ):?>						
+												<?php IF ($teachers['id'] != $studentforsubscribeteacher['id'] ):?>
 													<div class="contentContentSubscribeContent">
 														<a title="" alt="" href=""></a>
 													</div>

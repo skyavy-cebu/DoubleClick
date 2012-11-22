@@ -20,14 +20,15 @@ class studentActions extends sfActions
   {
     $this->user = $this->getUser()->getDetails();
     $this->teacherslist = Doctrine_Core::getTable('Teacher')->getTeachers();
-    $this->studentteachers = Doctrine_Core::getTable('Teacher')->getStudentTeachers();
+    $this->studentteachers = Doctrine_Core::getTable('Teacher')->getStudentTeachers($this->user->getId());
     $this->studentforsubscribeteachers = Doctrine_Core::getTable('Teacher')->getStudentForSubscribeTeachers($this->user->getId());
-    $this->studentnewsletters = Doctrine_Core::getTable('NewsletterXStudent')->getStudentNewsletters();
+    $this->studentnewsletters = Doctrine_Core::getTable('NewsletterXStudent')->getStudentNewsletters($this->user->getId());
   }
   public function executeShow(sfWebRequest $request)
   {
+    $this->user = $this->getUser()->getDetails();
     $this->teacherslist = Doctrine_Core::getTable('Teacher')->getTeachers();
-    $this->studentnewsletters = Doctrine_Core::getTable('NewsletterXStudent')->getStudentNewsletters();
+    $this->studentnewsletters = Doctrine_Core::getTable('NewsletterXStudent')->getStudentNewsletters($this->user->getId());
     $this->newsletters = Doctrine::getTable('Newsletter')-> find($request->getParameter('id'));
     $this->forward404Unless($this->newsletters);
   }
@@ -35,8 +36,8 @@ class studentActions extends sfActions
   {
     $this->user = $this->getUser()->getDetails();
     $this->teacherslist = Doctrine_Core::getTable('Teacher')->getTeachers();
-    $this->studentnewsletters = Doctrine_Core::getTable('NewsletterXStudent')->getStudentNewsletters();
-    $this->studentteachers = Doctrine_Core::getTable('Teacher')->getStudentTeachers();
+    $this->studentnewsletters = Doctrine_Core::getTable('NewsletterXStudent')->getStudentNewsletters($this->user->getId());
+   $this->studentteachers = Doctrine_Core::getTable('Teacher')->getStudentTeachers($this->user->getId());
     $this->studentforsubscribeteachers = Doctrine_Core::getTable('Teacher')->getStudentForSubscribeTeachers($this->user->getId());
     $this->teacher = Doctrine::getTable('Teacher')-> find($request->getParameter('id'));
     $this->forward404Unless($this->teacher);

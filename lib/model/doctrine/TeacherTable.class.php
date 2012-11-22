@@ -23,42 +23,28 @@ class TeacherTable extends Doctrine_Table
    
       return $q->execute();
     }
-    
-    public function getTeacherNewsletters()
-    {
-       $q = $this->createQuery('c')
-        ->leftJoin('c.Newsletter n');
    
-      return $q->execute();
-    }
-    
-    public function getNewsletters()
-    {
-      $student=1;
-       $q = $this->createQuery('c')
-        ->leftJoin('c.SubscriptionXTeacher sx')
-        ->leftJoin('sx.Subscription s')
-        ->leftJoin('s.Student st');
-       /* ->where('s.student_id = ?', $student);*/
-      return $q->execute();
-    }
-	  public function getStudentTeachers()
+    /*get student's teachers*/
+	  public function getStudentTeachers($id)
     {
         $q = $this->createQuery('a')
-        ->leftJoin('a.SubscriptionXTeacher x')
-        ->leftJoin('x.Subscription b');
-        /*->where('student_id = ?', $student);*/
+        ->leftJoin('a.SubscriptionPlan sp')
+        ->leftJoin('sp.Subscription sub')
+        ->where('sub.student_id != ?', $id)
+        ->andWhere('sub.valid_until >= NOW()'); // valid subscription;
          
       return $q->execute();
     }
     
+    /* teachers for students to subscribe*/
 	  public function getStudentForSubscribeTeachers($id)
     {
         $q = $this->createQuery('a')
-        ->leftJoin('a.SubscriptionXTeacher x')
-        ->leftJoin('x.Subscription b')
-        ->leftJoin('b.Student s')
-        ->where('s.id = ?', $id);
+        ->leftJoin('a.SubscriptionPlan sp')
+        ->leftJoin('sp.Subscription sub')
+        ->where('sub.student_id != ?', $id)
+        ->orWhere('sub.valid_until < NOW()');
+        
       return $q->execute();
     }
   
