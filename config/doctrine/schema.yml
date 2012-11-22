@@ -97,7 +97,7 @@ Feedback:
         expression: 'NOW()'
   columns:
     id:
-      type: integer(8)
+      type: integer(4)
       fixed: false
       unsigned: true
       primary: true
@@ -344,6 +344,71 @@ Page:
       primary: false
       notnull: false
       autoincrement: false
+Settlement:
+  connection: doctrine
+  tableName: settlement
+  actAs:
+    Timestampable:
+      created_at:
+        type: timestamp(25)
+        expression: 'NOW()'
+      updated_at:
+        type: timestamp(25)
+        expression: 'NOW()'
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: false
+    status:
+      type: enum(1)
+      fixed: false
+      unsigned: false
+      values:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    price:
+      type: 'decimal(9, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    paid_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    Subscription:
+      local: id
+      foreign: settlement_id
+      type: many
 State:
   connection: doctrine
   tableName: state
@@ -416,6 +481,20 @@ Student:
       primary: false
       notnull: false
       autoincrement: false
+    status:
+      type: enum(1)
+      fixed: false
+      unsigned: false
+      values:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
     login_type:
       type: enum(1)
       fixed: false
@@ -441,13 +520,6 @@ Student:
       primary: false
       notnull: false
       autoincrement: false
-    address:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: false
-      autoincrement: false
     state_id:
       type: integer(2)
       fixed: false
@@ -459,6 +531,13 @@ Student:
       type: integer(2)
       fixed: false
       unsigned: true
+      primary: false
+      notnull: false
+      autoincrement: false
+    address:
+      type: string(150)
+      fixed: false
+      unsigned: false
       primary: false
       notnull: false
       autoincrement: false
@@ -475,20 +554,6 @@ Student:
       unsigned: false
       primary: false
       notnull: false
-      autoincrement: false
-    status:
-      type: enum(1)
-      fixed: false
-      unsigned: false
-      values:
-        - '0'
-        - '1'
-        - '2'
-        - '3'
-        - '4'
-      primary: false
-      default: '0'
-      notnull: true
       autoincrement: false
     activation:
       type: string(255)
@@ -543,7 +608,7 @@ Subscription:
     id:
       type: integer(8)
       fixed: false
-      unsigned: true
+      unsigned: false
       primary: true
       autoincrement: true
     student_id:
@@ -553,50 +618,29 @@ Subscription:
       primary: false
       notnull: true
       autoincrement: false
-    status:
+    subscription_plan_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: false
+      notnull: true
+      autoincrement: false
+    settlement_id:
+      type: integer(8)
+      fixed: false
+      unsigned: true
+      primary: false
+      notnull: true
+      autoincrement: false
+    is_active:
       type: integer(1)
       fixed: false
       unsigned: false
-      primary: false
-      default: '1'
-      notnull: true
-      autoincrement: false
-    duration:
-      type: enum(1)
-      fixed: false
-      unsigned: false
-      values:
-        - '0'
-        - '1'
-        - '2'
       primary: false
       default: '0'
       notnull: true
       autoincrement: false
     valid_until:
-      type: timestamp(25)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: false
-      autoincrement: false
-    price:
-      type: 'decimal(9, 2)'
-      fixed: false
-      unsigned: false
-      primary: false
-      default: '0.00'
-      notnull: true
-      autoincrement: false
-    is_paid:
-      type: integer(1)
-      fixed: false
-      unsigned: false
-      primary: false
-      default: '0'
-      notnull: true
-      autoincrement: false
-    paid_at:
       type: timestamp(25)
       fixed: false
       unsigned: false
@@ -618,29 +662,61 @@ Subscription:
       notnull: false
       autoincrement: false
   relations:
+    Teacher:
+      local: teacher_id
+      foreign: id
+      type: one
     Student:
       local: student_id
       foreign: id
       type: one
-    SubscriptionXTeacher:
-      local: id
-      foreign: subscription_id
-      type: many
-SubscriptionXTeacher:
+    Settlement:
+      local: settlement_id
+      foreign: id
+      type: one
+    SubscriptionPlan:
+      local: subscription_plan_id
+      foreign: id
+      type: one
+SubscriptionPlan:
   connection: doctrine
-  tableName: subscription_x_teacher
+  tableName: subscription_plan
+  actAs:
+    Timestampable:
+      created_at:
+        type: timestamp(25)
+        expression: 'NOW()'
+      updated_at:
+        type: timestamp(25)
+        expression: 'NOW()'
   columns:
-    subscription_id:
-      type: integer(8)
+    id:
+      type: integer(4)
       fixed: false
       unsigned: true
       primary: true
-      autoincrement: false
+      autoincrement: true
     teacher_id:
       type: integer(8)
       fixed: false
       unsigned: true
-      primary: true
+      primary: false
+      notnull: true
+      autoincrement: false
+    name:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    duration:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
       autoincrement: false
     price:
       type: 'decimal(9, 2)'
@@ -650,15 +726,29 @@ SubscriptionXTeacher:
       default: '0.00'
       notnull: true
       autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
   relations:
-    Subscription:
-      local: subscription_id
-      foreign: id
-      type: one
     Teacher:
       local: teacher_id
       foreign: id
       type: one
+    Subscription:
+      local: id
+      foreign: subscription_plan_id
+      type: many
 Teacher:
   connection: doctrine
   tableName: teacher
@@ -698,6 +788,13 @@ Teacher:
       primary: false
       notnull: true
       autoincrement: false
+    sender_email:
+      type: string(80)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
     portfolio:
       type: string()
       fixed: false
@@ -711,14 +808,6 @@ Teacher:
       unsigned: false
       primary: false
       notnull: false
-      autoincrement: false
-    price:
-      type: 'decimal(9, 2)'
-      fixed: false
-      unsigned: false
-      primary: false
-      default: '0.00'
-      notnull: true
       autoincrement: false
     change_password:
       type: string(255)
@@ -746,7 +835,11 @@ Teacher:
       local: id
       foreign: teacher_id
       type: many
-    SubscriptionXTeacher:
+    Subscription:
+      local: id
+      foreign: teacher_id
+      type: many
+    SubscriptionPlan:
       local: id
       foreign: teacher_id
       type: many

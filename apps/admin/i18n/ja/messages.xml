@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="EN" target-language="ja" datatype="plaintext" original="messages" date="2012-11-21T08:43:49Z" product-name="messages">
+    <header/>
+    <body>
+      <trans-unit id="1">
+        <source>Submit</source>
+        <target>提出する</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Email</source>
+        <target>メールアドレス</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Password</source>
+        <target>パスワード</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Remember Me</source>
+        <target>次回から自動的にログイン</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

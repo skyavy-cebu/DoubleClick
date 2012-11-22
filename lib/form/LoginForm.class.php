@@ -40,7 +40,12 @@ class LoginForm extends BaseForm
    */
   public function checkLoginCredentials($validator, $values)
   {
-    if ('teacher' == $this->userType)
+    if ('admin' == $this->userType)
+    {
+      $oUser = AdminTable::getInstance()->findOneByEmail($values['email']);
+      $emailErrorMsg = 'Email is not assigned to any Admin User';
+    }
+    else if ('teacher' == $this->userType)
     {
       $oUser = TeacherTable::getInstance()->findOneByEmail($values['email']);
       $emailErrorMsg = 'Email is not assigned to any Teacher';

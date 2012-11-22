@@ -9,41 +9,41 @@ Doctrine_Manager::getInstance()->bindComponent('Subscription', 'doctrine');
  * 
  * @property integer $id
  * @property integer $student_id
- * @property integer $status
- * @property enum $duration
+ * @property integer $subscription_plan_id
+ * @property integer $settlement_id
+ * @property integer $is_active
  * @property timestamp $valid_until
- * @property decimal $price
- * @property integer $is_paid
- * @property timestamp $paid_at
  * @property timestamp $updated_at
  * @property timestamp $created_at
+ * @property Teacher $Teacher
  * @property Student $Student
- * @property Doctrine_Collection $SubscriptionXTeacher
+ * @property Settlement $Settlement
+ * @property SubscriptionPlan $SubscriptionPlan
  * 
- * @method integer             getId()                   Returns the current record's "id" value
- * @method integer             getStudentId()            Returns the current record's "student_id" value
- * @method integer             getStatus()               Returns the current record's "status" value
- * @method enum                getDuration()             Returns the current record's "duration" value
- * @method timestamp           getValidUntil()           Returns the current record's "valid_until" value
- * @method decimal             getPrice()                Returns the current record's "price" value
- * @method integer             getIsPaid()               Returns the current record's "is_paid" value
- * @method timestamp           getPaidAt()               Returns the current record's "paid_at" value
- * @method timestamp           getUpdatedAt()            Returns the current record's "updated_at" value
- * @method timestamp           getCreatedAt()            Returns the current record's "created_at" value
- * @method Student             getStudent()              Returns the current record's "Student" value
- * @method Doctrine_Collection getSubscriptionXTeacher() Returns the current record's "SubscriptionXTeacher" collection
- * @method Subscription        setId()                   Sets the current record's "id" value
- * @method Subscription        setStudentId()            Sets the current record's "student_id" value
- * @method Subscription        setStatus()               Sets the current record's "status" value
- * @method Subscription        setDuration()             Sets the current record's "duration" value
- * @method Subscription        setValidUntil()           Sets the current record's "valid_until" value
- * @method Subscription        setPrice()                Sets the current record's "price" value
- * @method Subscription        setIsPaid()               Sets the current record's "is_paid" value
- * @method Subscription        setPaidAt()               Sets the current record's "paid_at" value
- * @method Subscription        setUpdatedAt()            Sets the current record's "updated_at" value
- * @method Subscription        setCreatedAt()            Sets the current record's "created_at" value
- * @method Subscription        setStudent()              Sets the current record's "Student" value
- * @method Subscription        setSubscriptionXTeacher() Sets the current record's "SubscriptionXTeacher" collection
+ * @method integer          getId()                   Returns the current record's "id" value
+ * @method integer          getStudentId()            Returns the current record's "student_id" value
+ * @method integer          getSubscriptionPlanId()   Returns the current record's "subscription_plan_id" value
+ * @method integer          getSettlementId()         Returns the current record's "settlement_id" value
+ * @method integer          getIsActive()             Returns the current record's "is_active" value
+ * @method timestamp        getValidUntil()           Returns the current record's "valid_until" value
+ * @method timestamp        getUpdatedAt()            Returns the current record's "updated_at" value
+ * @method timestamp        getCreatedAt()            Returns the current record's "created_at" value
+ * @method Teacher          getTeacher()              Returns the current record's "Teacher" value
+ * @method Student          getStudent()              Returns the current record's "Student" value
+ * @method Settlement       getSettlement()           Returns the current record's "Settlement" value
+ * @method SubscriptionPlan getSubscriptionPlan()     Returns the current record's "SubscriptionPlan" value
+ * @method Subscription     setId()                   Sets the current record's "id" value
+ * @method Subscription     setStudentId()            Sets the current record's "student_id" value
+ * @method Subscription     setSubscriptionPlanId()   Sets the current record's "subscription_plan_id" value
+ * @method Subscription     setSettlementId()         Sets the current record's "settlement_id" value
+ * @method Subscription     setIsActive()             Sets the current record's "is_active" value
+ * @method Subscription     setValidUntil()           Sets the current record's "valid_until" value
+ * @method Subscription     setUpdatedAt()            Sets the current record's "updated_at" value
+ * @method Subscription     setCreatedAt()            Sets the current record's "created_at" value
+ * @method Subscription     setTeacher()              Sets the current record's "Teacher" value
+ * @method Subscription     setStudent()              Sets the current record's "Student" value
+ * @method Subscription     setSettlement()           Sets the current record's "Settlement" value
+ * @method Subscription     setSubscriptionPlan()     Sets the current record's "SubscriptionPlan" value
  * 
  * @package    DOUBLECLICK
  * @subpackage model
@@ -58,7 +58,7 @@ abstract class BaseSubscription extends sfDoctrineRecord
         $this->hasColumn('id', 'integer', 8, array(
              'type' => 'integer',
              'fixed' => 0,
-             'unsigned' => true,
+             'unsigned' => false,
              'primary' => true,
              'autoincrement' => true,
              'length' => 8,
@@ -72,26 +72,28 @@ abstract class BaseSubscription extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => 8,
              ));
-        $this->hasColumn('status', 'integer', 1, array(
+        $this->hasColumn('subscription_plan_id', 'integer', 4, array(
+             'type' => 'integer',
+             'fixed' => 0,
+             'unsigned' => true,
+             'primary' => false,
+             'notnull' => true,
+             'autoincrement' => false,
+             'length' => 4,
+             ));
+        $this->hasColumn('settlement_id', 'integer', 8, array(
+             'type' => 'integer',
+             'fixed' => 0,
+             'unsigned' => true,
+             'primary' => false,
+             'notnull' => true,
+             'autoincrement' => false,
+             'length' => 8,
+             ));
+        $this->hasColumn('is_active', 'integer', 1, array(
              'type' => 'integer',
              'fixed' => 0,
              'unsigned' => false,
-             'primary' => false,
-             'default' => '1',
-             'notnull' => true,
-             'autoincrement' => false,
-             'length' => 1,
-             ));
-        $this->hasColumn('duration', 'enum', 1, array(
-             'type' => 'enum',
-             'fixed' => 0,
-             'unsigned' => false,
-             'values' => 
-             array(
-              0 => '0',
-              1 => '1',
-              2 => '2',
-             ),
              'primary' => false,
              'default' => '0',
              'notnull' => true,
@@ -99,36 +101,6 @@ abstract class BaseSubscription extends sfDoctrineRecord
              'length' => 1,
              ));
         $this->hasColumn('valid_until', 'timestamp', 25, array(
-             'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
-             'autoincrement' => false,
-             'length' => 25,
-             ));
-        $this->hasColumn('price', 'decimal', 9, array(
-             'type' => 'decimal',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
-             'default' => '0.00',
-             'notnull' => true,
-             'autoincrement' => false,
-             'length' => 9,
-             'scale' => '2',
-             ));
-        $this->hasColumn('is_paid', 'integer', 1, array(
-             'type' => 'integer',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
-             'default' => '0',
-             'notnull' => true,
-             'autoincrement' => false,
-             'length' => 1,
-             ));
-        $this->hasColumn('paid_at', 'timestamp', 25, array(
              'type' => 'timestamp',
              'fixed' => 0,
              'unsigned' => false,
@@ -160,13 +132,21 @@ abstract class BaseSubscription extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('Teacher', array(
+             'local' => 'teacher_id',
+             'foreign' => 'id'));
+
         $this->hasOne('Student', array(
              'local' => 'student_id',
              'foreign' => 'id'));
 
-        $this->hasMany('SubscriptionXTeacher', array(
-             'local' => 'id',
-             'foreign' => 'subscription_id'));
+        $this->hasOne('Settlement', array(
+             'local' => 'settlement_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('SubscriptionPlan', array(
+             'local' => 'subscription_plan_id',
+             'foreign' => 'id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              'created_at' => 

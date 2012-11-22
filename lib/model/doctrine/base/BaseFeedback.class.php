@@ -37,13 +37,13 @@ abstract class BaseFeedback extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('feedback');
-        $this->hasColumn('id', 'integer', 8, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
              'autoincrement' => true,
-             'length' => 8,
+             'length' => 4,
              ));
         $this->hasColumn('customer_name', 'string', 80, array(
              'type' => 'string',
