@@ -12,5 +12,17 @@
  */
 class Subscription extends BaseSubscription
 {
-  
+  /**
+   * Returns the string representation for the is_active property.
+   *
+   * @return string
+   */
+  public function _getIsActive()
+  {
+    switch ($this->getIsActive())
+    {
+      case 0: return 'Inactive';
+      case 1: return 'Active';
+    }
+  }
 }

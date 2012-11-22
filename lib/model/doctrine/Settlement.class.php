@@ -12,5 +12,19 @@
  */
 class Settlement extends BaseSettlement
 {
-
+  /**
+   * Returns the string representation for the status property.
+   *
+   * @return string
+   */
+  public function _getStatus()
+  {
+    switch ($this->getStatus())
+    {
+      case 0: return 'Waiting';
+      case 1: return 'Paid';
+      case 1: return 'Cancelled';
+      case 1: return 'Declined';
+    }
+  }
 }

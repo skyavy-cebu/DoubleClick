@@ -4,6 +4,10 @@
 home:
   url:   /
   param: { module: home, action: index }
+  
+student-subscriptions:
+  url: /subscriptions-list
+  param: { module: subscription, action: student }
     
 teacher-account-settings:
   url:   /teacher/account-settings
@@ -12,7 +16,7 @@ teacher-account-settings:
 teacher-account-settings-confirm:
   url: /teacher/account-settings/confirm
   param: { module: teacher, action: confirm }
-
+  
 teacher-students:
   url: /teacher/students-list
   param: { module: teacher, action: studentsList }

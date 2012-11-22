@@ -12,4 +12,34 @@
  */
 class Student extends BaseStudent
 {
+  /**
+   * Gets the Student's Subscriptions.
+   *
+   * @param mixed $options   Optional. Defaults to empty array. Possible values: 'active'.
+   */
+  public function getSubscriptions($options = array(), $limit = 0, $offset = 0)
+  {
+    $q = SubscriptionTable::getInstance()->createQuery('sub')
+            ->where('student_id = ?', $this->getId());
+        
+    if (0 < count($options))
+    {
+      if (array_key_exists('active', $options))
+      {
+        $q->addWhere('sub.is_active = ?', $options['is_active']);
+      }
+    }
+    
+    if (0 < $limit)
+    {
+      $q->limit($limit);
+    }
+    
+    if (0 < $offset)
+    {
+      $q->offset($offset);
+    }
+    
+    return $q->execute();
+  }
 }
