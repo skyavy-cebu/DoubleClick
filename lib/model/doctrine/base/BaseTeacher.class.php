@@ -18,7 +18,6 @@ Doctrine_Manager::getInstance()->bindComponent('Teacher', 'doctrine');
  * @property timestamp $updated_at
  * @property timestamp $created_at
  * @property Doctrine_Collection $Newsletter
- * @property Doctrine_Collection $Subscription
  * @property Doctrine_Collection $SubscriptionPlan
  * 
  * @method integer             getId()               Returns the current record's "id" value
@@ -32,7 +31,6 @@ Doctrine_Manager::getInstance()->bindComponent('Teacher', 'doctrine');
  * @method timestamp           getUpdatedAt()        Returns the current record's "updated_at" value
  * @method timestamp           getCreatedAt()        Returns the current record's "created_at" value
  * @method Doctrine_Collection getNewsletter()       Returns the current record's "Newsletter" collection
- * @method Doctrine_Collection getSubscription()     Returns the current record's "Subscription" collection
  * @method Doctrine_Collection getSubscriptionPlan() Returns the current record's "SubscriptionPlan" collection
  * @method Teacher             setId()               Sets the current record's "id" value
  * @method Teacher             setTitle()            Sets the current record's "title" value
@@ -45,7 +43,6 @@ Doctrine_Manager::getInstance()->bindComponent('Teacher', 'doctrine');
  * @method Teacher             setUpdatedAt()        Sets the current record's "updated_at" value
  * @method Teacher             setCreatedAt()        Sets the current record's "created_at" value
  * @method Teacher             setNewsletter()       Sets the current record's "Newsletter" collection
- * @method Teacher             setSubscription()     Sets the current record's "Subscription" collection
  * @method Teacher             setSubscriptionPlan() Sets the current record's "SubscriptionPlan" collection
  * 
  * @package    DOUBLECLICK
@@ -153,10 +150,6 @@ abstract class BaseTeacher extends sfDoctrineRecord
     {
         parent::setUp();
         $this->hasMany('Newsletter', array(
-             'local' => 'id',
-             'foreign' => 'teacher_id'));
-
-        $this->hasMany('Subscription', array(
              'local' => 'id',
              'foreign' => 'teacher_id'));
 

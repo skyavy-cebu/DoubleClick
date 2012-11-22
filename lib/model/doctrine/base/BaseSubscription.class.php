@@ -18,7 +18,6 @@ Doctrine_Manager::getInstance()->bindComponent('Subscription', 'doctrine');
  * @property Student $Student
  * @property Settlement $Settlement
  * @property SubscriptionPlan $SubscriptionPlan
- * @property Teacher $Teacher
  * 
  * @method integer          getId()                   Returns the current record's "id" value
  * @method integer          getStudentId()            Returns the current record's "student_id" value
@@ -31,7 +30,6 @@ Doctrine_Manager::getInstance()->bindComponent('Subscription', 'doctrine');
  * @method Student          getStudent()              Returns the current record's "Student" value
  * @method Settlement       getSettlement()           Returns the current record's "Settlement" value
  * @method SubscriptionPlan getSubscriptionPlan()     Returns the current record's "SubscriptionPlan" value
- * @method Teacher          getTeacher()              Returns the current record's "Teacher" value
  * @method Subscription     setId()                   Sets the current record's "id" value
  * @method Subscription     setStudentId()            Sets the current record's "student_id" value
  * @method Subscription     setSubscriptionPlanId()   Sets the current record's "subscription_plan_id" value
@@ -43,7 +41,6 @@ Doctrine_Manager::getInstance()->bindComponent('Subscription', 'doctrine');
  * @method Subscription     setStudent()              Sets the current record's "Student" value
  * @method Subscription     setSettlement()           Sets the current record's "Settlement" value
  * @method Subscription     setSubscriptionPlan()     Sets the current record's "SubscriptionPlan" value
- * @method Subscription     setTeacher()              Sets the current record's "Teacher" value
  * 
  * @package    DOUBLECLICK
  * @subpackage model
@@ -142,10 +139,6 @@ abstract class BaseSubscription extends sfDoctrineRecord
 
         $this->hasOne('SubscriptionPlan', array(
              'local' => 'subscription_plan_id',
-             'foreign' => 'id'));
-
-        $this->hasOne('Teacher', array(
-             'local' => 'teacher_id',
              'foreign' => 'id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(

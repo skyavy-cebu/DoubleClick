@@ -831,10 +831,6 @@ Teacher:
       local: id
       foreign: teacher_id
       type: many
-    Subscription:
-      local: id
-      foreign: teacher_id
-      type: many
     SubscriptionPlan:
       local: id
       foreign: teacher_id
