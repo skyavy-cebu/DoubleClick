@@ -21,6 +21,15 @@ teacher-students:
   url: /teacher/students-list
   param: { module: teacher, action: studentsList }
 
+teacher-portfolio:
+  url:   /teacher/portfolio
+  class:   sfDoctrineRoute
+  options: { model: Teacher, type: object }
+  param:   { module: teacher, action: portfolio }
+  requirements:
+    id: \d+
+    sf_method: [get]
+
 dashboard:
   url:   /dashboard
   param: { module: student, action: dashboard }

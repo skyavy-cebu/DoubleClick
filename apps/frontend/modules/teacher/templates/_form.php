@@ -8,18 +8,27 @@
   <table>
     <tfoot>
       <tr>
-        <td colspan="2">
-          
-          <?php if (!$form->getObject()->isNew()): ?>
-            &nbsp;<?php /*echo link_to('Delete', 'newsletter/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?'))*/ ?>
-			<input type="button" value="<?php echo __('Back')?>" onclick="javascript:history.go(-1); return false;" />
-		  <?php endif; ?>
+        <td class="portfolio-save" colspan="2">
           <input type="submit" value="Save" />
         </td>
       </tr>
     </tfoot>
     <tbody>
-      <?php echo $form ?>
+     <tr>
+        <td class="portfolio-form-title"><?php echo $form['portfolio']->renderLabel()?></td>
+     </tr>
+     <tr>
+        <td class="portfolio-form-content"><?php echo $form['portfolio']->render(array("cols"=>70))?></td>
+     </tr>
+     <tr>
+        <td class="portfolio-form-title"><?php echo $form['details']->renderLabel()?></td>
+      </tr>
+      <tr>
+        <td class="portfolio-form-content"><?php echo $form['details']->render(array("cols"=>70))?></td>
+      </tr>
     </tbody>
   </table>
 </form>
+<script type="text/javascript">
+				CKEDITOR.replace( 'teacher_details', {toolbar : 'MyToolbar'});
+</script>

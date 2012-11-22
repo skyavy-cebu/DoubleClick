@@ -36,8 +36,7 @@ class teacherActions extends sfActions
     $this->user = $this->getUser()->getDetails();
 
     $this->forward404Unless($teacher = Doctrine_Core::getTable('teacher')->find(array($this->user->getId()/*$request->getParameter('id')*/)), sprintf('Object newsletter does not exist (%s).', $request->getParameter('id')));
-	  /*  $this->teachers = Doctrine_Core::getTable('teacher')->getTeacherAccount($this->user->getId());*/
-
+	  
     $this->form = new AccountSettingsForm();
     
     if ($request->isMethod('post'))
@@ -73,7 +72,40 @@ class teacherActions extends sfActions
         $this->redirect('@teacher-account-settings');
 			}
 			
-		/*$this->redirect('@new-newsletter-message');	*/
+  }
+  
+   /* Teacher's Portfolio*/
+  
+  public function executePortfolio(sfWebRequest $request)
+  {
+    
+    $this->user = $this->getUser()->getDetails();
+    $this->forward404Unless($portfolio = Doctrine_Core::getTable('Teacher')->find(array($this->user->getId())), sprintf('Object portfolio does not exist (%s).', $request->getParameter('id')));
+    $this->form = new TeacherForm($portfolio);
+    $this->portfolio = $this->getRoute()->getObject();
+  }
+
+  public function executeUpdate(sfWebRequest $request)
+  {
+    $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
+    $this->forward404Unless($portfolio = Doctrine_Core::getTable('Teacher')->find(array($request->getParameter('id'))), sprintf('Object portfolio does not exist (%s).', $request->getParameter('id')));
+    $this->form = new TeacherForm($portfolio);
+
+    $this->processForm($request, $this->form);
+
+    $this->setTemplate('portfolio');
+  }
+  
+   protected function processForm(sfWebRequest $request, sfForm $form)
+  {
+    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+    if ($form->isValid())
+    {
+      $portfolio = $form->save();
+
+      $this->redirect('@teacher-portfolio');
+	  
+    }
   }
   
 }

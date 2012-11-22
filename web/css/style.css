@@ -753,6 +753,18 @@ body {
 					 .contentDasboardContent1 li, .contentDasboardContent2 li{
 						height: 215px;
 					 }
+	/* Portfolio Form*/
+	.portfolio-form-title {
+		padding: 20px 40px;
+	}
+	.portfolio-form-content {
+		padding:0 25px;
+	}
+	.portfolio-save{
+		padding-top:20px;
+		padding-bottom:30px;
+		padding-left:295px;
+	}
 /* Banners */
 .banners {
   padding: 24px 0px 25px 0px;

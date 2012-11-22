@@ -12,7 +12,7 @@ default:
     #keywords:     symfony, project
     #robots:       index, follow
 
-  stylesheets:    [style.css]
-  javascripts:    []
+  stylesheets:    [style.css,"ckeditor/_samples/sample.css"]
+  javascripts:    ["ckeditor/ckeditor.js","ckeditor/_samples/sample.js"]
   has_layout:     true
   layout:         layout
