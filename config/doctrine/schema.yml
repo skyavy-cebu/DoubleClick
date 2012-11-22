@@ -662,10 +662,6 @@ Subscription:
       notnull: false
       autoincrement: false
   relations:
-    Teacher:
-      local: teacher_id
-      foreign: id
-      type: one
     Student:
       local: student_id
       foreign: id

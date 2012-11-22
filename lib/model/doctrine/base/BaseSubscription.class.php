@@ -15,10 +15,10 @@ Doctrine_Manager::getInstance()->bindComponent('Subscription', 'doctrine');
  * @property timestamp $valid_until
  * @property timestamp $updated_at
  * @property timestamp $created_at
- * @property Teacher $Teacher
  * @property Student $Student
  * @property Settlement $Settlement
  * @property SubscriptionPlan $SubscriptionPlan
+ * @property Teacher $Teacher
  * 
  * @method integer          getId()                   Returns the current record's "id" value
  * @method integer          getStudentId()            Returns the current record's "student_id" value
@@ -28,10 +28,10 @@ Doctrine_Manager::getInstance()->bindComponent('Subscription', 'doctrine');
  * @method timestamp        getValidUntil()           Returns the current record's "valid_until" value
  * @method timestamp        getUpdatedAt()            Returns the current record's "updated_at" value
  * @method timestamp        getCreatedAt()            Returns the current record's "created_at" value
- * @method Teacher          getTeacher()              Returns the current record's "Teacher" value
  * @method Student          getStudent()              Returns the current record's "Student" value
  * @method Settlement       getSettlement()           Returns the current record's "Settlement" value
  * @method SubscriptionPlan getSubscriptionPlan()     Returns the current record's "SubscriptionPlan" value
+ * @method Teacher          getTeacher()              Returns the current record's "Teacher" value
  * @method Subscription     setId()                   Sets the current record's "id" value
  * @method Subscription     setStudentId()            Sets the current record's "student_id" value
  * @method Subscription     setSubscriptionPlanId()   Sets the current record's "subscription_plan_id" value
@@ -40,10 +40,10 @@ Doctrine_Manager::getInstance()->bindComponent('Subscription', 'doctrine');
  * @method Subscription     setValidUntil()           Sets the current record's "valid_until" value
  * @method Subscription     setUpdatedAt()            Sets the current record's "updated_at" value
  * @method Subscription     setCreatedAt()            Sets the current record's "created_at" value
- * @method Subscription     setTeacher()              Sets the current record's "Teacher" value
  * @method Subscription     setStudent()              Sets the current record's "Student" value
  * @method Subscription     setSettlement()           Sets the current record's "Settlement" value
  * @method Subscription     setSubscriptionPlan()     Sets the current record's "SubscriptionPlan" value
+ * @method Subscription     setTeacher()              Sets the current record's "Teacher" value
  * 
  * @package    DOUBLECLICK
  * @subpackage model
@@ -132,10 +132,6 @@ abstract class BaseSubscription extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Teacher', array(
-             'local' => 'teacher_id',
-             'foreign' => 'id'));
-
         $this->hasOne('Student', array(
              'local' => 'student_id',
              'foreign' => 'id'));
@@ -146,6 +142,10 @@ abstract class BaseSubscription extends sfDoctrineRecord
 
         $this->hasOne('SubscriptionPlan', array(
              'local' => 'subscription_plan_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('Teacher', array(
+             'local' => 'teacher_id',
              'foreign' => 'id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
