@@ -48,9 +48,9 @@ class registerActions extends sfActions
     
     // Subscriptions
     $this->subscriptionPlans = array();
-    foreach ($this->register['subscription_plans'] as $teacherId => $subscriptionPlanId)
+    foreach ($this->register['subscription_plans'] as $teacherId => $subscriptionPlanIds)
     {
-      $subscriptionPlan = SubscriptionPlanTable::getInstance()->find($subscriptionPlanId);
+      $subscriptionPlan = SubscriptionPlanTable::getInstance()->find($subscriptionPlanIds['subs_plans']);
       $this->subscriptionPlans[$teacherId] = $subscriptionPlan;
     }
     
@@ -76,7 +76,7 @@ class registerActions extends sfActions
       $student->setActivation($activation);
       $student->save();
       
-      // save new Settlment (temporary)
+      // save new Settlement (temporary)
       $settlement = new Settlement();
       $settlement->save();
       

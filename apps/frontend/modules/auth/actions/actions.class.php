@@ -23,7 +23,7 @@ class authActions extends sfActions
     
     if ('teacher' == $this->userType)
     {
-      $redirect = '@dashboard'; // temp
+      $redirect = '@teacher-students';
     }
     else
     {

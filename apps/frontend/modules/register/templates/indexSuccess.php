@@ -35,6 +35,8 @@
     </tr>
   </table>
   
+  <?php if ($form->hasGlobalErrors()) echo $form->renderGlobalErrors()?>
+  
   <table summary="available Subscription Plans application form">
     <?php foreach ($form['subscription_plans'] as $subsPlansForm) :?>
     <tr>
