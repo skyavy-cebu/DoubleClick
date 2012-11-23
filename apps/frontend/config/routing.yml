@@ -5,9 +5,13 @@ home:
   url:   /
   param: { module: home, action: index }
   
+subscription-add:
+  url: /subscription/add
+  param: { module: subscription, action: add }
+  
 student-subscriptions:
   url: /subscriptions-list
-  param: { module: subscription, action: student }
+  param: { module: student, action: subscriptionsList }
     
 teacher-account-settings:
   url:   /teacher/account-settings

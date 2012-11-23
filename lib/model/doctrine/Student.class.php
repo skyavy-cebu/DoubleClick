@@ -42,4 +42,11 @@ class Student extends BaseStudent
     
     return $q->execute();
   }
+  
+  public function getAvailableTeachersToSubscribeTo()
+  {
+    return TeacherTable::getInstance()->createQuery('t')
+      ->where('NOT EXISTS (SELECT sbp.teacher_id FROM SubscriptionPlan sbp, Subscription sub WHERE sbp.teacher_id = t.id AND sub.subscription_plan_id = sbp.id AND sub.student_id = ?)', $this->getId())
+      ->execute();
+  }
 }

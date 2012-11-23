@@ -42,4 +42,17 @@ class studentActions extends sfActions
     $this->teacher = Doctrine::getTable('Teacher')-> find($request->getParameter('id'));
     $this->forward404Unless($this->teacher);
   }
+  
+  /**
+   * Executes subscriptions list action
+   *
+   * @param sfRequest $request A request object
+   */
+  public function executeSubscriptionsList(sfWebRequest $request)
+  {
+    $this->forward404Unless($this->getUser()->isAuthenticated(), 'Please login to continue.');
+    $this->forward404Unless('student' == $this->getUser()->getAttribute('user_type', '', 'doubleclick_frontend'), 'User must be a Student.');
+    
+    $this->subscriptions = $this->getUser()->getDetails()->getSubscriptions();
+  }
 }

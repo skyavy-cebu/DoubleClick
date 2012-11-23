@@ -5,8 +5,7 @@
  *
  * @package    DOUBLECLICK
  * @subpackage form
- * @author     Danilo M. Nava Jr.
- * @modified   Jane Lois E. de Veyra. 2012-11-13
+ * @author     Jane Lois E. de Veyra
  * @version    SVN: $Id: sfDoctrineFormTemplate.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 class TeacherSubscriptionPlansForm extends BaseForm
@@ -35,7 +34,7 @@ class TeacherSubscriptionPlansForm extends BaseForm
     );
     
     $this->setValidator('subs_plans', new sfValidatorPass());
-
+    
     $this->widgetSchema->setNameFormat('teacher_subscription_plans[%s]');
   }
 }

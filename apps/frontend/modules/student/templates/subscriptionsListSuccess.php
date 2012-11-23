@@ -12,7 +12,7 @@
   <tr>
     <td><?php echo $subscription->_getIsActive()?></td>
     <td><?php echo $subscription->getSubscriptionPlan()->getDuration()?></td>
-    <td><?php echo date('M j, Y (h:i A)', strtotime($subscription->getValidUntil()))?></td>
+    <td><?php echo ('' != $subscription->getValidUntil()) ? date('M j, Y (h:i A)', strtotime($subscription->getValidUntil())) : '--'?></td>
     <td><?php echo $subscription->getSubscriptionPlan()->getPrice()?></td>
     <td><?php echo $subscription->getSettlement()->_getStatus()?></td>
     <td><?php echo (1 == $subscription->getSettlement()->getStatus()) ? date('M j, Y (g:i A)', strtotime($subscription->getSettlement()->getPaidAt())) : '--';?></td>
@@ -20,7 +20,7 @@
   <?php endforeach;?>
 </table>
 <?php else:?>
-<div><?php echo __('No Subscription')?></div>
+<div><?php echo __('** No Subscription')?></div>
 <?php endif;?>
 
-<?php echo link_to(__('Add'), 'subscription/add', true)?>
+<?php echo link_to(__('Add'), url_for('@subscription-add'), true)?>
