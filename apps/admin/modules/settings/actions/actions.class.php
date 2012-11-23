@@ -20,7 +20,7 @@ class settingsActions extends sfActions
    
 		$this->user = $this->getUser()->getAdmin();
 
-    $this->forward404Unless($admin = Doctrine_Core::getTable('admin')->find(array($this->user->getId()/*$request->getParameter('id')*/)), sprintf('Object newsletter does not exist (%s).', $request->getParameter('id')));
+    $this->forward404Unless($admin = AdminTable::getInstance()->find(array($this->user->getId()/*$request->getParameter('id')*/)), sprintf('Object newsletter does not exist (%s).', $request->getParameter('id')));
 	  
     $this->form = new AccountSettingsAdminForm();
     
