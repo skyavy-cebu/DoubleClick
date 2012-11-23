@@ -13,7 +13,10 @@ logout:
 login:
   url:   /login
   param: { module: auth, action: login }
-  
+
+account-settings:
+  url:   /account-settings
+  param: { module: settings, action: accountSettings }
 # default rules
 home:
   url:   /
