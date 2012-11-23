@@ -70,7 +70,7 @@ class RegisterForm extends BaseForm
             'password', sfValidatorSchemaCompare::EQUAL, 'cpassword',
             array(), array('invalid' => 'パスワードが一致しません。')),
           // unique email
-          new sfValidatorCallback(array('callback' => array($this, 'checkUniqueEmail')))
+          new sfValidatorCallback(array('callback' => array($this, 'validateForm')))
         )
       )
     );
@@ -89,15 +89,47 @@ class RegisterForm extends BaseForm
   
   /**
    * Checks if the email is unique or is not yet assigned to another Student.
+   * Checks if the Student has selected at least one SubscriptionPlan.
    *
    * @param $validator
    * @param $values
    */
-  public function checkUniqueEmail($validator, $values)
+  public function validateForm($validator, $values)
   {
+    // check email
     if ('' != trim($values['email']) && StudentTable::getInstance()->findOneByEmail($values['email']))
     {
-			throw new sfValidatorErrorSchema($validator, array('email' => new sfValidatorError($validator, 'このメールアドレスはすでに登録済みです。')));
+			$validatorErrorSchema = new sfValidatorErrorSchema($validator, array('email' => new sfValidatorError($validator, 'このメールアドレスはすでに登録済みです。')));
+    }
+    
+    // check if at least one SubscriptionPlan is selected
+    $hasSubscribed = false;
+    foreach ($values['subscription_plans'] as $teacherId => $subscriptionPlan)
+    {
+      if (!is_null($subscriptionPlan['subs_plans']))
+      {
+        $hasSubscribed = true;
+        break;
+      }
+    }
+    
+    if (!$hasSubscribed)
+    {
+      $subscriptionPlansError = new sfValidatorError($validator, 'Select at least one Subscription Plan.');
+      
+      if (isset($validatorErrorSchema))
+      {
+        $validatorErrorSchema->addError($subscriptionPlansError);
+      }
+      else
+      {
+        throw $subscriptionPlansError;
+      }
+    }
+    
+    if (isset($validatorErrorSchema))
+    {
+      throw $validatorErrorSchema;
     }
   }
 }
