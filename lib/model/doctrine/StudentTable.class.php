@@ -59,4 +59,16 @@ class StudentTable extends Doctrine_Table
     
     return $q;
   }
+  
+  public function getSubscribedToTeacherNewsletter($teacherId)
+  {
+    $q = $this->createQuery('stu')
+          ->leftJoin('stu.Subscription sub')
+          ->leftJoin('sub.SubscriptionPlan sbp')
+          ->where('sbp.teacher_id = ?', $teacherId)
+          ->andWhere('sub.is_active = ?', 1) // active subscription
+          ->andWhere('sub.valid_until >= NOW()'); // valid subscription
+		  
+	return $q->execute();
+ }
 }

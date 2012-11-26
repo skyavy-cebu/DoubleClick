@@ -27,7 +27,7 @@ class newsletterActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
-		$this->newsletter = $this->getRoute()->getObject();
+		//$this->newsletter = $this->getRoute()->getObject();
     $this->form = new NewsletterForm();
   }
 
@@ -78,10 +78,24 @@ class newsletterActions extends sfActions
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    if ($form->isValid())
+    
+    $this->user = $this->getUser()->getDetails();
+     if ($form->isValid())
     {
-      $newsletter = $form->save();
-
+      $this->user = $this->getUser()->getDetails();
+	  $newsletter = $form->save();
+	  $this->subscribestudents = Doctrine_Core::getTable('Student')->getSubscribedToTeacherNewsletter($this->user->getId());
+   
+      foreach($this->subscribestudents as $i => $student){
+        //$this->user = $this->getUser()->getDetails();
+    
+        $newsletterx = new NewsletterXStudent();
+        $newsletterx->setNewsletterId($newsletter->getId());
+        $newsletterx->setStudentId($student->getId());
+        $newsletterx->save();
+      }
+	 
+      
       /*$this->redirect('newsletter/edit?id='.$newsletter->getId());*/
 	  
     }
