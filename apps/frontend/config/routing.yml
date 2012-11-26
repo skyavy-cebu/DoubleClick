@@ -101,8 +101,6 @@ delivered-newsletter-detail:
 
 new-newsletter:
   url:   /new-newsletter
-  class:   sfDoctrineRoute
-  options: { model: Newsletter, type: object }
   param:   { module: newsletter, action: new }
 
 newsletter-confirm:

@@ -31,5 +31,36 @@ class NewsletterTable extends Doctrine_Table
          
          return $q;
     }
+    
+    /*get student's newsletter*/
+     public function getStudentNewsletters($id)
+    {
+        $q = $this->createQuery('n')
+        ->leftJoin('n.NewsletterXStudent nx')
+        ->leftJoin('nx.Student stud')
+        ->where('stud.id = ?', $id);
+   
+      return $q->execute();
+   }
+   
+   /*get teacher's newsletter*/
+	  public function getTeacherNewsletters()
+    {
+        $q = $this->createQuery('n')
+        ->leftJoin('n.Teacher t');
+         
+      return $q->execute();
+    }
+    
+    /*get student's teachers*/
+	  public function getStudentTeachers($id)
+    {
+        $q = $this->createQuery('n')
+        ->leftJoin('n.NewsletterXStudent nx')
+        ->leftJoin('n.Teacher t')
+        ->where('nx.student_id = ?', $id);
+         
+      return $q->execute();
+    } 
    
 }

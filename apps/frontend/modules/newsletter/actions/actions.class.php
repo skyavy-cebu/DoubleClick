@@ -25,32 +25,26 @@ class newsletterActions extends sfActions
     $this->newsletter = $this->getRoute()->getObject();
   }
 
-  public function executeNew(sfWebRequest $request)
-  {
-		//$this->newsletter = $this->getRoute()->getObject();
-    $this->form = new NewsletterForm();
-  }
-
-  public function executeCreate(sfWebRequest $request)
+   public function executeNew(sfWebRequest $request)
   {
     $this->user = $this->getUser()->getDetails();
-    
+
     $newsletter = new Newsletter();
     $newsletter->setTeacherId($this->user->getId());
     
-    $this->forward404Unless($request->isMethod(sfRequest::POST));
-
     $this->form = new NewsletterForm($newsletter);
-
-    $this->processForm($request, $this->form);
-
-    $this->setTemplate('new');
-  }
-
-  public function executeEdit(sfWebRequest $request)
-  {
-    $this->forward404Unless($newsletter = Doctrine_Core::getTable('Newsletter')->find(array($request->getParameter('id'))), sprintf('Object newsletter does not exist (%s).', $request->getParameter('id')));
-    $this->form = new NewsletterForm($newsletter);
+    
+    if ($request->isMethod('post'))
+    {
+      $newsletter = $request->getParameter($this->form->getName());
+      $this->form->bind($newsletter);
+      
+      if ($this->form->isValid())
+      {
+        $this->getUser()->setAttribute('newsletter', $newsletter);
+        $this->redirect('@newsletter-confirm');
+      }
+    }
   }
 
   public function executeUpdate(sfWebRequest $request)
@@ -64,52 +58,36 @@ class newsletterActions extends sfActions
     $this->setTemplate('edit');
 	$this->redirect('@newsletter-confirm');
   }
-
-  /*public function executeDelete(sfWebRequest $request)
+  
+  public function executeConfirm(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
-
-    $this->forward404Unless($newsletter = Doctrine_Core::getTable('Newsletter')->find(array($request->getParameter('id'))), sprintf('Object newsletter does not exist (%s).', $request->getParameter('id')));
-    $newsletter->delete();
-
-    $this->redirect('newsletter/index');
-  }*/
-
-  protected function processForm(sfWebRequest $request, sfForm $form)
-  {
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    
     $this->user = $this->getUser()->getDetails();
-     if ($form->isValid())
-    {
-      $this->user = $this->getUser()->getDetails();
-	  $newsletter = $form->save();
-	  $this->subscribestudents = Doctrine_Core::getTable('Student')->getSubscribedToTeacherNewsletter($this->user->getId());
+    $this->forward404Unless($this->newsletter = $this->getUser()->getAttribute('newsletter'));
+
+		if ($request->isMethod('post'))
+			{
+            
+			 $this->user = $this->getUser()->getDetails();
+       
+       $newsletter = new Newsletter();
+       $newsletter->setTeacherId($this->user->getId());
+       $newsletter->setTitle($this->newsletter['title']);
+       $newsletter->setContent($this->newsletter['content']);
+       $newsletter->save();
+       $this->subscribestudents = Doctrine_Core::getTable('Student')->getSubscribedToTeacherNewsletter($this->user->getId());
    
       foreach($this->subscribestudents as $i => $student){
-        //$this->user = $this->getUser()->getDetails();
-    
+
         $newsletterx = new NewsletterXStudent();
         $newsletterx->setNewsletterId($newsletter->getId());
         $newsletterx->setStudentId($student->getId());
         $newsletterx->save();
+        
+        $this->redirect('@new-newsletter-message');
       }
-	 
-      
-      /*$this->redirect('newsletter/edit?id='.$newsletter->getId());*/
-	  
+              
     }
-  }
-  public function executeConfirm(sfWebRequest $request)
-  {
-		/*$this->newsletter = $this->getRoute()->getObject();*/
-		
-		if ($request->isMethod('post'))
-			{
-			$this->processForm($request, $this->form);
-			}
 			
-		$this->redirect('@new-newsletter-message');	
   }
-  
+
 }
