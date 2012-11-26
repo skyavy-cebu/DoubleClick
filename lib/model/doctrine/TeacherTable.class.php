@@ -23,7 +23,8 @@ class TeacherTable extends Doctrine_Table
    
       return $q->execute();
     }
-   
+    
+		
     /*get student's teachers*/
 	  public function getStudentTeachers($id)
     {
@@ -32,20 +33,8 @@ class TeacherTable extends Doctrine_Table
         ->leftJoin('sp.Subscription sub')
         ->where('sub.student_id != ?', $id)
         ->andWhere('sub.valid_until >= NOW()'); // valid subscription;
-         
-      return $q->execute();
-    }
-    
-    /* teachers for students to subscribe*/
-	  public function getStudentForSubscribeTeachers($id)
-    {
-        $q = $this->createQuery('a')
-        ->leftJoin('a.SubscriptionPlan sp')
-        ->leftJoin('sp.Subscription sub')
-        ->where('sub.student_id != ?', $id)
-        ->orWhere('sub.valid_until < NOW()');
         
       return $q->execute();
     }
-  
+    
 }

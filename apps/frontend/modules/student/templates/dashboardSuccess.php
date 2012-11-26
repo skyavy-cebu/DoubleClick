@@ -7,7 +7,6 @@
        <div class="contentLeftColumnHeader">???</div>
         <div class="contentLeftColumnContent">
 			<ul>
-				
 				<?php  foreach ($teacherslist as $i => $teachers):?>
 					<li>
 					  <span>&nbsp;</span>
@@ -41,25 +40,23 @@
                     <ul>
 											<?php $b=(($i % 2) );?>
 											<?php  foreach ($studentteachers as $i => $studentteacher):?>
-												<?php  foreach ($studentnewsletters as $y => $studentnewsletter):?>	
-													<?php foreach ($teachers->getNewsletter() as $i => $newsletterlist):?> 
-														<?php if ($teachers['id'] == $studentteacher['id']):?>
-															<?php if ($newsletterlist->getID() == $studentnewsletter['newsletter_id'] AND ($studentnewsletter['student_id'] == $user->getId())):?>
-																	<li>
-																		<span> <?php echo $newsletterlist->getPublishDate() ?></span>
-																		<p>
-																		<a href="<?php echo url_for('dashboard-newsletter',$newsletterlist) ?>">
-																			<?php echo $newsletterlist->getTitle() ?>
-																		</a>
-																		</p>
-																	</li>
-															<?php endif ?>
+												<?php if($studentteacher->getTeacherId() == $teachers->getId()):?>
+													<?php  foreach ($studentnewsletters as $i => $studentnewsletter):?>
+														<?php if($studentteacher->getId() == $studentnewsletter->getId()):?>
+															<li>
+																<span> <?php echo $studentnewsletter->getPublishDate() ?></span>
+																<p>
+																<a href="<?php echo url_for('dashboard-newsletter',$studentnewsletter) ?>">
+																	<?php echo $studentnewsletter->getTitle() ?>
+																</a>
+																</p>
+															</li>
 														<?php endif ?>
-													<?php endforeach ?>					
-												<?php endforeach ?>
+													<?php endforeach ?>
+												<?php endif ?>
 											<?php endforeach ?>
-											<?php  foreach ($studentforsubscribeteachers as $i => $studentforsubscribeteacher):?>					  
-												<?php IF ($teachers['id'] != $studentforsubscribeteacher['id'] ):?>
+											<?php  foreach ($availableTeachersToSubscribeTo as $i => $teachersToSubscribe):?>
+												<?php if($teachersToSubscribe->getId() == $teachers->getId()):?>
 													<div class="contentContentSubscribeContent">
 														<a title="" alt="" href=""></a>
 													</div>
@@ -72,7 +69,8 @@
               </td>
               <?php if ($b == 1):?> 
                 </tr><tr class="newsletterlist">
-               <?php endif ?>              
+               <?php endif ?>
+							 
               <?php endforeach ?>
               </tr>
               </table>

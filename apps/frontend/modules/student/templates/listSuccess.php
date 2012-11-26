@@ -29,31 +29,28 @@
         <div class="contentContentListContent2">
 		<ul>
 			<?php  foreach ($studentteachers as $i => $studentteacher):?>
-        <?php  foreach ($studentnewsletters as $y => $studentnewsletter):?>
-          <?php foreach ($teacher->getNewsletter() as $i => $newsletterlist):?> 
-            <?php if ($teacher['id'] == $studentteacher['id']):?>
-						<?php if ($newsletterlist->getID() == $studentnewsletter['newsletter_id'] AND ($studentnewsletter['student_id'] == $user->getId())):?>
-                <li>
-                  <span> <?php echo $newsletterlist->getPublishDate() ?></span>
-                  <p>
-                  <a href="<?php echo url_for('dashboard-newsletter',$newsletterlist) ?>">
-                    <?php echo $newsletterlist->getTitle() ?>
-                  </a>
-                  </p>
-                </li>
-              <?php endif ?>
-            <?php endif ?>		
-          <?php endforeach ?>
-        <?php endforeach ?>
-			<?php endforeach ?>
-			<?php  foreach ($studentforsubscribeteachers as $i => $studentforsubscribeteacher):?>
-				<?php IF ($teacher['id'] != $studentforsubscribeteacher['id']):?>
+					<?php if($studentteacher->getTeacherId() == $teacher->getId()):?>
+					  <?php  foreach ($studentnewsletters as $i => $studentnewsletter):?>
+							<?php if($studentteacher->getId() == $studentnewsletter->getId()):?>
+								<li>
+									<span> <?php echo $studentnewsletter->getPublishDate() ?></span>
+									<p>
+									<a href="<?php echo url_for('dashboard-newsletter',$studentnewsletter) ?>">
+										<?php echo $studentnewsletter->getTitle() ?>
+									</a>
+									</p>
+								</li>
+							<?php endif ?>
+						<?php endforeach ?>
+					<?php endif ?>
+				<?php endforeach ?>
+				<?php  foreach ($availableTeachersToSubscribeTo as $i => $teachersToSubscribe):?>
+				<?php if($teachersToSubscribe->getId() == $teacher->getId()):?>
 					<div class="contentContentSubscribeContent">
 						<a title="" alt="" href=""></a>
 					</div>
 				<?php endif ?>
 			<?php endforeach ?>
-            <div class="clear"></div>
 		</ul>
         </div>
       </div>

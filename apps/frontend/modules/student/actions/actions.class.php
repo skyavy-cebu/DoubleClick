@@ -20,25 +20,29 @@ class studentActions extends sfActions
   {
     $this->user = $this->getUser()->getDetails();
     $this->teacherslist = Doctrine_Core::getTable('Teacher')->getTeachers();
-    $this->studentteachers = Doctrine_Core::getTable('Teacher')->getStudentTeachers($this->user->getId());
-    $this->studentforsubscribeteachers = Doctrine_Core::getTable('Teacher')->getStudentForSubscribeTeachers($this->user->getId());
-    $this->studentnewsletters = Doctrine_Core::getTable('NewsletterXStudent')->getStudentNewsletters($this->user->getId());
+    $this->studentteachers = Doctrine_Core::getTable('Newsletter')->getStudentTeachers($this->user->getId());
+    
+    $this->availableTeachersToSubscribeTo = $this->user->getAvailableTeachersToSubscribeTo();
+    $this->teachernewsletters = Doctrine_Core::getTable('Newsletter')->getTeacherNewsletters();
+    $this->studentnewsletters = Doctrine_Core::getTable('Newsletter')->getStudentNewsletters($this->user->getId());
   }
   public function executeShow(sfWebRequest $request)
   {
     $this->user = $this->getUser()->getDetails();
     $this->teacherslist = Doctrine_Core::getTable('Teacher')->getTeachers();
-    $this->studentnewsletters = Doctrine_Core::getTable('NewsletterXStudent')->getStudentNewsletters($this->user->getId());
-    $this->newsletters = Doctrine::getTable('Newsletter')-> find($request->getParameter('id'));
+    $this->studentnewsletters = Doctrine_Core::getTable('Newsletter')->getStudentNewsletters($this->user->getId());
+	  $this->newsletters = Doctrine::getTable('Newsletter')-> find($request->getParameter('id'));
     $this->forward404Unless($this->newsletters);
   }
   public function executeList(sfWebRequest $request)
   {
     $this->user = $this->getUser()->getDetails();
     $this->teacherslist = Doctrine_Core::getTable('Teacher')->getTeachers();
-    $this->studentnewsletters = Doctrine_Core::getTable('NewsletterXStudent')->getStudentNewsletters($this->user->getId());
-   $this->studentteachers = Doctrine_Core::getTable('Teacher')->getStudentTeachers($this->user->getId());
-    $this->studentforsubscribeteachers = Doctrine_Core::getTable('Teacher')->getStudentForSubscribeTeachers($this->user->getId());
+    $this->studentteachers = Doctrine_Core::getTable('Newsletter')->getStudentTeachers($this->user->getId());
+	
+    $this->teachernewsletters = Doctrine_Core::getTable('Newsletter')->getTeacherNewsletters();
+    $this->studentnewsletters = Doctrine_Core::getTable('Newsletter')->getStudentNewsletters($this->user->getId());
+    $this->availableTeachersToSubscribeTo = $this->user->getAvailableTeachersToSubscribeTo();
     $this->teacher = Doctrine::getTable('Teacher')-> find($request->getParameter('id'));
     $this->forward404Unless($this->teacher);
   }
@@ -55,4 +59,5 @@ class studentActions extends sfActions
     
     $this->subscriptions = $this->getUser()->getDetails()->getSubscriptions();
   }
+  
 }
