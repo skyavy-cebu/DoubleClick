@@ -13,34 +13,62 @@
 class Student extends BaseStudent
 {
   /**
+   * Returns the string representation for the status property.
+   *
+   * @return string
+   */
+  public function _getStatus()
+  {
+    switch ($this->getStatus())
+    {
+      case 0: return 'Pending';
+      case 1: return 'Active';
+      case 2: return 'Deactivated';
+      case 3: return 'Deleted';
+      case 4: return 'Expired Subscription';
+    }
+  }
+  
+  /**
    * Gets the Student's Subscriptions.
    *
-   * @param mixed $options   Optional. Defaults to empty array. Possible values: 'active'.
+   * @param mixed $options   Optional. Defaults to empty array. Possible values: 'is_active'.
    */
   public function getSubscriptions($options = array(), $limit = 0, $offset = 0)
   {
-    $q = SubscriptionTable::getInstance()->createQuery('sub')
-            ->where('student_id = ?', $this->getId());
-        
-    if (0 < count($options))
+    return SubscriptionTable::getInstance()->getByOptionsQuery($options + array('student_id' => $this->getId()))->execute();
+  }
+  
+  /**
+   * Returns the string representation for the active Subscriptions.
+   *
+   * @return string SubscriptionPlan names
+   */
+  public function _getActiveSubscriptions()
+  {
+    $activeSubscriptions = $this->getSubscriptions(array('is_active' => 1));
+    
+    $activeSubscriptionsArr = array();
+    foreach ($activeSubscriptions as $activeSubscription)
     {
-      if (array_key_exists('active', $options))
-      {
-        $q->addWhere('sub.is_active = ?', $options['is_active']);
-      }
+      $activeSubscriptionsArr[$activeSubscription->getId()] = $activeSubscription->getSubscriptionPlan()->getName();
     }
     
-    if (0 < $limit)
-    {
-      $q->limit($limit);
-    }
+    return implode(', ', $activeSubscriptionsArr);
+  }
+  
+  /**
+   * Gets the Student's Subscription that will expire last.
+   *
+   * @return Subscription Subscription that has latest valid_until property
+   */
+  public function getLastSubscriptionToExpire()
+  {
+    $query = SubscriptionTable::getInstance()->getByOptionsQuery(array('student_id' => $this->getId(), 'is_active' => 1));
+    $alias = $query->getRootAlias();
     
-    if (0 < $offset)
-    {
-      $q->offset($offset);
-    }
-    
-    return $q->execute();
+    return $query->orderBy("$alias.valid_until DESC, $alias.created_at ASC")
+      ->fetchOne();
   }
   
   public function getAvailableTeachersToSubscribeTo()

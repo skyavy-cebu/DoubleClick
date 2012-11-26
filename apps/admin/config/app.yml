@@ -3,3 +3,6 @@
 
 # default values
 #all:
+
+search:
+  user_per_page: 20

@@ -18,22 +18,16 @@ class StudentTable extends Doctrine_Table
   }
   
   /**
-   * Query for retreiving Students with active and valid subscription to the given Teacher.
+   * Query for retrieving Students with given options.
    *
-   * @param int   $teacherId Id of Teacher that the Student should be subscribed to.
-   * @param mixed $options   Optional. Defaults to empty array. Possible values: 'name', 'email'.
+   * @param mixed $options   Optional. Defaults to empty array. Possible values: 'name', 'email', 'status'.
    * @param int   $limit     Optional. Defaults to 0. Limit to query.
    * @param int   $offset    Optional. Defaults to 0. Offset to query.
    * @return Doctrine_Query Query for retrieving Students.
    */
-  public function getSubscribedToTeacherQuery($teacherId, $options = array(), $limit = 0, $offset = 0)
+  public function getByOptionsQuery($options = array(), $limit = 0, $offset = 0)
   {
-    $q = $this->createQuery('stu')
-          ->innerJoin('stu.Subscription sub')
-          ->innerJoin('sub.SubscriptionPlan sbp')
-          ->where('sbp.teacher_id = ?', $teacherId)
-          ->andWhere('sub.is_active = ?', 1) // active subscription
-          ->andWhere('sub.valid_until >= NOW()'); // valid subscription
+    $q = $this->createQuery('stu');
     
     if (0 < count($options))
     {
@@ -45,7 +39,42 @@ class StudentTable extends Doctrine_Table
       {
         $q->andWhere('stu.email LIKE ?', '%' . $options['email'] . '%');
       }
+      if (array_key_exists('status', $options) && -1 < $options['status'])
+      {
+        $q->andWhere('stu.status = ?', $options['status']);
+      }
     }
+    
+    if (0 < $limit)
+    {
+      $q->limit($limit);
+    }
+    
+    if (0 < $offset)
+    {
+      $q->offset($offset);
+    }
+    
+    return $q;
+  }
+  
+  /**
+   * Query for retrieving Students with active and valid subscription to the given Teacher.
+   *
+   * @param int   $teacherId Id of Teacher that the Student should be subscribed to.
+   * @param mixed $options   Optional. Defaults to empty array. Possible values: 'name', 'email', 'status'.
+   * @param int   $limit     Optional. Defaults to 0. Limit to query.
+   * @param int   $offset    Optional. Defaults to 0. Offset to query.
+   * @return Doctrine_Query Query for retrieving Students.
+   */
+  public function getSubscribedToTeacherQuery($teacherId, $options = array(), $limit = 0, $offset = 0)
+  {
+    $q = $this->getByOptionsQuery($options) // students filtered by options
+          ->innerJoin('stu.Subscription sub')
+          ->innerJoin('sub.SubscriptionPlan sbp')
+          ->andwhere('sbp.teacher_id = ?', $teacherId)
+          ->andWhere('sub.is_active = ?', 1) // active subscription
+          ->andWhere('sub.valid_until >= NOW()'); // valid subscription
     
     if (0 < $limit)
     {

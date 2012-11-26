@@ -24,7 +24,8 @@ class teacherActions extends sfActions
     $this->searchForm->bind($searchStudentParams);
     
     $this->pager = new sfDoctrinePager('Student', sfConfig::get('app_student_search_limit'));
-    $this->pager->setQuery(StudentTable::getInstance()->getSubscribedToTeacherQuery($this->getUser()->getDetails()->getId(), $searchStudentParams));
+    // Students with active status only
+    $this->pager->setQuery(StudentTable::getInstance()->getSubscribedToTeacherQuery($this->getUser()->getDetails()->getId(), $searchStudentParams + array('status' => 1)));
     $this->pager->setPage($request->getParameter('page', 1));
     $this->pager->init();
   }
