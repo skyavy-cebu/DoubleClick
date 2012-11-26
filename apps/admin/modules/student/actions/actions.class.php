@@ -39,12 +39,14 @@ class studentActions extends sfActions
     
     $this->searchForm->bind($searchStudentParams);
     
+    /* Students who have no Subscription approved (is_active) by Admin should be at the top of the list */
+    /* The rest will be ordered by the expiration (valid_until) of their LATEST Subscriptions */
     $query = StudentTable::getInstance()->getByOptionsQuery($searchStudentParams);
     $alias = $query->getRootAlias();
     
     $query->leftJoin("$alias.Subscription sub1")
       ->addWhere("EXISTS (SELECT sub2.id, sub2.valid_until FROM Subscription sub2 WHERE sub2.id=sub1.id GROUP BY sub2.student_id HAVING(MAX(sub2.valid_until) OR sub2.valid_until IS NULL))")
-      ->orderBy("sub1.valid_until ASC, $alias.created_at ASC");
+      ->orderBy("sub1.valid_until ASC");
     
     $this->pager = new sfDoctrinePager('Student', sfConfig::get('app_search_user_per_page'));
     $this->pager->setQuery($query);
