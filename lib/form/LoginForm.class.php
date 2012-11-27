@@ -66,6 +66,20 @@ class LoginForm extends BaseForm
       {
         throw new sfValidatorErrorSchema($validator, array('password' => new sfValidatorError($validator, 'Incorrect password.')));
       }
+      
+      switch ($oUser->getStatus())
+      {
+        case 0: $statusErrorMsg = 'The account requires activation. Please check your mail for the activation link.'; break;
+        case 1: break;
+        case 2: $statusErrorMsg = 'The account has been deactivated.'; break;
+        case 3: $statusErrorMsg = 'The account has been deleted.'; break;
+        case 4: break;
+      }
+        
+      if ('' != $statusErrorMsg)
+      {
+        throw new sfValidatorErrorSchema($validator, array('email' => new sfValidatorError($validator, $statusErrorMsg)));
+      }
     }
   }
 }
