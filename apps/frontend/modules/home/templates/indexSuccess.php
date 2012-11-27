@@ -58,7 +58,7 @@
       </div>
       
       <a href="" alt="" title="" class="contentLeftLoad"><img src="/images/content-load.png" alt="" title=""></a>
-      <a href="" alt="" title="" class="contentLeftReason"><img src="/images/content-reason.png" alt="" title=""></a>
+      <a href="<?php echo url_for('static/safety')?>" alt="" title="" class="contentLeftReason"><img src="/images/content-reason.png" alt="" title=""></a>
       
       <div class="contentLeftMenu">
         <ul>
@@ -75,8 +75,10 @@
           暁投資顧問とは?
         </div>
         <div class="contentContentAboutContent">
-          <p>簡単な説明文が入ります。簡単な説明文が入ります。簡単な説明文が入ります。簡単な説 明文が入ります。簡単な説明文が入ります。簡単な説明文が入ります。簡単な説明文が入 ります。簡単な説明文が入ります。簡単な説明文が入ります。</p>
-          <a href="" alt="" title=""></a>
+          <p>暁投資顧問では安全性重視のトレードに重きを置きながら、
+          お客様が何を求め、感じているのかを考えており、より良く安心にお付き合いできるよう努めております。
+          </p>
+          <a href="<?php echo url_for('static/investment')?>" alt="" title=""></a>
         </div>
       </div>
       

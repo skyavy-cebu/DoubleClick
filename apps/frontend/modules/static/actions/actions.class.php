@@ -23,4 +23,12 @@ class staticActions extends sfActions
   {
     
   }
+  public function executeSafety(sfWebRequest $request)
+  {
+    
+  }
+  public function executeInvestment(sfWebRequest $request)
+  {
+    
+  }
 }
