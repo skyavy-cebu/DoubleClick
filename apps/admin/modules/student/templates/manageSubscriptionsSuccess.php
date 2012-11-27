@@ -1,0 +1,1 @@
+<h1><?php echo __('Manage %student_name%\'s Subscriptions', array('%student_name%' => $student->getName()))?></h1>

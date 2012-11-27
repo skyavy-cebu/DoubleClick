@@ -72,8 +72,15 @@ class studentActions extends sfActions
     $this->forward404Unless($this->student = $this->getRoute()->getObject(), 'Invalid Student.');
   }
   
+ /**
+  * Executes manage subscriptions action
+  *
+  * @param sfRequest $request A request object
+  */
   public function executeManageSubscriptions(sfWebRequest $request)
   {
     $this->forward404Unless($this->student = $this->getRoute()->getObject(), 'Invalid Student.');
+    
+    $this->subscriptions = $this->student->getSubscriptions();
   }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
 <xliff version="1.0">
-  <file source-language="EN" target-language="ja" datatype="plaintext" original="messages" date="2012-11-21T08:43:49Z" product-name="messages">
+  <file source-language="EN" target-language="ja" datatype="plaintext" original="messages" date="2012-11-27T08:10:55Z" product-name="messages">
     <header/>
     <body>
       <trans-unit id="1">
@@ -19,6 +19,74 @@
       <trans-unit id="4">
         <source>Remember Me</source>
         <target>次回から自動的にログイン</target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>Users Management</source>
+        <target>会員管理</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>User Search</source>
+        <target>会員検索</target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>Search</source>
+        <target>検索</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>List of Users</source>
+        <target>会員一覧</target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>Manage Subscriptions</source>
+        <target>サブスクリプションを管理する</target>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>Manage %student_name%'s Subscriptions</source>
+        <target>%student_name%のサブスクリプションを管理する</target>
+      </trans-unit>
+      <trans-unit id="11">
+        <source>User Information</source>
+        <target>会員情報</target>
+      </trans-unit>
+      <trans-unit id="12">
+        <source>Registration Date</source>
+        <target>登録日</target>
+      </trans-unit>
+      <trans-unit id="13">
+        <source>Name</source>
+        <target>氏名</target>
+      </trans-unit>
+      <trans-unit id="14">
+        <source>Furigana</source>
+        <target>ふりがな</target>
+      </trans-unit>
+      <trans-unit id="15">
+        <source>Zip Code</source>
+        <target>郵便番号</target>
+      </trans-unit>
+      <trans-unit id="16">
+        <source>Contact Info</source>
+        <target>連絡先</target>
+      </trans-unit>
+      <trans-unit id="17">
+        <source>Subscriptions</source>
+        <target>サブスクリプション</target>
+      </trans-unit>
+      <trans-unit id="18">
+        <source>Valid Until</source>
+        <target>まで有効</target>
+      </trans-unit>
+      <trans-unit id="19">
+        <source>Status</source>
+        <target>ステータス</target>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>No active Subscription</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="21">
+        <source>No Student to show</source>
+        <target/>
       </trans-unit>
     </body>
   </file>
