@@ -32,6 +32,14 @@ class NewsletterTable extends Doctrine_Table
          return $q;
     }
     
+    public function getNewsletters($id)
+    {
+         $q = $this->createQuery('n')
+        ->where('n.teacher_id = ?', $id)
+        ->addOrderBy('created_at ASC');
+        
+        return $q;
+    }
     /*get student's newsletter*/
      public function getStudentNewsletters($id)
     {

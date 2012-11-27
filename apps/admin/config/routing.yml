@@ -28,6 +28,23 @@ login:
 account-settings:
   url:   /account-settings
   param: { module: settings, action: accountSettings }
+
+teacher-list:
+  url: /teacher-list
+  param: { module: teacher, action: index }
+
+teacher-portfolio:
+  url: teacher/portfolio
+  param: { module: teacher, action: portfolio }
+  
+teacher-newsletters:
+  url: teacher/newsletters
+  param: { module: teacher, action: newsletter }
+  
+newsletter-detail:
+  url: newsletter/detail
+  param: { module: teacher, action: newsletterDetail }
+
 # default rules
 home:
   url:   /
