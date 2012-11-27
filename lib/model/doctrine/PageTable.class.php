@@ -16,4 +16,10 @@ class PageTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Page');
     }
+    public function getPage()
+    {
+       $q = $this->createQuery('p');
+   
+      return $q->execute();
+    }
 }

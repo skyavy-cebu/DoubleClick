@@ -87,29 +87,29 @@
         <div class="contentContentMenuContent">
           <div>
             <ul class="contentContentMenuContent1">
-              <li><a href="" alt="" title="">
+              <li><a href="<?php echo url_for('@page1?id=1')?>" alt="" title="">
                 <h3>オプションとは?</h3>
                 <h5>オプション取引の基礎知識</h5>
               </a></li>
-              <li><a href="" alt="" title="">
+              <li><a href="<?php echo url_for('@page2?id=2')?>" alt="" title="">
                 <h3>先物とは?</h3>
                 <h5>将来の株価指数の動きを予想する</h5>
               </a></li>
-              <li><a href="" alt="" title="">
+              <li><a href="<?php echo url_for('@page3?id=3')?>" alt="" title="">
                 <h3>FXとは?</h3>
                 <h5>為替取引の仕組みや特徴、FXについて</h5>
               </a></li>
             </ul>
             <ul class="contentContentMenuContent2">
-              <li><a href="" alt="" title="">
+              <li><a href="<?php echo url_for('@page4?id=4')?>" alt="" title="">
                 <h3>CFDとは?</h3>
                 <h5>ＣＦＤの基礎知識と魅力</h5>
               </a></li>
-              <li><a href="" alt="" title="">
+              <li><a href="<?php echo url_for('@page5?id=5')?>" alt="" title="">
                 <h3>株式取引とは?</h3>
                 <h5>株式取引について</h5>
               </a></li>
-              <li><a href="" alt="" title="">
+              <li><a href="<?php echo url_for('@page6?id=6')?>" alt="" title="">
                 <h3>Q&Aはこちら</h3>
                 <h5>よくあるご質問</h5>
               </a></li>

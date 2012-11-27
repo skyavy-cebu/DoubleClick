@@ -118,7 +118,30 @@ new-newsletter-message:
 feedback:
   url: /feedback
   param: { module: dynamic, action: feedback }
+
+page1:
+  url: /page1
+  param: { module: page, action: page1 }
   
+page2:
+  url: /page2
+  param: { module: page, action: page2 }
+
+page3:
+  url: /page3
+  param: { module: page, action: page3 }
+
+page4:
+  url: /page4
+  param: { module: page, action: page4 }
+
+page5:
+  url: /page5
+  param: { module: page, action: page5 }
+
+page6:
+  url: /page6
+  param: { module: page, action: page6 }
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
