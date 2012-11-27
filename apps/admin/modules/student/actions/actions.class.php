@@ -10,6 +10,14 @@
  */
 class studentActions extends sfActions
 {
+  public function preExecute()
+  {
+    if (!$this->getUser()->isAuthenticated())
+    {
+      $this->redirect('@login');
+    }
+  }
+  
  /**
   * Executes index action
   *
@@ -17,8 +25,6 @@ class studentActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward404Unless($this->getUser()->isAuthenticated(), 'Please login to continue.');
-    
     $this->searchForm = new SearchStudentForm();
     
     // set search parameters
@@ -45,8 +51,10 @@ class studentActions extends sfActions
     $alias = $query->getRootAlias();
     
     $query->leftJoin("$alias.Subscription sub1")
-      ->addWhere("EXISTS (SELECT sub2.id, sub2.valid_until FROM Subscription sub2 WHERE sub2.id=sub1.id GROUP BY sub2.student_id HAVING(MAX(sub2.valid_until) OR sub2.valid_until IS NULL))")
-      ->orderBy("sub1.valid_until ASC");
+      ->addWhere("EXISTS (SELECT sub2.id, sub2.valid_until FROM Subscription sub2 WHERE sub2.student_id=$alias.id GROUP BY sub2.student_id HAVING(MAX(sub2.valid_until) OR sub2.valid_until IS NULL))")
+      ->andWhere("$alias.id=sub1.student_id")
+      ->groupBy("$alias.id")
+      ->orderBy("sub1.valid_until ASC, $alias.status ASC");
     
     $this->pager = new sfDoctrinePager('Student', sfConfig::get('app_search_user_per_page'));
     $this->pager->setQuery($query);
@@ -61,6 +69,11 @@ class studentActions extends sfActions
   */
   public function executeView(sfWebRequest $request)
   {
-    $this->forward404Unless($this->getUser()->isAuthenticated(), 'Please login to continue.');
+    $this->forward404Unless($this->student = $this->getRoute()->getObject(), 'Invalid Student.');
+  }
+  
+  public function executeManageSubscriptions(sfWebRequest $request)
+  {
+    $this->forward404Unless($this->student = $this->getRoute()->getObject(), 'Invalid Student.');
   }
 }
