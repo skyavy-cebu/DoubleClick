@@ -7,7 +7,7 @@
   </tr>
   <?php foreach ($pager->getResults() as $student) :?>
   <tr>
-    <td><?php echo link_to($student->getName(), url_for('@dashboard'))?></td>
+    <td><?php echo $student->getName()?></td>
     <td><?php echo $student->getFurigana()?></td>
     <td><?php echo $student->getEmail()?></td>
   </tr>
