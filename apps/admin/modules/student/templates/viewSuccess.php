@@ -6,6 +6,10 @@
     <td><?php echo $student->getCreatedAt()?></td>
   </tr>
   <tr>
+    <td><?php echo __('Status')?></td>
+    <td><?php echo $student->_getStatus()?></td>
+  </tr>
+  <tr>
     <td><?php echo __('Name')?></td>
     <td><?php echo $student->getName()?></td>
   </tr>

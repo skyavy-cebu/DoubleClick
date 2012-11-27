@@ -81,12 +81,32 @@
         <target>ステータス</target>
       </trans-unit>
       <trans-unit id="20">
-        <source>No active Subscription</source>
-        <target/>
+        <source>Pending</source>
+        <target>ペンディング</target>
       </trans-unit>
       <trans-unit id="21">
-        <source>No Student to show</source>
-        <target/>
+        <source>Active</source>
+        <target>アクティブ</target>
+      </trans-unit>
+      <trans-unit id="22">
+        <source>Deactivated</source>
+        <target>非アクティブ化</target>
+      </trans-unit>
+      <trans-unit id="23">
+        <source>Deleted</source>
+        <target>削除された</target>
+      </trans-unit>
+      <trans-unit id="24">
+        <source>Expired Subscription</source>
+        <target>期限切れのサブスクリプション</target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>Please select...</source>
+        <target>選択</target>
+      </trans-unit>
+      <trans-unit id="26">
+        <source>Inactive</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

@@ -19,14 +19,16 @@ class Student extends BaseStudent
    */
   public function _getStatus()
   {
+    $status = '';
     switch ($this->getStatus())
     {
-      case 0: return 'Pending';
-      case 1: return 'Active';
-      case 2: return 'Deactivated';
-      case 3: return 'Deleted';
-      case 4: return 'Expired Subscription';
+      case 0: $status = 'Pending'; break;
+      case 1: $status = 'Active'; break;
+      case 2: $status = 'Deactivated'; break;
+      case 3: $status = 'Deleted'; break;
+      case 4: $status = 'Expired Subscription'; break;
     }
+    return sfContext::getInstance()->getI18N()->__($status, array(), 'messages');
   }
   
   /**

@@ -10,7 +10,7 @@
   <tr>
     <td><?php echo link_to($student->getName(), url_for('@student-details?id=' . $student->getId()))?></td>
     <td><?php echo ('' != $student->_getActiveSubscriptions()) ? $student->_getActiveSubscriptions() : __('No active Subscription')?></td>
-    <td><?php echo ($student->getLastSubscriptionToExpire()) ? $student->getLastSubscriptionToExpire()->getValidUntil() : '--'?></td>
+    <td><?php echo ($student->getLastSubscriptionToExpire()) ? date('Y/m/d', strtotime($student->getLastSubscriptionToExpire()->getValidUntil())) : '--'?></td>
     <td><?php echo $student->_getStatus()?></td>
   </tr>
   <?php endforeach;?>
