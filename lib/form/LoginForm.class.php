@@ -34,12 +34,14 @@ class LoginForm extends BaseForm
   
   /**
    * Checks if the email exists and the password is correct.
+   * Checks if the status is active when user is a Student.
    *
    * @param $validator
    * @param $values
    */
   public function checkLoginCredentials($validator, $values)
   {
+    // check if User exists
     if ('admin' == $this->userType)
     {
       $oUser = AdminTable::getInstance()->findOneByEmail($values['email']);
@@ -62,23 +64,28 @@ class LoginForm extends BaseForm
     }
     else
     {
+      // check password
       if ($oUser->getPassword() != md5(md5($values['password']).sfConfig::get('app_system_salt')))
       {
         throw new sfValidatorErrorSchema($validator, array('password' => new sfValidatorError($validator, 'Incorrect password.')));
       }
       
-      switch ($oUser->getStatus())
+      // if Student, check status
+      if ('' == $this->userType)
       {
-        case 0: $statusErrorMsg = 'The account requires activation. Please check your mail for the activation link.'; break;
-        case 1: break;
-        case 2: $statusErrorMsg = 'The account has been deactivated.'; break;
-        case 3: $statusErrorMsg = 'The account has been deleted.'; break;
-        case 4: break;
-      }
-        
-      if ('' != $statusErrorMsg)
-      {
-        throw new sfValidatorErrorSchema($validator, array('email' => new sfValidatorError($validator, $statusErrorMsg)));
+        switch ($oUser->getStatus())
+        {
+          case 0: $statusErrorMsg = 'The account requires activation. Please check your mail for the activation link.'; break;
+          case 1: break;
+          case 2: $statusErrorMsg = 'The account has been deactivated.'; break;
+          case 3: $statusErrorMsg = 'The account has been deleted.'; break;
+          case 4: break;
+        }
+          
+        if ('' != $statusErrorMsg)
+        {
+          throw new sfValidatorErrorSchema($validator, array('email' => new sfValidatorError($validator, $statusErrorMsg)));
+        }
       }
     }
   }
