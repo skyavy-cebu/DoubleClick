@@ -16,4 +16,18 @@ class MailmagazineTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Mailmagazine');
     }
+    public function getMailmagazines()
+    {
+       $q = $this->createQuery('f')
+       ->where('f.publish_date > NOW()');
+   
+      return $q->execute();
+    }
+    public function getPastMailmagazines()
+    {
+       $q = $this->createQuery('f')
+       ->where('f.publish_date <= NOW()');
+   
+      return $q->execute();
+    }
 }
