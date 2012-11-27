@@ -13,7 +13,7 @@
     <?php foreach ($pager->getResults() as $newsletter): ?>
                
                 <li>
-                  <?php echo date('Y/m/d',strtotime($newsletter->getPublishDate())) ?>
+                  <?php echo date('Y/m/d',strtotime($newsletter->getCreatedAt())) ?>
                   <a href="<?php echo url_for('@newsletter-detail?id=' .$newsletter->getId()) ?>"><?php echo $newsletter->getTitle() ?></a>
                 </li>
               
