@@ -3,8 +3,8 @@
 
 default:
   http_metas:
-    content-type: text/html
-
+    charset=utf-8
+    
   metas:
     #title:        symfony project
     #description:  symfony project
@@ -12,9 +12,8 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [main.css]
-
-  javascripts:    []
-
+  stylesheets:    [main.css,jquery-ui.css]
+  javascripts:    [jquery-1.8.2.js,jquery-ui.js]
+  
   has_layout:     true
   layout:         layout
