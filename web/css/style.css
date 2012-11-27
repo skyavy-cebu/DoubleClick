@@ -696,17 +696,18 @@ body {
           .contentContentTeachersContent1, .contentContentTeacherImage, .contentContentTeachersIntroductionContent1, .contentDasboardContent1 { float: left; }
           .contentContentTeachersContent2, .contentContentTeacherDetail, .contentContentTeachersIntroductionContent2, .contentDasboardContent2{ float: right; }
           .contentContentTeachersContent1 li, .contentContentTeachersContent2 li {
-						margin-bottom: 20px;
+						margin-bottom: 15px;
 						border: 1px solid #DCDCDC;
 						padding: 9px;
 						width: 300px;
 						height: 110px;
+						margin-left:5px;
 					}
 					
 					.contentContentTeacherDetail{
 						width: 360px;
 					}
-          .contentContentTeachersContent1 li:last-child, .contentContentTeachersContent2 li:last-child { margin-bottom: 0px; }
+          .contentContentTeachersContent1 li:last-child, .contentContentTeachersContent2 li:last-child { margin-bottom: 15px; }
 					.contentContentTeachersContent1 li img, .contentContentTeachersContent2 li img {
 						border: 1px solid #E6E6E6;
 						padding: 6px;

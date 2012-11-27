@@ -28,7 +28,10 @@ class teacherActions extends sfActions
     $this->pager->setPage($request->getParameter('page', 1));
     $this->pager->init();
   }
-  
+   public function executeTeacherDetails(sfWebRequest $request)
+  {
+    $this->teacher = Doctrine_Core::getTable('Teacher')->find(array($request->getParameter('id')));
+  }
       
   /* Teacher's account settings*/
     public function executeAccountSettings(sfWebRequest $request)

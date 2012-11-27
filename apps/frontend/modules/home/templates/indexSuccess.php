@@ -10,7 +10,7 @@
 <div class="contentWrapper">
   <div class="content">
     <div class="contentLeft">
-      <a href="" alt="" title=""><img src="/images/content-signup.png" alt="" title=""></a>
+      <a href="<?php echo url_for('@register') ?>" alt="" title=""><img src="/images/content-signup.png" alt="" title=""></a>
       
       <div class="contentLeftLogin">
         <div class="contentLeftLoginHeader">会員ログイン</div>
@@ -25,7 +25,7 @@
           </form>
           
           <a href="<?php echo url_for('@remind-password')?>" alt="" title="Password Reminder"><?php echo __('Forgot your password?')?></a>
-          <a href="<?php echo url_for('@register')?>" alt="" title="New Member Registration"><?php echo __('New Member Registration')?></a>
+          
         </div>
       </div>
       
@@ -219,35 +219,24 @@
           先生の実績
         </div>
         <div class="contentContentTeachersContent">
+           <table><tr>
+           <?php  foreach ($teacherslist as $i => $teachers):?>
+           <td>
             <ul class="contentContentTeachersContent1">
               <li>
+                 <?php $b=(($i % 2) );?>
                 <img src="/images/teachers-no-image.png" />
-                <h3>OP先生</h3>
-                <h5>実績の最初の数文字が入り 画像	ます。実績の最初の数文字 が入ります。 <span>> <a href="" alt="" title="">詳しく見る</a></span></h5>
+                <h3><?php echo $teachers->getTitle() ?></h3>
+                <h5><?php echo truncate_text($teachers['details'], 50); ?></h5>
+                <h5><span> <a href="<?php echo url_for('@teacher-details?id=' . $teachers['id'])?>" alt="" title="">詳しく見る</a></span></h5>
               </li>
-              <li>
-                <img src="/images/teachers-no-image.png" />
-                <h3>シロネコ先生</h3>
-                <h5>実績の最初の数文字が入り 画像	ます。実績の最初の数文字 が入ります。 <span>> <a href="" alt="" title="">詳しく見る</a></span></h5>
-              </li>
-              <li>
-                <img src="/images/teachers-no-image.png" />
-                <h3>スイング先生</h3>
-                <h5>実績の最初の数文字が入り 画像	ます。実績の最初の数文字 が入ります。 <span>> <a href="" alt="" title="">詳しく見る</a></span></h5>
-              </li>
-            </ul>
-            <ul class="contentContentTeachersContent2">
-              <li>
-                <img src="/images/teachers-no-image.png" />
-                <h3>CDF先生</h3>
-                <h5>実績の最初の数文字が入り 画像	ます。実績の最初の数文字 が入ります。 <span>> <a href="" alt="" title="">詳しく見る</a></span></h5>
-              </li>
-              <li>
-                <img src="/images/teachers-no-image.png" />
-                <h3>白虎先生</h3>
-                <h5>実績の最初の数文字が入り 画像	ます。実績の最初の数文字 が入ります。  <span>> <a href="" alt="" title="">詳しく見る</a></span></h5>
-              </li>
-            </ul>
+              </td>
+              <?php if ($b == 1):?> 
+                </tr><tr >
+               <?php endif ?>
+              <?php endforeach ?>
+              </tr>
+              </table>
             <div class="clear"></div>
         </div>
       </div>

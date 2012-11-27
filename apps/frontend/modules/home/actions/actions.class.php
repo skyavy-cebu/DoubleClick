@@ -18,5 +18,6 @@ class homeActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->loginForm = new LoginForm();
+    $this->teacherslist = Doctrine_Core::getTable('Teacher')->getTeachers();
   }
 }

@@ -34,6 +34,10 @@ teacher-portfolio:
     id: \d+
     sf_method: [get]
 
+teacher-details:
+  url: /teacher/details
+  param: { module: teacher, action: teacherDetails }
+
 dashboard:
   url:   /dashboard
   param: { module: student, action: dashboard }
@@ -111,6 +115,10 @@ new-newsletter-message:
   url: /new-newsletter/message
   param: { module: static, action: newsletterMessage }
 
+feedback:
+  url: /feedback
+  param: { module: dynamic, action: feedback }
+  
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
