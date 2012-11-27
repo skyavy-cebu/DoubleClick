@@ -1,6 +1,6 @@
 <div class="studentSearchBox">
   <form action="<?php echo url_for('@teacher-students')?>" method="GET">
-  <?php echo $searchForm?>
+  <?php echo $searchForm['name']->renderRow()?><?php echo $searchForm['email']->renderRow()?>
   <input type="submit" value="<?php echo __('Search') ?>">
   </form>
 </div>

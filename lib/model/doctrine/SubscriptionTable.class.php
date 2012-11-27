@@ -7,15 +7,53 @@
  */
 class SubscriptionTable extends Doctrine_Table
 {
-    /**
-     * Returns an instance of this class.
-     *
-     * @return object SubscriptionTable
-     */
-    public static function getInstance()
+  /**
+   * Returns an instance of this class.
+   *
+   * @return object SubscriptionTable
+   */
+  public static function getInstance()
+  {
+      return Doctrine_Core::getTable('Subscription');
+  }
+  
+  /**
+   * Query for retreiving Subscriptions with given options.
+   *
+   * @param mixed $options   Optional. Defaults to empty array. Possible values: 'student_id', 'is_active'.
+   * @param int   $limit     Optional. Defaults to 0. Limit to query.
+   * @param int   $offset    Optional. Defaults to 0. Offset to query.
+   * @return Doctrine_Query Query for retrieving Subscriptions.
+   */
+  public function getByOptionsQuery($options = array(), $limit = 0, $offset = 0)
+  {
+    $q = $this->createQuery('sub');
+    
+    if (0 < count($options))
     {
-        return Doctrine_Core::getTable('Subscription');
+      if (array_key_exists('student_id', $options) && is_numeric($options['student_id']))
+      {
+        $q->addWhere('sub.student_id = ?', $options['student_id']);
+      }
+      if (array_key_exists('is_active', $options) && is_numeric($options['is_active']))
+      {
+        $q->addWhere('sub.is_active = ?', $options['is_active']);
+      }
     }
+    
+    if (0 < $limit)
+    {
+      $q->limit($limit);
+    }
+    
+    if (0 < $offset)
+    {
+      $q->offset($offset);
+    }
+    
+    return $q;
+  }
+  
     public function getActive()
     {
       $student=1;

@@ -12,14 +12,18 @@ class SearchStudentForm extends BaseForm
 {
   public function configure()
   {
+    $statusChoices = array('Pending', 'Active', 'Deactivated', 'Deleted', 'Expired Subscription');
+    
     $this->setWidgets(array(
-      'name'  => new sfWidgetFormInputText(),
-      'email' => new sfWidgetFormInputText(array('label' => 'Email'))
+      'name'   => new sfWidgetFormInputText(),
+      'email'  => new sfWidgetFormInputText(array('label' => 'Email')),
+      'status' => new sfWidgetFormSelect(array('label' => 'Status', 'choices' => array(-1 => 'Please select...') + $statusChoices))
     ));
     
     $this->setValidators(array(
-      'name'  => new sfValidatorPass(),
-      'email' => new sfValidatorPass()
+      'name'   => new sfValidatorPass(),
+      'email'  => new sfValidatorPass(),
+      'status' => new sfValidatorPass()
     ));
     
     $this->disableLocalCSRFProtection();
