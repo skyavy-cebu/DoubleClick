@@ -253,9 +253,9 @@
 
 <div class="bannersWrapper">
   <div class="banners">
-    <a href="" title="" alt=""><img src="/images/banner-finance.png" title="" alt="" /></a>
-    <a href="" title="" alt=""><img src="/images/banner-association.png" title="" alt="" /></a>
-    <a href="" title="" alt=""><img src="/images/banner-minus-6.png" title="" alt="" /></a>
-    <a href="" title="" alt=""><img src="/images/banner-eco.png" title="" alt="" /></a>
+    <a href="http://www.fsa.go.jp" target="_blank" title="" alt=""><img src="/images/banner-finance.png" title="" alt="" /></a>
+    <a href="http://www.jiaa.or.jp" target="_blank" title="" alt=""><img src="/images/banner-association.png" title="" alt="" /></a>
+    <a href="http://www.team-6.jp" target="_blank" title="" alt=""><img src="/images/banner-minus-6.png" title="" alt="" /></a>
+    <a href="http://www.eco-people.jp" target="_blank" title="" alt=""><img src="/images/banner-eco.png" title="" alt="" /></a>
   </div>
 </div>
