@@ -14,7 +14,7 @@
       <div class="header">
         <div class="headerLeft">
           <h3>投資のことなら暁投資顧問</h3>
-          <a href="/"><img src="/images/header-logo.png" alt="Akatsuki" alt="Akatsuki" /></a>
+          <a href="<?php echo url_for('@home')?>"><img src="/images/header-logo.png" alt="Akatsuki" alt="Akatsuki" /></a>
         </div>
         
         <ul>

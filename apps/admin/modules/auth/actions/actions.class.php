@@ -17,6 +17,11 @@ class authActions extends sfActions
    */
   public function executeLogin(sfWebRequest $request)
   {
+    if ($this->getUser()->isAuthenticated())
+    {
+      $this->redirect('@students');
+    }
+    
     $this->form = new LoginForm(null, array('userType' => 'admin'));
     
     if ($request->isMethod('post'))
