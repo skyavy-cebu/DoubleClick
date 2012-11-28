@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Register form.
+ * PasswordReminder form.
  *
  * @package    DOUBLECLICK
  * @subpackage form

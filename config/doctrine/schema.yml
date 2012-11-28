@@ -805,6 +805,13 @@ Teacher:
       primary: false
       notnull: false
       autoincrement: false
+    picture:
+      type: string(42)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
     change_password:
       type: string(255)
       fixed: false

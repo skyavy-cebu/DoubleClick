@@ -81,6 +81,23 @@ class studentActions extends sfActions
   {
     $this->forward404Unless($this->student = $this->getRoute()->getObject(), 'Invalid Student.');
     
-    $this->subscriptions = $this->student->getSubscriptions();
+    $this->settlements = SettlementTable::getInstance()->getByStudentQuery($this->student->getId())->execute();
+  }
+  
+ /**
+  * Executes change status action
+  *
+  * @param sfRequest $request A request object
+  */
+  public function executeChangeStatus(sfWebRequest $request)
+  {
+    $this->forward404Unless($request->isMethod('post'));
+    $this->forward404Unless($student = StudentTable::getInstance()->find($request->getParameter('id')), 'No Student');
+    $this->forward404Unless($changeStudentStatus = $request->getParameter('change_student_status'), 'Missing parameters');
+    
+    $student->setStatus($changeStudentStatus['status']);
+    $student->save();
+    
+    $this->redirect('@student-details?id=' . $student->getId());
   }
 }

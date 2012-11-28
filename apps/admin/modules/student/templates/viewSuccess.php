@@ -7,7 +7,14 @@
   </tr>
   <tr>
     <td><?php echo __('Status')?></td>
-    <td><?php echo $student->_getStatus()?></td>
+    <td>
+      <form action="<?php echo url_for('@student-change-status?id=' . $student->getId())?>" method="POST">
+        <?php $changeStudentStatusForm = new ChangeStudentStatusForm($student->getRawValue());?>
+        <?php echo $changeStudentStatusForm['status']->render()?>
+        <?php echo $changeStudentStatusForm->renderHiddenFields()?>
+        <input type="submit" value="<?php echo __('Update')?>"/>
+      </form>
+    </td>
   </tr>
   <tr>
     <td><?php echo __('Name')?></td>
