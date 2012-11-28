@@ -1,6 +1,14 @@
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
 
+subscription-change-status:
+  url:   /subscription/:id/change-status
+  param: { module: subscription, action: changeStatus }
+  
+settlement-change-status:
+  url:   /settlement/:id/change-status
+  param: { module: settlement, action: changeStatus }
+
 student-subscriptions:
   url:   /student/:id/subscriptions
   class:   sfDoctrineRoute

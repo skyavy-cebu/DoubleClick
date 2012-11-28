@@ -81,6 +81,6 @@ class studentActions extends sfActions
   {
     $this->forward404Unless($this->student = $this->getRoute()->getObject(), 'Invalid Student.');
     
-    $this->subscriptions = $this->student->getSubscriptions();
+    $this->settlements = SettlementTable::getInstance()->getByStudentQuery($this->student->getId())->execute();
   }
 }
