@@ -9,3 +9,9 @@ all:
 
   delivered_newsletters:
     limit: 1
+    
+  contact:
+    email: admin@doubleclick.co.jp
+    name: Admin
+    subject:  Inquiry
+    

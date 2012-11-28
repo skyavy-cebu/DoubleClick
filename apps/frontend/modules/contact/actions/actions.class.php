@@ -43,12 +43,18 @@ class contactActions extends sfActions
         /* from */
          $this->contact['email'],
         /* to */
-        array('admin@doubleclick.co.jp' => 'DoubleClick Admin'),
+        sfConfig::get('app_contact_email'),
         /* subject */
-        'Inquiry',
+         sfConfig::get('app_contact_inquiry'),
         /* body */
-        $this->contact['inquiry']
+        
+<<<EOF
+{$this->contact['inquiry']}
 
+-------------------------------
+DoubleClick
+{$this->getController()->genUrl('@home', true)}
+EOF
       );
       
       $this->getMailer()->send($message);
