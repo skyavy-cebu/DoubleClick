@@ -30,8 +30,8 @@ abstract class BaseNewsletterForm extends BaseFormDoctrine
       'title'        => new sfValidatorString(array('max_length' => 150)),
       'content'      => new sfValidatorString(array('required' => false)),
       'publish_date' => new sfValidatorDateTime(),
-      'updated_at'   => new sfValidatorDateTime(array('required' => false)),
-      'created_at'   => new sfValidatorDateTime(array('required' => false)),
+      'updated_at'   => new sfValidatorDateTime(),
+      'created_at'   => new sfValidatorDateTime(),
     ));
 
     $this->widgetSchema->setNameFormat('newsletter[%s]');
