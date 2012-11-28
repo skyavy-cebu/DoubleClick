@@ -40,11 +40,11 @@
         <ul>
           <li><a href="/" alt="" title="" class="navi-1"></a></li>
           <li><a href="/" alt="" title="" class="navi-2"></a></li>
-          <li><a href="<?php echo url_for('@register') ?>" alt="" title="" class="navi-3"></a></li>
-          <li><a href="<?php echo url_for('@feedback') ?>" alt="" title="" class="navi-4"></a></li>
+          <li><a href="<?php echo url_for('@register')?>" alt="" title="" class="navi-3"></a></li>
+          <li><a href="<?php echo url_for('@feedback')?>" alt="" title="" class="navi-4"></a></li>
           <li><a href="/" alt="" title="" class="navi-5"></a></li>
           <li><a href="/" alt="" title="" class="navi-6"></a></li>
-          <li><a href="/" alt="" title="" class="navi-7"></a></li>
+          <li><a href="<?php echo url_for('@contact')?>" alt="" title="" class="navi-7"></a></li>
         </ul>
       </div>
     </div>
