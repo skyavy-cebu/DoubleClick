@@ -1,14 +1,6 @@
 <?php
 
-/**
- * Register form.
- *
- * @package    DOUBLECLICK
- * @subpackage form
- * @author     Danilo M. Nava Jr.
- * @version    SVN: $Id: sfDoctrineFormTemplate.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
- */
-class ContactForm extends sfForm
+class InquiryForm extends sfForm
 {
   public function configure()
   {
@@ -29,5 +21,6 @@ class ContactForm extends sfForm
       'inquiry'  => new sfValidatorString(array('max_length' => 255)),
     ));
     
+    $this->widgetSchema->setNameFormat('inquiry[%s]');
   }
 }

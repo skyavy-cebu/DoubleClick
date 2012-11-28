@@ -74,6 +74,14 @@ register:
   url: /register
   param: { module: register, action: index }
 
+contact:
+  url: /contact
+  param: { module: contact, action: index }
+
+contact-confirm:
+  url: /contact/confirm
+  param: { module: contact, action: confirm }
+
 dashboard-newsletter:
   url:   /newsletter/:id  
   class:   sfDoctrineRoute

@@ -17,6 +17,48 @@ class contactActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->form = new ContactForm();
+    $this->form = new InquiryForm();
+    
+    if ($request->isMethod('post'))
+    {
+      $inquiry = $request->getParameter($this->form->getName());
+      $this->form->bind($inquiry);
+      
+      if ($this->form->isValid())
+      {
+        $this->getUser()->setAttribute('contact', $inquiry);
+        $this->redirect('@contact-confirm');
+      }
+    }
+  }
+  
+  public function executeConfirm(sfWebRequest $request)
+  {
+    $this->forward404Unless($this->contact = $this->getUser()->getAttribute('contact'));
+    
+     if ($request->isMethod('post'))
+    {
+            // send mail
+      $message = $this->getMailer()->compose(
+        /* from */
+         $this->contact['email'],
+        /* to */
+        array('admin@doubleclick.co.jp' => 'DoubleClick Admin'),
+        /* subject */
+        'Inquiry',
+        /* body */
+        $this->contact['inquiry']
+
+      );
+      
+      $this->getMailer()->send($message);
+      
+      /* destroy session variable: contact */
+      $this->getUser()->getAttributeHolder()->remove('contact');
+      
+      // redirect
+      $this->redirect('@contact');
+    }
+  
   }
 }
