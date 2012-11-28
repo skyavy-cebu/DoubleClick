@@ -5,8 +5,8 @@
   <table>
     <tr>
       <td><?php echo $form['publish_date']->renderRow(array('id' => 'datepicker'))?></td>
-
-    </tr>
+      <td><?php echo $form['publish_time']->renderRow(array('id' => 'timepicker'))?></td>
+       </tr>
     <tr>
       <td><?php echo $form['title']->renderRow()?></td>
     </tr>
@@ -27,4 +27,9 @@
        $( "#datepicker" ).datepicker().attr('readonly','readonly');
     });
     </script>
+<script>
+  $(function() {
+    $('#timepicker').timepicker({ 'step': 60 });
+  });
+</script>
 </form>

@@ -41,13 +41,19 @@ class mailMagazineActions extends sfActions
     {
       $magazine = $request->getParameter($this->form->getName());
       $this->form->bind($magazine);
-      
+			$a= (date('H:i:s',strtotime($magazine['publish_time'])));
+			$b=(date('Y-m-d',strtotime($magazine['publish_date'])));
+			//print(((date('Y-m-d',strtotime($magazine['publish_date']))). ' ' .(date('H:i:s',strtotime($magazine['publish_time'])))));
+     // var_dump(date('H:i:s',strtotime($magazine['publish_time'])));
+			//var_dump(date('Y-m-d',strtotime($magazine['publish_date'])));
+		//	var_dump($c);
+		//	exit;
       if ($this->form->isValid())
       {
 	   // save new Feedback
 	   
       $mailmagazine = new Mailmagazine();
-      $mailmagazine->setPublishDate(date('Y-m-d H:i:s', strtotime($magazine['publish_date'])));
+      $mailmagazine->setPublishDate((date('Y-m-d',strtotime($magazine['publish_date']))). ' ' .(date('H:i:s',strtotime($magazine['publish_time']))));
       $mailmagazine->setTitle($magazine['title']);
 	    $mailmagazine->setContent($magazine['content']);
       $mailmagazine->save();

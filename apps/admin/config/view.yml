@@ -12,8 +12,8 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [main.css,jquery-ui.css]
-  javascripts:    [jquery-1.8.2.js,jquery-ui.js]
+  stylesheets:    [main.css,jquery-ui.css,jquery.timepicker.css,base.css]
+  javascripts:    [jquery-1.8.2.js,jquery-ui.js,jquery.timepicker.js,base.js]
   
   has_layout:     true
   layout:         layout
