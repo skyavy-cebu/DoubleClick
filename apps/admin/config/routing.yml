@@ -15,6 +15,10 @@ student-subscriptions:
   options: { model: Student, type: object }
   param: { module: student, action: manageSubscriptions }
 
+student-change-status:
+  url:   /student/:id/change-status
+  param: { module: student, action: changeStatus }
+
 student-details:
   url:   /student/:id
   class:   sfDoctrineRoute
