@@ -18,10 +18,10 @@
         </div>
         
         <ul>
-          <li><a href="/" alt="" title="">会社概要</a></li>
-          <li><a href="/" alt="" title="">プライバシーポリシー</a></li>
-          <li><a href="/" alt="" title="">契約前事前交付書面</a></li>
-          <li><a href="/" alt="" title="">利用規約</a></li>
+          <li><a href="<?php echo url_for('static/aboutCompany')?>" alt="About Company" title="About Company">会社概要</a></li>
+          <li><a href="<?php echo url_for('static/privacyPolicy')?>" alt="Privacy Policy" title="Privacy Policy">プライバシーポリシー</a></li>
+          <li><a href="<?php echo url_for('static/contract')?>" alt="Contract" title="Contract">契約前事前交付書面</a></li>
+          <li><a href="<?php echo url_for('static/userPolicy')?>" alt="User Policy" title="User Policy">利用規約</a></li>
         </ul>
         
         <div class="header-right">
@@ -38,12 +38,12 @@
     <div class="naviWrapper">
       <div class="navi">
         <ul>
-          <li><a href="/" alt="" title="" class="navi-1"></a></li>
-          <li><a href="/" alt="" title="" class="navi-2"></a></li>
+          <li><a href="<?php echo url_for('@home')?>" alt="" title="" class="navi-1"></a></li>
+          <li><a href="<?php echo url_for('static/aboutUs')?>" alt="" title="" class="navi-2"></a></li>
           <li><a href="<?php echo url_for('@register')?>" alt="" title="" class="navi-3"></a></li>
           <li><a href="<?php echo url_for('@feedback')?>" alt="" title="" class="navi-4"></a></li>
-          <li><a href="/" alt="" title="" class="navi-5"></a></li>
-          <li><a href="/" alt="" title="" class="navi-6"></a></li>
+          <li><a href="<?php echo url_for('@teacher-introduction')?>" alt="" title="" class="navi-5"></a></li>
+          <li><a href="<?php echo url_for('static/faq')?>" alt="" title="" class="navi-6"></a></li>
           <li><a href="<?php echo url_for('@contact')?>" alt="" title="" class="navi-7"></a></li>
         </ul>
       </div>

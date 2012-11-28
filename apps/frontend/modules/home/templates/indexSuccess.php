@@ -62,9 +62,9 @@
       
       <div class="contentLeftMenu">
         <ul>
-          <li><a href="" alt="" title="" class="contentLeftMenu1"><span>法令順守</span></a></li>
-          <li><a href="" alt="" title="" class="contentLeftMenu2"><span>利用規約</span></a></li>
-          <li><a href="<?php echo url_for('@contact')?>" alt="" title="" class="contentLeftMenu3"><span>契約前事前交付書面</span></a></li>
+          <li><a href="<?php echo url_for('static/rule')?>" alt="" title="" class="contentLeftMenu1"><span>法令順守</span></a></li>
+          <li><a href="<?php echo url_for('static/userPolicy')?>" alt="" title="" class="contentLeftMenu2"><span>利用規約</span></a></li>
+          <li><a href="<?php echo url_for('static/contract')?>" alt="" title="" class="contentLeftMenu3"><span>契約前事前交付書面</span></a></li>
         </ul>
       </div>
     </div>

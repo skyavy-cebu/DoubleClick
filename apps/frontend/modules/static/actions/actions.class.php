@@ -31,4 +31,32 @@ class staticActions extends sfActions
   {
     
   }
+  public function executeRule(sfWebRequest $request)
+  {
+    
+  }
+  public function executeUserPolicy(sfWebRequest $request)
+  {
+    
+  }
+  public function executeAboutUs(sfWebRequest $request)
+  {
+    
+  }
+  public function executeFaq(sfWebRequest $request)
+  {
+    
+  }
+  public function executeContract(sfWebRequest $request)
+  {
+    
+  }
+  public function executeAboutCompany(sfWebRequest $request)
+  {
+    
+  }
+  public function executePrivacyPolicy(sfWebRequest $request)
+  {
+    
+  }
 }

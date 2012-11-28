@@ -1,0 +1,1 @@
+<h1><?php echo __('User Policy'); ?></h1>
