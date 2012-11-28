@@ -7,10 +7,12 @@
   <?php echo $changeSettlementStatusForm->renderHiddenFields()?>
   <input type="submit" value="<?php echo __('Update')?>"/>
 </form>
+
 <div>
   <?php echo date('M j, Y', strtotime($settlement->getCreatedAt()))?>
   <?php echo $settlement->getPrice()?>円
   <?php foreach ($settlement->getSubscription() as $subscription) :?>
+  
   <div>
     <?php echo $subscription->getSubscriptionPlan()->getName()?>
     <?php if (1 == $settlement->getStatus()) :?>
