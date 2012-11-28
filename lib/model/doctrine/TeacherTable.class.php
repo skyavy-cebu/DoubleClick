@@ -31,7 +31,7 @@ class TeacherTable extends Doctrine_Table
         $q = $this->createQuery('a')
         ->leftJoin('a.SubscriptionPlan sp')
         ->leftJoin('sp.Subscription sub')
-        ->where('sub.student_id != ?', $id)
+        ->where('sub.student_id = ?', $id)
         ->andWhere('sub.valid_until >= NOW()'); // valid subscription;
         
       return $q->execute();

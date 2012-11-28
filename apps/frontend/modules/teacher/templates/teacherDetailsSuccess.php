@@ -70,7 +70,15 @@
               </div>
               <div class="contentContentTeacherIntroDetail">
                  <p><?php echo $teacher->getDetails() ?></p>
-                 <a title="" alt="" href=""></a>
+                    <?php if ($usertype == 'student'):?>
+                       <?php  foreach ($availableTeachersToSubscribeTo as $i => $teachersToSubscribe):?>
+                          <?php if($teachersToSubscribe->getId() == $teacher->getId()):?>
+                            <a title="" alt="" href=""></a>
+                          <?php endif ?>
+                       <?php endforeach ?>
+                     <?php else :?>
+                      <a title="" alt="" href=""></a>
+                    <?php endif ?>
               </div>
             <div class="clear"></div>
           </div>

@@ -64,53 +64,25 @@
         </div>
         <div class="contentContentTeachersIntroductionContent">
             <ul class="contentContentTeachersIntroductionContent1">
-              <li>
-                <div class="contentContentTeacherIntroductionContentHeader">
-                  <div class="contentContentTeacherIntroductionContentHeaderTitle">山田太郎様</div>
-                  <div class="contentContentTeacherIntroductionContentHeaderLink"><a alt="" href="">詳細を見る</a></div>
-                </div>
-                <img src="/images/teachers-no-image.png" />
-                <p>紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。<br>
-                紹介文が入ります。</p>
-              </li>
-              <li>
-                <div class="contentContentTeacherIntroductionContentHeader">
-                  <div class="contentContentTeacherIntroductionContentHeaderTitle">山田太郎様</div>
-                  <div class="contentContentTeacherIntroductionContentHeaderLink"><a alt="" href="">詳細を見る</a></div>
-                </div>
-                <img src="/images/teachers-no-image.png" />
-                <p>紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。<br>
-                紹介文が入ります。</p>
-              </li>
-              <li>
-                <div class="contentContentTeacherIntroductionContentHeader">
-                  <div class="contentContentTeacherIntroductionContentHeaderTitle">山田太郎様</div>
-                  <div class="contentContentTeacherIntroductionContentHeaderLink"><a alt="" href="">詳細を見る</a></div>
-                </div>
-                <img src="/images/teachers-no-image.png" />
-                <p>紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。<br>
-                紹介文が入ります。</p>
-              </li>             
-            </ul>
-            <ul class="contentContentTeachersIntroductionContent2">
-              <li>
-                <div class="contentContentTeacherIntroductionContentHeader">
-                  <div class="contentContentTeacherIntroductionContentHeaderTitle">山田太郎様</div>
-                  <div class="contentContentTeacherIntroductionContentHeaderLink"><a alt="" href="">詳細を見る</a></div>
-                </div>
-                <img src="/images/teachers-no-image.png" />
-                <p>紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。<br>
-                紹介文が入ります。</p>
-              </li>
-               <li>
-                <div class="contentContentTeacherIntroductionContentHeader">
-                  <div class="contentContentTeacherIntroductionContentHeaderTitle">山田太郎様</div>
-                  <div class="contentContentTeacherIntroductionContentHeaderLink"><a alt="" href="">詳細を見る</a></div>
-                </div>
-                <img src="/images/teachers-no-image.png" />
-                <p>紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。紹介文が入ります。<br>
-                紹介文が入ります。</p>
-              </li> 
+               <table><tr>
+              <?php  foreach ($teachers as $i => $teacher):?>
+              <td>
+                <li>
+                  <?php $b=(($i % 2) );?>
+                  <div class="contentContentTeacherIntroductionContentHeader">
+                    <div class="contentContentTeacherIntroductionContentHeaderTitle"> <?php echo $teacher->getTitle() ?></div>
+                    <div class="contentContentTeacherIntroductionContentHeaderLink"><a alt="Teacher's Portfolio" href="<?php echo url_for('@teacher-details?id=' . $teacher['id'])?>">詳細を見る</a></div>
+                  </div>
+                  <img src="/images/teachers-no-image.png" />
+                  <p><?php echo truncate_text($teacher['details'], 50); ?></p>
+                </li>
+              </td>
+              <?php if ($b == 1):?> 
+                </tr><tr >
+               <?php endif ?>
+              <?php endforeach ?>
+              </tr>
+              </table>	
             </ul>
             <div class="clear"></div>
         </div>

@@ -31,9 +31,19 @@ class teacherActions extends sfActions
   }
    public function executeTeacherDetails(sfWebRequest $request)
   {
+    $this->usertype = $this->user = $this->getUser()->getAttribute('user_type', 'visitor', 'doubleclick_frontend');
+
+    if ($this->usertype == 'student'){
+    
+       $this->user = $this->getUser()->getDetails();
+       $this->availableTeachersToSubscribeTo = $this->user->getAvailableTeachersToSubscribeTo();
+    
+    }
     $this->teacher = Doctrine_Core::getTable('Teacher')->find(array($request->getParameter('id')));
+   
   }
-      
+   
+
   /* Teacher's account settings*/
     public function executeAccountSettings(sfWebRequest $request)
   {

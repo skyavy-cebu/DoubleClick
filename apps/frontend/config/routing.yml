@@ -25,6 +25,10 @@ teacher-students:
   url: /teacher/students-list
   param: { module: teacher, action: studentsList }
 
+teacher-introduction:
+  url: /teacher/introduction
+  param: { module: dynamic, action: teacherIntroduction }
+
 teacher-portfolio:
   url:   /teacher/portfolio
   class:   sfDoctrineRoute

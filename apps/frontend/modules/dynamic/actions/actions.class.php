@@ -33,7 +33,7 @@ class dynamicActions extends sfActions
   }
   public function executeTeacherIntroduction(sfWebRequest $request)
   {
-    
+    $this->teachers = Doctrine_Core::getTable('Teacher')->getTeachers();
   }
   public function executeTeacherIntroductionDetail(sfWebRequest $request)
   {
