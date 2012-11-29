@@ -42,7 +42,6 @@ abstract class BaseSettlement extends sfDoctrineRecord
         $this->setTableName('settlement');
         $this->hasColumn('id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
              'autoincrement' => true,
@@ -50,8 +49,6 @@ abstract class BaseSettlement extends sfDoctrineRecord
              ));
         $this->hasColumn('status', 'enum', 1, array(
              'type' => 'enum',
-             'fixed' => 0,
-             'unsigned' => false,
              'values' => 
              array(
               0 => '0',
@@ -59,48 +56,31 @@ abstract class BaseSettlement extends sfDoctrineRecord
               2 => '2',
               3 => '3',
              ),
-             'primary' => false,
              'default' => '0',
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 1,
              ));
         $this->hasColumn('price', 'decimal', 9, array(
              'type' => 'decimal',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
+             'unsigned' => true,
              'default' => '0.00',
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 9,
              'scale' => '2',
              ));
         $this->hasColumn('paid_at', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
         $this->hasColumn('updated_at', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
         $this->hasColumn('created_at', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
     }

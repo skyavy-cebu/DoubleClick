@@ -84,7 +84,6 @@ abstract class BaseStudent extends sfDoctrineRecord
         $this->setTableName('student');
         $this->hasColumn('id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
              'autoincrement' => true,
@@ -92,44 +91,26 @@ abstract class BaseStudent extends sfDoctrineRecord
              ));
         $this->hasColumn('name', 'string', 100, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 100,
              ));
         $this->hasColumn('furigana', 'string', 100, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 100,
              ));
         $this->hasColumn('email', 'string', 80, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 80,
              ));
         $this->hasColumn('password', 'string', 50, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 50,
              ));
         $this->hasColumn('status', 'enum', 1, array(
              'type' => 'enum',
-             'fixed' => 0,
-             'unsigned' => false,
              'values' => 
              array(
               0 => '0',
@@ -138,115 +119,71 @@ abstract class BaseStudent extends sfDoctrineRecord
               3 => '3',
               4 => '4',
              ),
-             'primary' => false,
              'default' => '0',
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 1,
              ));
         $this->hasColumn('login_type', 'enum', 1, array(
              'type' => 'enum',
-             'fixed' => 0,
-             'unsigned' => false,
              'values' => 
              array(
               0 => '0',
               1 => '1',
              ),
-             'primary' => false,
              'default' => '0',
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 1,
              ));
         $this->hasColumn('zipcode1', 'string', 3, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 3,
              ));
         $this->hasColumn('zipcode2', 'string', 4, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 4,
              ));
         $this->hasColumn('state_id', 'integer', 2, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 2,
              ));
         $this->hasColumn('city_id', 'integer', 2, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 2,
              ));
         $this->hasColumn('address', 'string', 150, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 150,
              ));
         $this->hasColumn('contact', 'string', 20, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 20,
              ));
         $this->hasColumn('picture', 'string', 42, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 42,
              ));
         $this->hasColumn('activation', 'string', 255, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 255,
              ));
         $this->hasColumn('updated_at', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
         $this->hasColumn('created_at', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
     }

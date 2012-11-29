@@ -39,7 +39,6 @@ abstract class BaseMailmagazine extends sfDoctrineRecord
         $this->setTableName('mailmagazine');
         $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
              'autoincrement' => true,
@@ -47,47 +46,27 @@ abstract class BaseMailmagazine extends sfDoctrineRecord
              ));
         $this->hasColumn('title', 'string', 150, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 150,
              ));
         $this->hasColumn('content', 'string', null, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => '',
              ));
         $this->hasColumn('publish_date', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 25,
              ));
         $this->hasColumn('updated_at', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
         $this->hasColumn('created_at', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
     }
@@ -99,7 +78,7 @@ abstract class BaseMailmagazine extends sfDoctrineRecord
              'created_at' => 
              array(
               'type' => 'timestamp(25)',
-              'expression' => 'NOW()',
+              'expre,' => 'expression: \'NOW()\'',
              ),
              'updated_at' => 
              array(
