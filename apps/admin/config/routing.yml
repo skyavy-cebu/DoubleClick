@@ -1,6 +1,18 @@
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
 
+topic-edit:
+  url:   /topic/:id/edit
+  param: { module: topic, action: edit }
+
+topic-add:
+  url:   /topic/add
+  param: { module: topic, action: add }
+  
+topics:
+  url:   /topics
+  param: { module: topic, action: list }
+
 subscription-change-status:
   url:   /subscription/:id/change-status
   param: { module: subscription, action: changeStatus }
