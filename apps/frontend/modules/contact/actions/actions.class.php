@@ -45,7 +45,7 @@ class contactActions extends sfActions
         /* to */
         sfConfig::get('app_contact_email'),
         /* subject */
-         sfConfig::get('app_contact_inquiry'),
+         sfConfig::get('app_contact_subject'),
         /* body */
         
 <<<EOF
