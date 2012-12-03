@@ -66,7 +66,7 @@
         <div class="contentContentTeacherIntroDetails">
           <div>
               <div class="contentContentTeacherIntroDetailImage">
-                <img src="/images/teachers-no-image-big.png" />
+                <img src="/uploads/teacher/<?php echo (empty($teacher['picture'])) ? 'default.png' : $teacher['picture']; ?>"/>
               </div>
               <div class="contentContentTeacherIntroDetail">
                  <p><?php echo $teacher->getDetails() ?></p>
