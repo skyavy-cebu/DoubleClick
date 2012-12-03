@@ -41,7 +41,7 @@ class feedbackActions extends sfActions
 	    $cust_feedback->setBody($feedback['body']);
       $cust_feedback->save();
       
-      $this->redirect('feedback/index');
+      $this->redirect('@feedbacks');
       }
      
     }
@@ -54,7 +54,7 @@ class feedbackActions extends sfActions
     $this->forward404Unless($cust_feedback = Doctrine_Core::getTable('Feedback')->find(array($request->getParameter('id'))), sprintf('Object feedback does not exist (%s).', $request->getParameter('id')));
     $cust_feedback->delete();
 
-    $this->redirect('feedback/index');
+    $this->redirect('@feedbacks');
   }
  
   public function executeEdit(sfWebRequest $request)
@@ -78,7 +78,7 @@ class feedbackActions extends sfActions
 	    $this->cust_feedback->setBody($feedback['body']);
       $this->cust_feedback->save();
       
-      $this->redirect('feedback/index');
+      $this->redirect('@feedbacks');
       }
     }
 	 

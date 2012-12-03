@@ -69,6 +69,13 @@ newsletter-detail:
   url: newsletter/detail
   param: { module: teacher, action: newsletterDetail }
 
+feedbacks:
+  url:   /feedbacks
+  param: { module: feedback, action: index }
+
+feedback-edit:
+  url:   /feedback/:id/edit
+  param: { module: feedback, action: edit }
 # default rules
 home:
   url:   /

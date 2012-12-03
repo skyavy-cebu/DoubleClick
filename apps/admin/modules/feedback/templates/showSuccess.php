@@ -29,6 +29,6 @@
 
 <hr />
 
-<a href="<?php echo url_for('feedback/edit?id='.$cust_feedback->getId()) ?>">Edit</a>
+<a href="<?php echo url_for('@feedback-edit?id='.$cust_feedback->getId()) ?>">Edit</a>
 &nbsp;
-<a href="<?php echo url_for('feedback/index') ?>">List</a>
+<a href="<?php echo url_for('@feedbacks') ?>">List</a>
