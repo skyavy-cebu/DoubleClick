@@ -144,6 +144,14 @@
         <source>Detail</source>
         <target></target>
       </trans-unit>
+      <trans-unit id="36">
+        <source>Required</source>
+        <target>必須。</target>
+      </trans-unit>
+      <trans-unit id="37">
+        <source>Invalid</source>
+        <target>無効。</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
