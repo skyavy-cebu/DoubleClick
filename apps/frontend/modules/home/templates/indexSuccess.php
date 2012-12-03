@@ -1,7 +1,7 @@
 <div class="visualWrapper">
   <div class="visual">
     <div class="visualContent">
-      <h1>お客様の資産運用ニーズにお応えするため、<br />我々は挑戦し続けます。</h1>
+      
     </div>
   </div>
 </div>
@@ -75,7 +75,7 @@
           暁投資顧問とは?
         </div>
         <div class="contentContentAboutContent">
-          <p>暁投資顧問では安全性重視のトレードに重きを置きながら、
+         <p>暁投資顧問では安全性重視のトレードに重きを置きながら、
           お客様が何を求め、感じているのかを考えており、より良く安心にお付き合いできるよう努めております。
           </p>
           <a href="<?php echo url_for('static/investment')?>" alt="" title=""></a>
