@@ -7,7 +7,7 @@
  * @author     Maria Teresa A. Abesa
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class mailMagazineActions extends sfActions
+class mailmagazineActions extends sfActions
 {
    
    public function executeIndex(sfWebRequest $request)
@@ -54,7 +54,7 @@ class mailMagazineActions extends sfActions
 	    $mailmagazine->setContent($magazine['content']);
       $mailmagazine->save();
       
-      $this->redirect('mailMagazine/index');
+      $this->redirect('@mailmagazines');
       }
      
     }
@@ -67,7 +67,7 @@ class mailMagazineActions extends sfActions
     $this->forward404Unless($mailmagazine = Doctrine_Core::getTable('Mailmagazine')->find(array($request->getParameter('id'))), sprintf('Object mailmagazine does not exist (%s).', $request->getParameter('id')));
     $mailmagazine->delete();
 
-    $this->redirect('mailMagazine/index');
+    $this->redirect('@mailmagazines');
   }
  
   public function executeEdit(sfWebRequest $request)
@@ -91,7 +91,7 @@ class mailMagazineActions extends sfActions
 	    $this->mailmagazine->setContent($magazine['content']);
       $this->mailmagazine->save();
       
-      $this->redirect('mailMagazine/index');
+      $this->redirect('@mailmagazines');
       }
     }
 	

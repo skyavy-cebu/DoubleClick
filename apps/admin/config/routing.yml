@@ -76,6 +76,26 @@ feedbacks:
 feedback-edit:
   url:   /feedback/:id/edit
   param: { module: feedback, action: edit }
+
+mailmagazine-new:
+  url:   /mailmagazine/new
+  param: { module: mailMagazine, action: new }
+  
+mailmagazines:
+  url:   /mailmagazines
+  param: { module: mailMagazine, action: index }
+
+mailmagazine-detail:
+  url:   /mailmagazine/:id/detail
+  param: { module: mailMagazine, action: show }
+  
+past-mailmagazines:
+  url:   /past-mailmagazines
+  param: { module: mailMagazine, action: pastMailmagazine }
+
+past-mailmagazine-detail:
+  url:   /past-mailmagazine/:id/detail
+  param: { module: mailMagazine, action: showPastMailmagazine }
 # default rules
 home:
   url:   /

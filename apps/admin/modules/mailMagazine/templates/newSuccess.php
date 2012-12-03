@@ -1,7 +1,7 @@
 
 
 
-<form action="<?php echo url_for('mailMagazine/new') ?>" method="POST">
+<form action="<?php echo url_for('@mailmagazine-new') ?>" method="POST">
   <table>
     <tr>
       <td><?php echo $form['publish_date']->renderRow(array('id' => 'datepicker'))?></td>
