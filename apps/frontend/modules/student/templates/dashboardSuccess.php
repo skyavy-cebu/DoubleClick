@@ -4,7 +4,7 @@
   <div class="content">
     <div class="contentLeft">
       <div>
-       <div class="contentLeftColumnHeader">???</div>
+       <div class="contentLeftColumnHeader">先生一覧</div>
         <div class="contentLeftColumnContent">
 			<ul>
 				<?php  foreach ($teacherslist as $i => $teachers):?>
@@ -33,7 +33,7 @@
               <td><br>
                 <li>
                   <div class="contentContentTeacherIntroductionContentHeader">
-                    <div class="contentContentTeacherIntroductionContentHeaderTitle"><?php echo $teachers->getTitle() ?></div>
+                    <div class="contentContentTeacherIntroductionContentHeaderTitle"><?php echo $teachers->getTitle() .'の新着配信' ?></div>
 										<div class="contentContentTeacherIntroductionContentHeaderLink"><a href="<?php echo url_for('dashboard-teacher-newsletter',$teachers) ?>">もっと見る</a></div>
                   </div>
                    <div class="contentContentSubscriptionContent">
