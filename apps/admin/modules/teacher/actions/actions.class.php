@@ -36,6 +36,31 @@ class teacherActions extends sfActions
   }
 	public function executePortfolio(sfWebRequest $request)
   {
+	   $this->teacher = Doctrine_Core::getTable('Teacher')->find(array($request->getParameter('id')));
+  }
+	public function executeEdit(sfWebRequest $request)
+  {
 	  $this->teacher = Doctrine_Core::getTable('Teacher')->find(array($request->getParameter('id')));
+		
+		$data = array( 'portfolio' => $this->teacher['portfolio'], 'details' => $this->teacher['details']);
+   
+		$this->form = new TeacherPortfolioForm($data);
+		
+		if ($request->isMethod('post'))
+    {
+      $teacherPortfolio = $request->getParameter($this->form->getName());
+      $this->form->bind($teacherPortfolio);
+      
+      if ($this->form->isValid())
+      {
+	   
+      $this->teacher->setPortfolio($teacherPortfolio['portfolio']);
+	    $this->teacher->setDetails($teacherPortfolio['details']);
+      $this->teacher->save();
+      
+      $this->redirect('@teacher-list');
+      }
+    }
+   
   }
 }

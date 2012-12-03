@@ -58,8 +58,12 @@ teacher-list:
   param: { module: teacher, action: index }
 
 teacher-portfolio:
-  url: teacher/portfolio
+  url: teacher/:id/portfolio
   param: { module: teacher, action: portfolio }
+
+teacher-portfolio-edit:
+  url: teacher/:id/portfolio/edit
+  param: { module: teacher, action: edit }
   
 teacher-newsletters:
   url: teacher/newsletters

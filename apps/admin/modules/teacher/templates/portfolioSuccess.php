@@ -14,3 +14,4 @@
     </tr>
   </tbody>
 </table>
+<a href="<?php echo url_for('@teacher-portfolio-edit?id=' . $teacher['id']) ?>">edit</a>
