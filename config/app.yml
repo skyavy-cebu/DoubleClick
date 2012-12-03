@@ -14,4 +14,8 @@ all:
     email: admin@doubleclick.co.jp
     name: Admin
     subject:  Inquiry
+  
+  mailmagazine:
+    email: admin@doubleclick.co.jp
+    name: Admin
     

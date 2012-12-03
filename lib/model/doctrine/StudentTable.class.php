@@ -100,4 +100,11 @@ class StudentTable extends Doctrine_Table
 		  
 	return $q->execute();
  }
+ public function getInactiveStudents()
+  {
+    $q = $this->createQuery('stu')
+          ->where('stu.status = ?', 0); // in active status
+		  
+	return $q->execute();
+ }
 }

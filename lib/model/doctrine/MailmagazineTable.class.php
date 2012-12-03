@@ -18,15 +18,23 @@ class MailmagazineTable extends Doctrine_Table
     }
     public function getMailmagazines()
     {
-       $q = $this->createQuery('f')
-       ->where('f.publish_date > NOW()');
+       $q = $this->createQuery('m')
+       ->where('m.publish_date > NOW()');
    
       return $q->execute();
     }
     public function getPastMailmagazines()
     {
-       $q = $this->createQuery('f')
-       ->where('f.publish_date <= NOW()');
+       $q = $this->createQuery('m')
+       ->where('m.publish_date <= NOW()');
+   
+      return $q->execute();
+    }
+    public function getForSendingMailmagazines($today)
+    {
+             
+       $q = $this->createQuery('m')
+       ->where('m.publish_date = ?', $today);
    
       return $q->execute();
     }
