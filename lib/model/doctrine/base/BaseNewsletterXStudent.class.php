@@ -33,18 +33,14 @@ abstract class BaseNewsletterXStudent extends sfDoctrineRecord
         $this->setTableName('newsletter_x_student');
         $this->hasColumn('newsletter_id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
-             'autoincrement' => false,
              'length' => 8,
              ));
         $this->hasColumn('student_id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
-             'autoincrement' => false,
              'length' => 8,
              ));
     }

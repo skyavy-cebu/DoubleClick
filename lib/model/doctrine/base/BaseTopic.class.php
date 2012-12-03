@@ -39,7 +39,6 @@ abstract class BaseTopic extends sfDoctrineRecord
         $this->setTableName('topic');
         $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
              'autoincrement' => true,
@@ -47,47 +46,27 @@ abstract class BaseTopic extends sfDoctrineRecord
              ));
         $this->hasColumn('title', 'string', 255, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 255,
              ));
         $this->hasColumn('pdf_filename', 'string', 50, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 50,
              ));
         $this->hasColumn('publish_date', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 25,
              ));
         $this->hasColumn('updated_at', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
         $this->hasColumn('created_at', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
     }

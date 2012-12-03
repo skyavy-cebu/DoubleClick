@@ -54,74 +54,48 @@ abstract class BaseSubscription extends sfDoctrineRecord
         $this->setTableName('subscription');
         $this->hasColumn('id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
-             'unsigned' => false,
+             'unsigned' => true,
              'primary' => true,
              'autoincrement' => true,
              'length' => 8,
              ));
         $this->hasColumn('student_id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 8,
              ));
         $this->hasColumn('subscription_plan_id', 'integer', 4, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 4,
              ));
         $this->hasColumn('settlement_id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 8,
              ));
         $this->hasColumn('is_active', 'integer', 1, array(
              'type' => 'integer',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'default' => '0',
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 1,
              ));
         $this->hasColumn('valid_until', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
         $this->hasColumn('updated_at', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
         $this->hasColumn('created_at', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
     }

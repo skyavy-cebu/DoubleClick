@@ -184,38 +184,6 @@
       </div>
       <div class="clear"></div>
       
-      <div class="contentContentLatestColumn">
-        <div class="contentContentLatestColumnHeader">
-          <div class="contentContentLatestColumnHeaderTitle">最新コラム</div>
-          <div class="contentContentLatestColumnHeaderLink"><a alt="See more" href="">もっと見る</a></div>
-        </div>
-        <div class="contentContentLatestColumnContent">
-          <ul>
-            <li>
-              <span>2012.10.02</span>
-              <p> コラムタイトル</p>
-            </li>
-            <li>
-              <span>2012.10.02</span>
-              <p> コラムタイトル</p>
-            </li>
-            <li>
-              <span>2012.10.02</span>
-              <p> コラムタイトル</p>
-            </li>
-            <li>
-              <span>2012.10.02</span>
-              <p> コラムタイトル</p>
-            </li>
-            <li>
-              <span>2012.10.02</span>
-              <p> コラムタイトル</p>
-            </li>
-          </ul>
-          <div class="clear"></div>
-        </div>
-      </div>
-       <div class="clear"></div>
       <div class="contentContentTeachers">
         <div class="contentContentTeachersHeader">
           先生の実績

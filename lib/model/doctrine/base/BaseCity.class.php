@@ -36,7 +36,6 @@ abstract class BaseCity extends sfDoctrineRecord
         $this->setTableName('city');
         $this->hasColumn('id', 'integer', 2, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
              'autoincrement' => true,
@@ -44,20 +43,14 @@ abstract class BaseCity extends sfDoctrineRecord
              ));
         $this->hasColumn('state_id', 'integer', 2, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
-             'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              'length' => 2,
              ));
         $this->hasColumn('name', 'string', 50, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 50,
              ));
     }

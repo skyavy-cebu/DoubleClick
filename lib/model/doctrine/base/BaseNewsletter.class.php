@@ -48,7 +48,6 @@ abstract class BaseNewsletter extends sfDoctrineRecord
         $this->setTableName('newsletter');
         $this->hasColumn('id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
              'autoincrement' => true,
@@ -56,56 +55,33 @@ abstract class BaseNewsletter extends sfDoctrineRecord
              ));
         $this->hasColumn('teacher_id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 8,
              ));
         $this->hasColumn('title', 'string', 150, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 150,
              ));
         $this->hasColumn('content', 'blob', null, array(
              'type' => 'blob',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => '',
              ));
         $this->hasColumn('publish_date', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 25,
              ));
         $this->hasColumn('updated_at', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
         $this->hasColumn('created_at', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
     }

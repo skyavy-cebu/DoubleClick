@@ -60,7 +60,6 @@ abstract class BaseTeacher extends sfDoctrineRecord
         $this->setTableName('teacher');
         $this->hasColumn('id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
              'autoincrement' => true,
@@ -68,92 +67,52 @@ abstract class BaseTeacher extends sfDoctrineRecord
              ));
         $this->hasColumn('title', 'string', 100, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 100,
              ));
         $this->hasColumn('email', 'string', 80, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 80,
              ));
         $this->hasColumn('password', 'string', 50, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 50,
              ));
         $this->hasColumn('sender_email', 'string', 80, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
              'length' => 80,
              ));
         $this->hasColumn('portfolio', 'string', null, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => '',
              ));
         $this->hasColumn('details', 'string', null, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => '',
              ));
         $this->hasColumn('picture', 'string', 42, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 42,
              ));
         $this->hasColumn('change_password', 'string', 255, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 255,
              ));
         $this->hasColumn('updated_at', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
         $this->hasColumn('created_at', 'timestamp', 25, array(
              'type' => 'timestamp',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => false,
              'notnull' => false,
-             'autoincrement' => false,
              'length' => 25,
              ));
     }
